@@ -8,8 +8,6 @@ namespace Game
 {
     public enum MonsterBehavior { chase, scatter, frightened }
 
-   
-
-
+    public enum Directions { Left, Up, Right, Down, Nothing}
 
 }

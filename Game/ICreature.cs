@@ -8,10 +8,10 @@ namespace Game
 {
     interface ICreature
     {
+        Directions CurrentDirection { get; set; }
         string GetImageFileName();
         int GetDrawingPriority();
         CreatureCommand Act(int x, int y, Game game);
         bool DeadInConflict(ICreature conflictedObject, Game game);
-        string Direction {get; set;}
     }
 }

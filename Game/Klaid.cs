@@ -1,10 +1,13 @@
-using System.Drawing;
+﻿using System.Drawing;
 
 namespace Game
 {
     class Klaid : Ghost
     {
-        public override string Direction { get => Direction; set => throw new System.NotImplementedException(); }
+        public Klaid(Directions dir)
+        {
+            CurrentDirection = dir;
+        }
         public override CreatureCommand Act(int x, int y, Game game)
         {
             throw new System.NotImplementedException();

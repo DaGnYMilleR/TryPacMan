@@ -8,20 +8,13 @@ namespace Game
 {
     class Wall : ICreature
     {
-        public CreatureCommand Act(int x, int y, Game game)
-        {
-            throw new NotImplementedException();
-        }
+        public Directions CurrentDirection { get; set; }
 
-        public bool DeadInConflict(ICreature conflictedObject, Game game)
-        {
-            throw new NotImplementedException();
-        }
+        public CreatureCommand Act(int x, int y, Game game) => new CreatureCommand();
 
-        public int GetDrawingPriority()
-        {
-            throw new NotImplementedException();
-        }
+        public bool DeadInConflict(ICreature conflictedObject, Game game) => false;
+
+        public int GetDrawingPriority() => 1;
 
         public string GetImageFileName()
         {
