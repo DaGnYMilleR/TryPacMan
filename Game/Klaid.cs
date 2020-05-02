@@ -1,4 +1,5 @@
-﻿using System.Drawing;
+﻿using System;
+using System.Drawing;
 
 namespace Game
 {
@@ -44,7 +45,7 @@ namespace Game
         }
         private static Point GetGoal(int x, int y)
         {
-            if (GetDistanceSquare(new Point(x, y), Game.PackMansPosition) > 8)
+            if (Math.Sqrt(GetDistanceSquare(new Point(x, y), Game.PackMansPosition)) > 8)
                 return Game.PackMansPosition;
             else
                 return new Point(0, Game.MapWidth - 1);

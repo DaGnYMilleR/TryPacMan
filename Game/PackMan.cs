@@ -12,6 +12,7 @@ namespace Game
     {
         public Directions CurrentDirection { get; set; }
         private bool Tick;
+        private Point prevPoint;
 
         public CreatureCommand Act(int x, int y)
         {
@@ -71,7 +72,12 @@ namespace Game
 
         public string GetImageFileName()
         {
-            Tick = !Tick;
+            if (prevPoint != Game.PackMansPosition)
+            {
+                Tick = !Tick;
+                prevPoint = Game.PackMansPosition;
+            }
+            
             switch (CurrentDirection)
             {
                 case Directions.Up:
@@ -104,32 +110,32 @@ namespace Game
             switch (Game.KeyPressed)
             {
                 case Keys.Up:
-                    //if (!(Game.Map[x - 1,y] is Wall))
-                    //    {
+                    if (!(Game.Map[x,y - 1] is Wall))
+                        {
                     CurrentDirection = Directions.Up;
                         Game.PacMansDirection = CurrentDirection;
-                         //}
+                         }
                     break;
                 case Keys.Down:
-                    //if (!(Game.Map[x + 1, y] is Wall))
-                    //{
+                    if (!(Game.Map[x , y + 1] is Wall))
+                    {
                         CurrentDirection = Directions.Down;
                         Game.PacMansDirection = CurrentDirection;
-                    //}
+                    }
                     break;
                 case Keys.Left:
-                    //if (!(Game.Map[x, y - 1] is Wall))
-                    //{
+                    if (x != 0 &&!(Game.Map[x - 1, y] is Wall))
+                    {
                         CurrentDirection = Directions.Left;
                         Game.PacMansDirection = CurrentDirection;
-                    //}
+                    }
                     break;
                 case Keys.Right:
-                    //if (!(Game.Map[x, y + 1] is Wall))
-                    //{
+                    if (x != Game.MapHeight - 1 && !(Game.Map[x + 1, y] is Wall))
+                    {
                         CurrentDirection = Directions.Right;
                         Game.PacMansDirection = CurrentDirection;
-                    //}
+                    }
                     break;
             }
         }
