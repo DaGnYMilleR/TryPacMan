@@ -11,9 +11,9 @@ namespace Game
         public Directions CurrentDirection { get; set; }
 
 
-        public CreatureCommand Act(int x, int y, Game game) => new CreatureCommand();
+        public CreatureCommand Act(int x, int y) => new CreatureCommand();
 
-        public bool DeadInConflict(ICreature conflictedObject, Game game) //
+        public bool DeadInConflict(ICreature conflictedObject) //
         {
             throw new NotImplementedException();
         }

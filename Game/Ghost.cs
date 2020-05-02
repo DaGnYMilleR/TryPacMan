@@ -13,12 +13,12 @@ namespace Game
         public static Point[] possibleMoves = new Point[] { new Point(1, 0), new Point(0, -1), new Point(-1, 0), new Point(0, 1) };
         public Directions CurrentDirection { get; set; }
 
-        public virtual CreatureCommand Act(int x, int y, Game game)
+        public virtual CreatureCommand Act(int x, int y)
         {
             throw new NotImplementedException();
         }
 
-        public bool DeadInConflict(ICreature conflictedObject, Game game)
+        public bool DeadInConflict(ICreature conflictedObject)
                         => conflictedObject is PackMan && Game.IsMonsterStyle;
 
         public virtual int GetDrawingPriority()
@@ -31,13 +31,13 @@ namespace Game
             throw new NotImplementedException();
         }
 
-        public CreatureCommand FindPath(Game game, int x, int y, Point goal) // принимает начальную позицию и цель. Возвращает следующую точку и обновляет CurrDir
+        public CreatureCommand FindPath(int x, int y, Point goal) // принимает начальную позицию и цель. Возвращает следующую точку и обновляет CurrDir
         {
             var oppositeDirecrion = Direction.GetOppositeDirection(CurrentDirection);
             var oppositePoint = Direction.directions[oppositeDirecrion];
             var minDist = mapDiagonalSize;
             var result = new Point();
-            foreach (var neighbor in GetNeighbors(new Point(x, y), game))
+            foreach (var neighbor in GetNeighbors(new Point(x, y)))
             {
                 var distSquare = GetDistanceSquare(neighbor, goal);
                 var movement = new Point(neighbor.X - x, neighbor.Y - y);
@@ -65,30 +65,30 @@ namespace Game
             return width * width + height * height;
         }
 
-        protected static IEnumerable<Point> GetNeighbors(Point point, Game game)
+        protected static IEnumerable<Point> GetNeighbors(Point point)
         {
             foreach (var newPoint in possibleMoves)
             {
                 var neighbor = point.Add(newPoint);
                 if (neighbor == Game.LeftTeleport || neighbor == Game.RightTeleport)
                     yield return Game.Teleports[neighbor];
-                if (CanMoveTo(neighbor, game))
+                if (CanMoveTo(neighbor))
                     yield return neighbor;
             }
         }
 
-        public static CreatureCommand GetMovementBySpeed(Game game, CreatureCommand movement, int speed, int x, int y)// возвращает точку, позволяет избежать ошибки выхода за массив
+        public static CreatureCommand GetMovementBySpeed(CreatureCommand movement, int speed, int x, int y)// возвращает точку, позволяет избежать ошибки выхода за массив
         {
             for (var i = speed; i >= 0; i--)
             {
                 var tryToMove = movement * i;
-                if (game.InBounds(new Point(x + tryToMove.DeltaX, y + tryToMove.DeltaY)))
+                if (Game.InBounds(new Point(x + tryToMove.DeltaX, y + tryToMove.DeltaY)))
                     return tryToMove;
             }
             return null;
         }
 
-        public CreatureCommand FrightenedAlgorithm(Game game, int x, int y) // алгоритм режима испуга. Принимает x, y. Возвращает след точку, обновляет CurrDir
+        public CreatureCommand FrightenedAlgorithm(int x, int y) // алгоритм режима испуга. Принимает x, y. Возвращает след точку, обновляет CurrDir
         {
             var rnd = new Random();
             while (true)
@@ -103,7 +103,7 @@ namespace Game
                         var movement = Game.Teleports[newPoint];
                         return new CreatureCommand { DeltaX = movement.X, DeltaY = movement.Y };
                     }
-                    if (CanMoveTo(newPoint, game)
+                    if (CanMoveTo(newPoint)
                         && Direction.reversedDirections[new Point(newX, newY)] != Direction.GetOppositeDirection(CurrentDirection))
                     {
                         CurrentDirection = Direction.reversedDirections[new Point(newX, newY)];
@@ -113,7 +113,7 @@ namespace Game
             }
         }
 
-        public static Point GetNCellsBeforePoint(Point point, Game game, Directions dir, int n)
+        public static Point GetNCellsBeforePoint(Point point, Directions dir, int n)
         {
             var vector = Direction.directions[dir];
 
@@ -121,22 +121,22 @@ namespace Game
             {
                 var move = vector.Multiply(i);
                 var newPoint = point.Add(move);
-                if (game.InBounds(newPoint) && !(game.Map[newPoint.X, newPoint.Y] is Wall))
+                if (Game.InBounds(newPoint) && !(Game.Map[newPoint.X, newPoint.Y] is Wall))
                     return newPoint;
             }
             return point;
         }
 
-        public static bool CanMoveTo(Point point, Game game)
+        public static bool CanMoveTo(Point point)
         {
-            return game.InBounds(point) && !(game.Map[point.X, point.Y] is Wall);
+            return Game.InBounds(point) && !(Game.Map[point.X, point.Y] is Wall);
         }
 
-        public static int ChangeSpeed(Game game) // FIX values // изменяет скорость
+        public static int ChangeSpeed() // FIX values // изменяет скорость
         {
-            if (game.PointsEated == 0)
+            if (Game.PointsEated == 0)
                 return 1;
-            double relation = (double)game.PointsAtLevel / game.PointsEated;
+            double relation = (double)Game.PointsAtLevel / Game.PointsEated;
 
             if (relation > 2)
                 return 1;

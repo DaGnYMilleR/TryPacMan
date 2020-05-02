@@ -11,13 +11,13 @@ namespace Game
         public Directions CurrentDirection { get; set; }
         private string Image = "Energizer.png";
 
-        public CreatureCommand Act(int x, int y, Game game) => new CreatureCommand();
+        public CreatureCommand Act(int x, int y) => new CreatureCommand();
 
-        public bool DeadInConflict(ICreature conflictedObject, Game game)
+        public bool DeadInConflict(ICreature conflictedObject)
         {
             if(conflictedObject is PackMan)
             {
-                game.Score += 50;
+                Game.Score += 50;
                 Game.IsMonsterStyle = true;
                 return true;
             }

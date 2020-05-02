@@ -10,40 +10,39 @@ namespace Game
 
     class PackMan : ICreature
     {
-
-        public Directions CurrentDirection { get => CurrentDirection; set => GetDirection(); } 
-        private string Image;
+        public Directions CurrentDirection { get; set; }
         private bool Tick;
 
-        public CreatureCommand Act(int x, int y, Game game)
+        public CreatureCommand Act(int x, int y)
         {
+            GetDirection();
             switch (CurrentDirection)
             {
                 case Directions.Up:
-                    if (game.CanMoveToUp(x, y))
+                    if (Game.CanMoveToUp(x, y))
                         return new CreatureCommand { DeltaX = 0, DeltaY = -1 };
                     break;
                 case Directions.Down:
-                    if (game.CanMoveToDown(x, y))
+                    if (Game.CanMoveToDown(x, y))
                         return new CreatureCommand { DeltaX = 0, DeltaY = 1 };
                     break;
                 case Directions.Left:
-                    if (game.CanMoveToLeft(x, y))
+                    if (Game.CanMoveToLeft(x, y))
                         return new CreatureCommand { DeltaX = -1, DeltaY = 0 };
                     break;
                 case Directions.Right:
-                    if (game.CanMoveToRight(x, y))
+                    if (Game.CanMoveToRight(x, y))
                         return new CreatureCommand { DeltaX = 1, DeltaY = 0 };
                     break;
             }
-            return new CreatureCommand();
+            return new CreatureCommand { DeltaX = Direction.directions[CurrentDirection].X, DeltaY = Direction.directions[CurrentDirection].Y };
         }
 
 
 
-        public bool DeadInConflict(ICreature conflictedObject, Game game)
+        public bool DeadInConflict(ICreature conflictedObject)
         {
-            return conflictedObject is Ghost && !game.IsMonsterStyle;
+            return conflictedObject is Ghost && !Game.IsMonsterStyle;
         }
 
         public int GetDrawingPriority()
@@ -87,18 +86,19 @@ namespace Game
             {
                 case Keys.Up:
                     CurrentDirection = Directions.Up;
+                    Game.PacMansDirection = CurrentDirection;
                     break;
                 case Keys.Down:
                     CurrentDirection = Directions.Down;
+                    Game.PacMansDirection = CurrentDirection;
                     break;
                 case Keys.Left:
                     CurrentDirection = Directions.Left;
+                    Game.PacMansDirection = CurrentDirection;
                     break;
                 case Keys.Right:
                     CurrentDirection = Directions.Right;
-                    break;
-                default:
-                    CurrentDirection = Directions.Nothing;
+                    Game.PacMansDirection = CurrentDirection;
                     break;
             }
         }
