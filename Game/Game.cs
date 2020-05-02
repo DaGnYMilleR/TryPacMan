@@ -43,19 +43,30 @@ WFWWWWWWWWWWFWWWFWWWWWWWWWWFW
 W             S             W
 WWWWWWWWWWWWWWWWWWWWWWWWWWWWW
 ";
+        public static Point LeftTeleport { get => new Point(-1, 13); }
+        public static Point RightTeleport { get => new Point(29, 13); }
+
+        public static Dictionary<Point, Point> Teleports = new Dictionary<Point, Point>()
+        {
+            { LeftTeleport, new Point(28, 13) },
+            { RightTeleport, new Point(0, 13) }
+        };
+
         public int PointsAtLevel;
         public Point PackMansPosition { get; set; }
+        public Point BlinkysPosition { get; set; } // 14, 10
         public int Score;
 
         public MonsterBehavior CurrentBehavior;
         public ICreature[,] Map = Map_creator.CreateMap(testMap);
 
         public int PointsEated;
-        public bool IsMonsterStyle;
+        public static bool IsMonsterStyle;
         internal static Keys KeyPressed;
 
         public int MapWidth => Map.GetLength(0);
         public int MapHeight => Map.GetLength(1);
+        public Directions PacMansDirection;
 
         public bool CanMoveToLeft(int x, int y) => x - 1 >= 0 && !(Map[x - 1, y] is Wall);
 

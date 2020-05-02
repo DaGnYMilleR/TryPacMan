@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 
@@ -6,36 +8,73 @@ namespace Game
 {
     class Ghost : ICreature
     {
+        public const int mapDiagonalSize = 900;
+        public string BlueMonsters = "GhostIsMonsterStyle.png";
+        public static Point[] possibleMoves = new Point[] { new Point(1, 0), new Point(0, -1), new Point(-1, 0), new Point(0, 1) };
         public Directions CurrentDirection { get; set; }
 
         public virtual CreatureCommand Act(int x, int y, Game game)
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
-        
+
         public bool DeadInConflict(ICreature conflictedObject, Game game)
-                        => conflictedObject is PackMan && game.IsMonsterStyle;
+                        => conflictedObject is PackMan && Game.IsMonsterStyle;
 
         public virtual int GetDrawingPriority()
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
 
         public virtual string GetImageFileName()
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
 
         public CreatureCommand FindPath(Game game, int x, int y, Point goal) // принимает начальную позицию и цель. Возвращает следующую точку и обновляет CurrDir
         {
-            var path = BFS.FindPaths(game, new Point(x, y), goal, CurrentDirection).ToList();
-            if (path == null)
-                throw new Exception($"Not path found for {GetType().Name}");
-            var nextPoint = path[path.Count - 2];
-            var movement = new Point(nextPoint.X - x, nextPoint.Y - y);
-            CurrentDirection = Direction.reversedDirections[movement];
+            var oppositeDirecrion = Direction.GetOppositeDirection(CurrentDirection);
+            var oppositePoint = Direction.directions[oppositeDirecrion];
+            var minDist = mapDiagonalSize;
+            var result = new Point();
+            foreach (var neighbor in GetNeighbors(new Point(x, y), game))
+            {
+                var distSquare = GetDistanceSquare(neighbor, goal);
+                var movement = new Point(neighbor.X - x, neighbor.Y - y);
+                if (distSquare <= minDist && movement != oppositePoint)
+                {
+                    minDist = distSquare;
+                    result = movement;
+                }
+            }
+            if (result.X == 28)
+                CurrentDirection = Directions.Left;
+            else if (result.X == -28)
+                CurrentDirection = Directions.Right;
+            else
+                CurrentDirection = Direction.reversedDirections[result];
 
-            return new CreatureCommand { DeltaX = movement.X, DeltaY = movement.Y };
+            return new CreatureCommand { DeltaX = result.X, DeltaY = result.Y };
+        }
+
+        protected static int GetDistanceSquare(Point start, Point goal)
+        {
+            var width = start.X - goal.X;
+            var height = start.Y - goal.Y;
+
+            return width * width + height * height;
+        }
+
+        protected static IEnumerable<Point> GetNeighbors(Point point, Game game)
+        {
+            foreach (var newPoint in possibleMoves)
+            {
+                var neighbor = point.Add(newPoint);
+                if (neighbor == Game.LeftTeleport || neighbor == Game.RightTeleport)
+                    yield return Game.Teleports[neighbor];
+                if (CanMoveTo(neighbor, game))
+                    yield return neighbor;
+            }
         }
 
         public static CreatureCommand GetMovementBySpeed(Game game, CreatureCommand movement, int speed, int x, int y)// возвращает точку, позволяет избежать ошибки выхода за массив
@@ -44,7 +83,7 @@ namespace Game
             {
                 var tryToMove = movement * i;
                 if (game.InBounds(new Point(x + tryToMove.DeltaX, y + tryToMove.DeltaY)))
-                    return movement;
+                    return tryToMove;
             }
             return null;
         }
@@ -58,7 +97,13 @@ namespace Game
                 var newY = rnd.Next(-1, 2);
                 if ((newX != newY) && (newX == 0 || newY == 0))
                 {
-                    if (CanMoveTo(x + newX, y + newY, game)
+                    var newPoint = new Point(x + newX, y + newY);
+                    if (Game.Teleports.ContainsKey(newPoint))
+                    {
+                        var movement = Game.Teleports[newPoint];
+                        return new CreatureCommand { DeltaX = movement.X, DeltaY = movement.Y };
+                    }
+                    if (CanMoveTo(newPoint, game)
                         && Direction.reversedDirections[new Point(newX, newY)] != Direction.GetOppositeDirection(CurrentDirection))
                     {
                         CurrentDirection = Direction.reversedDirections[new Point(newX, newY)];
@@ -68,14 +113,29 @@ namespace Game
             }
         }
 
-
-        public bool CanMoveTo(int x, int y, Game game)
+        public static Point GetNCellsBeforePoint(Point point, Game game, Directions dir, int n)
         {
-            return game.InBounds(new Point(x, y)) && !(game.Map[x, y] is Wall);
+            var vector = Direction.directions[dir];
+
+            for (var i = n; i > 0; i--)
+            {
+                var move = vector.Multiply(i);
+                var newPoint = point.Add(move);
+                if (game.InBounds(newPoint) && !(game.Map[newPoint.X, newPoint.Y] is Wall))
+                    return newPoint;
+            }
+            return point;
         }
 
-        public int ChangeSpeed(Game game) // FIX values // изменяет скорость
+        public static bool CanMoveTo(Point point, Game game)
         {
+            return game.InBounds(point) && !(game.Map[point.X, point.Y] is Wall);
+        }
+
+        public static int ChangeSpeed(Game game) // FIX values // изменяет скорость
+        {
+            if (game.PointsEated == 0)
+                return 1;
             double relation = (double)game.PointsAtLevel / game.PointsEated;
 
             if (relation > 2)

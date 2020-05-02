@@ -8,7 +8,8 @@ namespace Game
 {
     class Fruit : ICreature
     {
-        public Directions CurrentDirection { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public Directions CurrentDirection { get; set; }
+        private string Image = "Fruit.png";
 
         public CreatureCommand Act(int x, int y, Game game) => new CreatureCommand();
 
@@ -25,9 +26,6 @@ namespace Game
         public int GetDrawingPriority() => 1;
 
 
-        public string GetImageFileName()
-        {
-            throw new NotImplementedException();
-        }
+        public string GetImageFileName() => Image;
     }
 }

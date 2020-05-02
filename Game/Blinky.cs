@@ -13,12 +13,13 @@ namespace Game
         {
             CurrentDirection = dir;
         }
-        
+        private string Image;
+
         public override CreatureCommand Act(int x, int y, Game game)
         {
             var goal = game.PackMansPosition;
             var speed = ChangeSpeed(game);
-            
+
             switch (game.CurrentBehavior)
             {
                 case MonsterBehavior.chase:
@@ -29,7 +30,7 @@ namespace Game
                     break;
 
                 case MonsterBehavior.scatter:
-                    var movement1 = FindPath(game, x, y, new Point(game.MapWidth - 1, 0));
+                    var movement1 = FindPath(game, x, y, new Point(game.MapWidth, -1));
                     var movementWithSpeed1 = GetMovementBySpeed(game, movement1, speed, x, y);
                     if (movementWithSpeed1 != null)
                         return movementWithSpeed1;
@@ -53,7 +54,24 @@ namespace Game
 
         public override string GetImageFileName()
         {
-            throw new NotImplementedException();
+            if (Game.IsMonsterStyle)
+                return BlueMonsters;
+            switch (CurrentDirection)
+            {
+                case Directions.Up:
+                    Image = "BlinkyUp.png";
+                    break;
+                case Directions.Right:
+                    Image = "BlinkyRight.png";
+                    break;
+                case Directions.Down:
+                    Image = "BlinkyDown.png";
+                    break;
+                case Directions.Left:
+                    Image = "BlinkyLeft.png";
+                    break;
+            }
+            return Image;
         }
     }
 }

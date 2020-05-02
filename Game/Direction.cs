@@ -38,6 +38,11 @@ namespace Game
         {
             return new Point(point.X * a, point.Y * a);
         }
+
+        public static Point Add(this Point point, Point otherPoint)
+        {
+            return new Point(point.X + otherPoint.X, point.Y + otherPoint.Y);
+        }
     }
 
 }

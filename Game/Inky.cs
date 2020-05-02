@@ -13,6 +13,7 @@ namespace Game
         {
             CurrentDirection = dir;
         }
+        private string Image;
         public override CreatureCommand Act(int x, int y, Game game)
         {
             var goal = game.PackMansPosition;
@@ -47,18 +48,29 @@ namespace Game
             return new CreatureCommand();
         }
 
-        public Point FindGoal(Point pacmansPos, Point blinkysPos, Game game)
-        {
-            throw new Exception(); 
-        }
-
-
         public override int GetDrawingPriority() => 3;
 
 
         public override string GetImageFileName()
         {
-            throw new NotImplementedException();
+            if (Game.IsMonsterStyle)
+                return BlueMonsters;
+            switch (CurrentDirection)
+            {
+                case Directions.Up:
+                    Image = "InkyUp.png";
+                    break;
+                case Directions.Right:
+                    Image = "InkyRight.png";
+                    break;
+                case Directions.Down:
+                    Image = "InkyDown.png";
+                    break;
+                case Directions.Left:
+                    Image = "InkyLeft.png";
+                    break;
+            }
+            return Image;
         }
     }
 }

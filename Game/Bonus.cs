@@ -10,6 +10,7 @@ namespace Game
     {
         public Directions CurrentDirection { get; set; }
 
+
         public CreatureCommand Act(int x, int y, Game game) => new CreatureCommand();
 
         public bool DeadInConflict(ICreature conflictedObject, Game game) //
