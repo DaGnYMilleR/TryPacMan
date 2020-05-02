@@ -50,7 +50,7 @@ namespace Game
                 return new Point(0, Game.MapWidth - 1);
         }
 
-        public override int GetDrawingPriority() => 5;
+        public override int GetDrawingPriority() => 7;
 
         public override string GetImageFileName()
         {

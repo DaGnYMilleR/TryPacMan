@@ -1,20 +1,47 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace Game
 {
-    class Program : Form
+    internal static class Program
     {
-
-        static void Main(string[] args)
+        [STAThread]
+        private static void Main()
         {
-            Application.Run(new Form());
+            string MapPacman = @"
+WWWWWWWWWWWWWWWWWWWWWWWWWWWWW
+WFFFFFFFFFFFFWWWFFFFFFFFFFFFW
+WFWWWWFWWWWWFWWWFWWWWWFWWWWFW
+WEWWWWFWWWWWFWWWFWWWWWFWWWWEW
+WFWWWWFWWWWWFWWWFWWWWWFWWWWFW
+WFFFFFFFFFFFFFFFFFFFFFFFFFFFW
+WFWWWWFWWFWWWWWWWWWFWWFWWWWFW
+WFFFFFFWWFFFFWWWFFFFWWFFFFFFW
+WWWWWWFWWWWW WWW WWWWWFWWWWWW
+     WFWWWWW WWW WWWWWFW     
+     WFWWW         WWWFW     
+     WFWWW WWWDWWW WWWFW     
+WWWWWWFWWW WW   WW WWWFWWWWWW
+      FF   WWWWWWW   FF      
+WWWWWWFWW           WWFWWWWWW
+     WFWW WWWWWWWWW WWFW     
+     WFWW WWWWWWWWW WWFW     
+WWWWWWFWW WWWWWWWWW WWFWWWWWW
+WFFFFFFFFFFFFWWWFFFFFFFFFFFFW
+WFWWWWFWWWWWFWWWFWWWWWFWWWWFW
+WFWWWWFWWWWWFWWWFWWWWWFWWWWFW
+WEFFWWFFFFFFFFFFFFFFFFFWWFFEW
+WWWFWWFWWFWWWWWWWWWFWWFWWFWWW
+WWWFWWFWWFWWWWWWWWWFWWFWWFWWW
+WFFFFFFWWFFFFWWWFFFFWWFFFFFFW
+WFWWWWWWWWWWFWWWFWWWWWWWWWWFW
+WFWWWWWWWWWWFWWWFWWWWWWWWWWFW
+W             S             W
+WWWWWWWWWWWWWWWWWWWWWWWWWWWWW
+";
+        Game.CreateMap(MapPacman);
+            Application.Run(new PacManWindow());
         }
-        
     }
 }

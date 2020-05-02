@@ -39,8 +39,7 @@ namespace Game
                         return new CreatureCommand { DeltaX = 1, DeltaY = 0 };
                     break;
             }
-            return new CreatureCommand { DeltaX = Direction.directions[CurrentDirection].X,
-                DeltaY = Direction.directions[CurrentDirection].Y };
+            return new CreatureCommand();
         }
 
 
@@ -50,10 +49,7 @@ namespace Game
             return conflictedObject is Ghost && !Game.IsMonsterStyle;
         }
 
-        public int GetDrawingPriority()
-        {
-            return 3;
-        }
+        public int GetDrawingPriority() => 10;
 
         public string GetImageFileName()
         {

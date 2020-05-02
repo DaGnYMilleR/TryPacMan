@@ -50,7 +50,7 @@ namespace Game
             return new CreatureCommand();
         }
 
-        public override int GetDrawingPriority() => 3;
+        public override int GetDrawingPriority() => 6;
 
 
         public override string GetImageFileName()

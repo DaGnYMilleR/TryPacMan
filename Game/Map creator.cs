@@ -44,7 +44,8 @@ namespace Game
                     return new Fruit();
                 case 'S':
                     return new PackMan();
-
+                case 'D':
+                    return new Door();
                 default:
                     throw new Exception("Wrong symbol!");
             }

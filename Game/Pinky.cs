@@ -53,7 +53,7 @@ namespace Game
         }
     
 
-        public override int GetDrawingPriority() => 4;
+        public override int GetDrawingPriority() => 8;
 
         public override string GetImageFileName()
         {

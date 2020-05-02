@@ -18,11 +18,11 @@ namespace Game
             throw new NotImplementedException();
         }
 
-        public int GetDrawingPriority() => 1;
+        public int GetDrawingPriority() => 4;
 
         public string GetImageFileName()
         {
-            throw new NotImplementedException();
+            return "Fruit.png";
         }
     }
 }

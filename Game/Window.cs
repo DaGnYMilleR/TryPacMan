@@ -79,10 +79,10 @@ namespace Game
         {
             this.SuspendLayout();
             // 
-            // DiggerWindow
+            // PacManWindow
             // 
-            this.ClientSize = new System.Drawing.Size(615, 301);
-            this.Name = "DiggerWindow";
+            this.ClientSize = new System.Drawing.Size(391, 248);
+            this.Name = "PacManWindow";
             this.ResumeLayout(false);
 
         }

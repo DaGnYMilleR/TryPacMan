@@ -84,9 +84,7 @@
     <Compile Include="PacmanTest.cs" />
     <Compile Include="Pinky.cs" />
     <Compile Include="PinkyTest.cs" />
-    <Compile Include="Program.cs">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SinglyLinkedList.cs" />
     <Compile Include="TestBlinky.cs" />
@@ -100,12 +98,12 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Program.resx">
-      <DependentUpon>Program.cs</DependentUpon>
-    </EmbeddedResource>
+    <Content Include="NewFile1.txt" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="NewFile1.txt" />
+    <EmbeddedResource Include="Window.resx">
+      <DependentUpon>Window.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

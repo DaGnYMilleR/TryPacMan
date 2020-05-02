@@ -24,7 +24,7 @@ namespace Game
             return false;
         }
 
-        public int GetDrawingPriority() => 1;
+        public int GetDrawingPriority() => 3;
 
         public string GetImageFileName() => Image;
     }

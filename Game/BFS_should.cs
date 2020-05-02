@@ -15,6 +15,7 @@ namespace Game
         public void ReturnNoPaths_WhenNoPathsToChests()
         {
             var game = new Game();
+            
 
 
             var paths = BFS.FindPaths(game, new Point(1, 1), new Point(3, 5), new Point(1, 2)).ToList();
