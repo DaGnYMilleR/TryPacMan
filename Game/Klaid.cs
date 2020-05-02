@@ -8,7 +8,7 @@ namespace Game
         {
             CurrentDirection = dir;
         }
-        private string Image;
+        private string Image = "KlaidUp.png";
         public override CreatureCommand Act(int x, int y)
         {
             var goal = GetGoal(x, y);

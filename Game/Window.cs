@@ -35,7 +35,7 @@ namespace Game
         protected override void OnLoad(EventArgs e)
         {
             base.OnLoad(e);
-            Text = "Digger";
+            Text = "Pacman";
             DoubleBuffered = true;
         }
 

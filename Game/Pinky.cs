@@ -4,7 +4,7 @@ namespace Game
 {
     class Pinky : Ghost
     {
-        private string Image;
+        private string Image = "PinkyUp.png";
         
         public Pinky(Directions dir)
         {

@@ -11,26 +11,25 @@ namespace Game
         private string Image = "Wall.png";
         public Directions CurrentDirection { get; set; }
 
-        public CreatureCommand Act(int x, int y) => new CreatureCommand();
+        public virtual CreatureCommand Act(int x, int y) => new CreatureCommand();
 
-        public bool DeadInConflict(ICreature conflictedObject) => false;
+        public virtual bool DeadInConflict(ICreature conflictedObject) => false;
 
-        public int GetDrawingPriority() => 1;
+        public virtual int GetDrawingPriority() => 1;
 
-        public string GetImageFileName() => Image;
+        public virtual string GetImageFileName() => Image;
     }
 
-    class Door : ICreature
+    class Door : Wall
     {
         private string Image = "Door.png";
-        public Directions CurrentDirection { get; set; }
 
-        public CreatureCommand Act(int x, int y) => new CreatureCommand();
+        public override CreatureCommand Act(int x, int y) => new CreatureCommand();
 
-        public bool DeadInConflict(ICreature conflictedObject) => false;
+        public override bool DeadInConflict(ICreature conflictedObject) => false;
 
-        public int GetDrawingPriority() => 9;
+        public override int GetDrawingPriority() => 9;
 
-        public string GetImageFileName() => Image;
+        public override string GetImageFileName() => Image;
     }
 }

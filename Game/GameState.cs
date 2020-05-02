@@ -55,9 +55,9 @@ namespace Game
                 foreach (var rival in candidates)
                     if (rival != candidate && candidate.DeadInConflict(rival))
                         aliveCandidates.Remove(candidate);
-            if (aliveCandidates.Count > 1)
-                throw new Exception(
-                    $"Creatures {aliveCandidates[0].GetType().Name} and {aliveCandidates[1].GetType().Name} claimed the same map cell");
+            //if (aliveCandidates.Count > 1)
+            //    throw new Exception(
+            //        $"Creatures {aliveCandidates[0].GetType().Name} and {aliveCandidates[1].GetType().Name} claimed the same map cell");
 
             return aliveCandidates.FirstOrDefault();
         }

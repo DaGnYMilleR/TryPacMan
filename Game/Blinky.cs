@@ -13,7 +13,7 @@ namespace Game
         {
             CurrentDirection = dir;
         }
-        private string Image;
+        private string Image = "BlinkyUp.png";
 
         public override CreatureCommand Act(int x, int y)
         {

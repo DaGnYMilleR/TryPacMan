@@ -14,7 +14,7 @@ namespace Game
         {
             CurrentDirection = dir;
         }
-        private string Image;
+        private string Image= "InkyUp.png";
         private ImageList PacmanImages = new ImageList(); // Доделать добаваить все картинки м.ь. при инициализации разобраться с путем до картинки
         public override CreatureCommand Act(int x, int y)
         {

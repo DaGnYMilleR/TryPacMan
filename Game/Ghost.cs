@@ -77,7 +77,7 @@ namespace Game
             }
         }
 
-        public static CreatureCommand GetMovementBySpeed(CreatureCommand movement, int speed, int x, int y)// возвращает точку, позволяет избежать ошибки выхода за массив
+        public static CreatureCommand GetMovementBySpeed(ыCreatureCommand movement, int speed, int x, int y)// возвращает точку, позволяет избежать ошибки выхода за массив
         {
             for (var i = speed; i >= 0; i--)
             {

@@ -48,3 +48,4 @@ C:\Users\dns\Desktop\TryPacMan-master\Game\obj\Debug\Game.exe
 C:\Users\dns\Desktop\TryPacMan-master\Game\obj\Debug\Game.pdb
 C:\Users\dns\Desktop\TryPacMan-master\Game\obj\Debug\Game.PacManWindow.resources
 C:\Users\dns\Desktop\TryPacMan-master\Game\obj\Debug\Game.csproj.GenerateResource.cache
+C:\Users\dns\Desktop\TryPacMan-master\Game\obj\Debug\Game.csprojAssemblyReference.cache
