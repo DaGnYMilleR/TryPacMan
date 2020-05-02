@@ -11,7 +11,7 @@ namespace Game
 {
     class Game
     {
-        private const string testMap = @"
+        private const string MapPacman = @"
 WWWWWWWWWWWWWWWWWWWWWWWWWWWWW
 WFFFFFFFFFFFFWWWFFFFFFFFFFFFW
 WFWWWWFWWWWWFWWWFWWWWWFWWWWFW
@@ -57,7 +57,7 @@ WWWWWWWWWWWWWWWWWWWWWWWWWWWWW
         public static int Score;
 
         public static MonsterBehavior CurrentBehavior;
-        public static ICreature[,] Map = Map_creator.CreateMap(testMap);
+        public static ICreature[,] Map = Map_creator.CreateMap(MapPacman);
 
         public static int PointsEated;
         public static bool IsMonsterStyle;
@@ -81,11 +81,6 @@ WWWWWWWWWWWWWWWWWWWWWWWWWWWWW
             return rect.Contains(point);
         }
 
-        public Timer Timer = new Timer();
-        private void StartTimer()
-        {
-            Timer.Start();
-        }
 
     }
 }

@@ -77,11 +77,13 @@
     <Compile Include="ICreature.cs" />
     <Compile Include="Inky.cs" />
     <Compile Include="Klaid.cs" />
+    <Compile Include="KlaidTest.cs" />
     <Compile Include="Map creator.cs" />
-    <Compile Include="Misha2.cs" />
     <Compile Include="MonsterBehavior.cs" />
     <Compile Include="PackMan.cs" />
+    <Compile Include="PacmanTest.cs" />
     <Compile Include="Pinky.cs" />
+    <Compile Include="PinkyTest.cs" />
     <Compile Include="Program.cs">
       <SubType>Form</SubType>
     </Compile>

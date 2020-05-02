@@ -15,70 +15,91 @@ namespace Game
         public void TestChaseMode()
         {
             var game = new Game();
-            game.Map = Map_creator.CreateMap(@"
+            Game.Map = Map_creator.CreateMap(@"
     
     
     
-G   ");
-            game.PackMansPosition = new Point(3, 0);
-            game.CurrentBehavior = MonsterBehavior.chase;
-            game.PointsAtLevel = 7;
-            game.PointsEated = 2;
+B   ");
+            Game.PackMansPosition = new Point(3, 0);
+            Game.CurrentBehavior = MonsterBehavior.chase;
+            Game.PointsAtLevel = 7;
+            Game.PointsEated = 2;
             var blinkyPos = new Point(0, 3);
             var blinky = new Blinky(Directions.Right);
             for (var i = 0; i < 6; i++)
             {
-                var a = blinky.Act(blinkyPos.X, blinkyPos.Y, game);
+                var a = blinky.Act(blinkyPos.X, blinkyPos.Y);
                 blinkyPos.X += a.DeltaX;
                 blinkyPos.Y += a.DeltaY;
 
             }
-            Assert.AreEqual(game.PackMansPosition, blinkyPos);
+            Assert.AreEqual(Game.PackMansPosition, blinkyPos);
 
+        }
+
+        [Test]
+        public void SimpleTest()
+        {
+            var game = new Game();
+            var blinky = new Blinky(Directions.Left);
+            var blinkyPos = new Point(14, 10);
+            Game.PackMansPosition = new Point(14, 27);
+            var result = new List<Point>() { blinkyPos };
+            while (blinkyPos != Game.PackMansPosition)
+            {
+                var move = blinky.Act(blinkyPos.X, blinkyPos.Y);
+                blinkyPos.X += move.DeltaX;
+                blinkyPos.Y += move.DeltaY;
+                result.Add(blinkyPos);
+            }
+            Assert.IsNotEmpty(result);
+            Assert.AreEqual(46, result.Count);
         }
 
         [Test]
         public void TestScatterMode()
         {
             var game = new Game();
-            game.Map = Map_creator.CreateMap(@"
-    
-    
-    
-G   ");
-            game.PackMansPosition = new Point(3, 0);
-            game.CurrentBehavior = MonsterBehavior.scatter;
-            game.PointsAtLevel = 7;
-            game.PointsEated = 5;
-            var blinkyPos = new Point(0, 3);
+            Game.Map = Map_creator.CreateMap(@"
+WWWWWW
+W    W
+W    W
+W    W
+WB   W
+WWWWWW");
+            Game.PackMansPosition = new Point(4, 1);
+            Game.CurrentBehavior = MonsterBehavior.scatter;
+            Game.PointsAtLevel = 7;
+            Game.PointsEated = 2;
+            var blinkyPos = new Point(1, 4);
             var blinky = new Blinky(Directions.Right);
             for (var i = 0; i < 6; i++)
             {
-                var a = blinky.Act(blinkyPos.X, blinkyPos.Y, game);
+                var a = blinky.Act(blinkyPos.X, blinkyPos.Y);
                 blinkyPos.X += a.DeltaX;
                 blinkyPos.Y += a.DeltaY;
 
             }
-            Assert.AreEqual(game.PackMansPosition, blinkyPos);
+            Assert.AreEqual(Game.PackMansPosition, blinkyPos);
         }
 
         [Test]
         public void TestFrightenedMode()
         {
             var game = new Game();
-            game.Map = Map_creator.CreateMap(@"
+            Game.Map = Map_creator.CreateMap(@"
     
     
     
-G   ");
-            game.PackMansPosition = new Point(3, 0);
-            game.CurrentBehavior = MonsterBehavior.frightened;
+B   ");
+            Game.PackMansPosition = new Point(3, 0);
+            Game.CurrentBehavior = MonsterBehavior.frightened;
             var blinkyPos = new Point(0, 3);
             var blinky = new Blinky(Directions.Right);
             var res = new List<CreatureCommand>();
             for (var i = 0; i < 6; i++)
             {
-                var a = blinky.Act(blinkyPos.X, blinkyPos.Y, game);
+                var a = blinky.Act(blinkyPos.X, blinkyPos.Y);
                 blinkyPos.X += a.DeltaX;
                 blinkyPos.Y += a.DeltaY;
                 res.Add(a);

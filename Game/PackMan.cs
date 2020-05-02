@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -7,7 +8,6 @@ using System.Windows.Forms;
 
 namespace Game
 {
-
     class PackMan : ICreature
     {
         public Directions CurrentDirection { get; set; }
@@ -16,6 +16,10 @@ namespace Game
         public CreatureCommand Act(int x, int y)
         {
             GetDirection();
+            if (Game.LeftTeleport == new Point(x - 1, y) && CurrentDirection == Directions.Left)
+                return new CreatureCommand { DeltaX = 28, DeltaY = 0 };
+            if (Game.RightTeleport == new Point(x + 1, y) && CurrentDirection == Directions.Right)
+                return new CreatureCommand { DeltaX = -28, DeltaY = 0 };
             switch (CurrentDirection)
             {
                 case Directions.Up:
@@ -35,7 +39,8 @@ namespace Game
                         return new CreatureCommand { DeltaX = 1, DeltaY = 0 };
                     break;
             }
-            return new CreatureCommand { DeltaX = Direction.directions[CurrentDirection].X, DeltaY = Direction.directions[CurrentDirection].Y };
+            return new CreatureCommand { DeltaX = Direction.directions[CurrentDirection].X,
+                DeltaY = Direction.directions[CurrentDirection].Y };
         }
 
 
@@ -85,20 +90,32 @@ namespace Game
             switch (Game.KeyPressed)
             {
                 case Keys.Up:
-                    CurrentDirection = Directions.Up;
-                    Game.PacMansDirection = CurrentDirection;
+                    if (CurrentDirection != Directions.Down)
+                    {
+                        CurrentDirection = Directions.Up;
+                        Game.PacMansDirection = CurrentDirection;
+                    }
                     break;
                 case Keys.Down:
-                    CurrentDirection = Directions.Down;
-                    Game.PacMansDirection = CurrentDirection;
+                    if (CurrentDirection != Directions.Up)
+                    {
+                        CurrentDirection = Directions.Down;
+                        Game.PacMansDirection = CurrentDirection;
+                    }
                     break;
                 case Keys.Left:
-                    CurrentDirection = Directions.Left;
-                    Game.PacMansDirection = CurrentDirection;
+                    if (CurrentDirection != Directions.Right)
+                    {
+                        CurrentDirection = Directions.Left;
+                        Game.PacMansDirection = CurrentDirection;
+                    }
                     break;
                 case Keys.Right:
-                    CurrentDirection = Directions.Right;
-                    Game.PacMansDirection = CurrentDirection;
+                    if (CurrentDirection != Directions.Left)
+                    {
+                        CurrentDirection = Directions.Right;
+                        Game.PacMansDirection = CurrentDirection;
+                    }
                     break;
             }
         }
