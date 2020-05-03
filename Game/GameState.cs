@@ -9,7 +9,7 @@ namespace Game
 {
     public class GameState
     {
-        public const int ElementSize = 32;
+        public const int ElementSize = 24;
         public List<CreatureAnimation> Animations = new List<CreatureAnimation>();
 
         public void BeginAct()

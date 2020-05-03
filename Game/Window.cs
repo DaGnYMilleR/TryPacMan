@@ -81,9 +81,15 @@ namespace Game
             // 
             // PacManWindow
             // 
-            this.ClientSize = new System.Drawing.Size(391, 248);
+            this.ClientSize = new System.Drawing.Size(282, 153);
             this.Name = "PacManWindow";
+            this.Load += new System.EventHandler(this.PacManWindow_Load);
             this.ResumeLayout(false);
+
+        }
+
+        private void PacManWindow_Load(object sender, EventArgs e)
+        {
 
         }
     }
