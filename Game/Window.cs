@@ -21,13 +21,13 @@ namespace Game
             ClientSize = new Size(
                 GameState.ElementSize * Game.MapWidth,
                 GameState.ElementSize * Game.MapHeight + GameState.ElementSize);
-            FormBorderStyle = FormBorderStyle.FixedDialog;
+            FormBorderStyle = FormBorderStyle.Fixed3D;
             if (imagesDirectory == null)
                 imagesDirectory = new DirectoryInfo("Images");
             foreach (var e in imagesDirectory.GetFiles("*.png"))
                 bitmaps[e.Name] = (Bitmap)Image.FromFile(e.FullName);
             var timer = new Timer();
-            timer.Interval = 15;
+            timer.Interval = 10;
             timer.Tick += TimerTick;
             timer.Start();
         }
@@ -61,6 +61,11 @@ namespace Game
                 e.Graphics.DrawImage(bitmaps[a.Creature.GetImageFileName()], a.Location);
             e.Graphics.ResetTransform();
             e.Graphics.DrawString(Game.Score.ToString(), new Font("Arial", 16), Brushes.Green, 0, 0);
+            var imagesDirectory = new DirectoryInfo("Images");
+            imagesDirectory.GetFiles("live.png");
+            var c = (Bitmap)Image.FromFile(imagesDirectory.GetFiles("live.png").FirstOrDefault().FullName);
+            for (var i = 0; i < Game.GameLives; i++)
+                e.Graphics.DrawImage(c, new Point(100 + i * 20, 10));
         }
 
         private void TimerTick(object sender, EventArgs args)
@@ -68,7 +73,6 @@ namespace Game
             if (tickCount == 0) gameState.BeginAct();
             foreach (var e in gameState.Animations)
                 e.Location = new Point(e.Location.X + 2 * e.Command.DeltaX, e.Location.Y + 2 * e.Command.DeltaY);
-            if (tickCount == 3) Game.Map[11, 14] = null;
             if (tickCount == 7)
                 gameState.EndAct();
             tickCount++;

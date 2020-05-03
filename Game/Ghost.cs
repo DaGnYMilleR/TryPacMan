@@ -63,6 +63,37 @@ namespace Game
             return width * width + height * height;
         }
 
+        public CreatureCommand FindAct(int x, int y, Point goal, Point goalInScatter)
+        {
+            var speed = ChangeSpeed();
+
+            switch (Game.CurrentBehavior)
+            {
+                case MonsterBehavior.chase:
+                    return MovementWithSpeed(x, y, speed, goal);
+
+                case MonsterBehavior.scatter:
+                    return MovementWithSpeed(x, y, speed, goalInScatter);
+
+                case MonsterBehavior.frightened:
+                    var movement2 = FrightenedAlgorithm(x, y);
+                    var movementWithSpeed2 = GetMovementBySpeed(movement2, speed, x, y);
+                    if (movementWithSpeed2 != null)
+                        return movementWithSpeed2;
+                    break;
+
+                default:
+                    return new CreatureCommand();
+            }
+            return new CreatureCommand();
+        }
+
+        public CreatureCommand MovementWithSpeed(int x, int y, int speed, Point goal)
+        {
+            var movement = FindPath(x, y, goal);
+            return GetMovementBySpeed(movement, speed, x, y);
+        }
+
         protected static IEnumerable<Point> GetNeighbors(Point point)
         {
             foreach (var newPoint in possibleMoves)

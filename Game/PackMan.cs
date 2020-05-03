@@ -10,7 +10,7 @@ namespace Game
 {
     class PackMan : ICreature
     {
-        public Directions CurrentDirection { get; set;}
+        public Directions CurrentDirection { get; set; }
         private bool Tick;
         private Point prevPoint;
         public PackMan(Directions dir)
@@ -20,7 +20,7 @@ namespace Game
 
         public CreatureCommand Act(int x, int y)
         {
-            GetDirection(x,y);
+            GetDirection(x, y);
             if (Game.LeftTeleport == new Point(x - 1, y) && CurrentDirection == Directions.Left)
             {
                 Game.PackMansPosition = PointExtenshions.Add(Game.RightTeleport, new Point(-1, 0));
@@ -69,10 +69,11 @@ namespace Game
 
         public bool DeadInConflict(ICreature conflictedObject)
         {
-            if(conflictedObject is Ghost && !Game.IsMonsterStyle)
+            if (conflictedObject is Ghost && !Game.IsMonsterStyle)
             {
-                Game.Lives--;
+                Game.GameLives--;
                 return true;
+
             }
             return false;
         }
@@ -86,7 +87,7 @@ namespace Game
                 Tick = !Tick;
                 prevPoint = Game.PackMansPosition;
             }
-            
+
             switch (CurrentDirection)
             {
                 case Directions.Up:
@@ -119,21 +120,21 @@ namespace Game
             switch (Game.KeyPressed)
             {
                 case Keys.Up:
-                    if (!(Game.Map[x,y - 1] is Wall))
-                        {
-                    CurrentDirection = Directions.Up;
+                    if (!(Game.Map[x, y - 1] is Wall))
+                    {
+                        CurrentDirection = Directions.Up;
                         Game.PacMansDirection = CurrentDirection;
-                         }
+                    }
                     break;
                 case Keys.Down:
-                    if (!(Game.Map[x , y + 1] is Wall))
+                    if (!(Game.Map[x, y + 1] is Wall))
                     {
                         CurrentDirection = Directions.Down;
                         Game.PacMansDirection = CurrentDirection;
                     }
                     break;
                 case Keys.Left:
-                    if (x != 0 &&!(Game.Map[x - 1, y] is Wall))
+                    if (x != 0 && !(Game.Map[x - 1, y] is Wall))
                     {
                         CurrentDirection = Directions.Left;
                         Game.PacMansDirection = CurrentDirection;
@@ -152,4 +153,3 @@ namespace Game
 
     }
 }
-

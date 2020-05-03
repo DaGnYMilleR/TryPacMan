@@ -18,7 +18,7 @@ namespace Game
             {
                 for (var y = 0; y < Game.MapHeight; y++)
                 {
-                    if (Game.Lives <= 0)
+                    if (Game.GameLives <= 0)
                     {
                         var creature = Game.Map[x, y];
                         if (creature == null) continue;

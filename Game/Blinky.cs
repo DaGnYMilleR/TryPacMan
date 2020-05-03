@@ -18,38 +18,9 @@ namespace Game
         public override CreatureCommand Act(int x, int y)
         {
             var goal = Game.PackMansPosition;
-            var speed = ChangeSpeed();
-
-            switch (Game.CurrentBehavior)
-            {
-                case MonsterBehavior.chase:
-                    var movement = FindPath(x, y, goal);
-                    var movementWithSpeed = GetMovementBySpeed(movement, speed, x, y);
-                    Game.BlinkysPosition.Add(new Point(movementWithSpeed.DeltaX, movementWithSpeed.DeltaY));
-                    if (movementWithSpeed != null)
-                        return movementWithSpeed;
-                    break;
-
-                case MonsterBehavior.scatter:
-                    var movement1 = FindPath(x, y, new Point(Game.MapWidth, -1));
-                    var movementWithSpeed1 = GetMovementBySpeed(movement1, speed, x, y);
-                    Game.BlinkysPosition.Add(new Point(movementWithSpeed1.DeltaX, movementWithSpeed1.DeltaY));
-                    if (movementWithSpeed1 != null)
-                        return movementWithSpeed1;
-                    break;
-
-                case MonsterBehavior.frightened:
-                    var movement2 = FrightenedAlgorithm(x, y);
-                    var movementWithSpeed2 = GetMovementBySpeed(movement2, speed, x, y);
-                    Game.BlinkysPosition.Add(new Point(movementWithSpeed2.DeltaX, movementWithSpeed2.DeltaY));
-                    if (movementWithSpeed2 != null)
-                        return movementWithSpeed2;
-                    break;
-
-                default:
-                    return new CreatureCommand();
-            }
-            return new CreatureCommand();
+            var movement = FindAct(x, y, goal, new Point(Game.MapWidth, 0));
+            Game.BlinkysPosition.Add(new Point(movement.DeltaX, movement.DeltaY));
+            return movement;
         }
 
 

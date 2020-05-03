@@ -118,6 +118,7 @@ WWWWWW");
         [Test]
         public void TestClashGhost()
         {
+            Game.CreateMap(TestGhost.Map);
             var blinky = new Blinky(Directions.Nothing);
             var pacman = new PackMan(Directions.Right);
             Assert.AreEqual(pacman.DeadInConflict(blinky), true);

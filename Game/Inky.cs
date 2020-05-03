@@ -16,39 +16,13 @@ namespace Game
         private string Image = "InkyUp.png";
         public override CreatureCommand Act(int x, int y)
         {
-            var speed = ChangeSpeed();
-
-            switch (Game.CurrentBehavior)
-            {
-                case MonsterBehavior.chase:
-                    var goal = FindGoal(Game.PackMansPosition, Game.BlinkysPosition);
-                    var movement = FindPath(x, y, goal);
-                    var movementWithSpeed = GetMovementBySpeed(movement, speed, x, y);
-                    if (movementWithSpeed != null)
-                        return movementWithSpeed;
-                    break;
-
-                case MonsterBehavior.scatter:
-                    var movement1 = FindPath(x, y, new Point(Game.MapWidth - 2, Game.MapHeight - 2));
-                    var movementWithSpeed1 = GetMovementBySpeed(movement1, speed, x, y);
-                    if (movementWithSpeed1 != null)
-                        return movementWithSpeed1;
-                    break;
-
-                case MonsterBehavior.frightened:
-                    var movement2 = FrightenedAlgorithm(x, y);
-                    var movementWithSpeed2 = GetMovementBySpeed(movement2, speed, x, y);
-                    if (movementWithSpeed2 != null)
-                        return movementWithSpeed2;
-                    break;
-
-                default:
-                    return new CreatureCommand();
-            }
-            return new CreatureCommand();
+            var goal = FindGoal(Game.PackMansPosition, Game.BlinkysPosition);
+            var movement = FindAct(x, y, goal, new Point(Game.MapWidth, Game.MapHeight));
+            Game.KlaidPosition.Add(new Point(movement.DeltaX, movement.DeltaY));
+            return movement;
         }
 
-        public Point FindGoal(Point pacmansPos, Point blinkysPos) //придумать красивое решение
+        public Point FindGoal(Point pacmansPos, Point blinkysPos)
         {
             var twoCellsBeforePacman = Get2CellsBeforePacman(pacmansPos);
             var width = twoCellsBeforePacman.X - blinkysPos.X;
