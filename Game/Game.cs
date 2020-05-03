@@ -12,37 +12,6 @@ namespace Game
     class Game
     {
 
-//        private const string MapPacman = @"
-//WWWWWWWWWWWWWWWWWWWWWWWWWWWWW
-//WFFFFFFFFFFFFWWWFFFFFFFFFFFFW
-//WFWWWWFWWWWWFWWWFWWWWWFWWWWFW
-//WCWWWWFWWWWWFWWWFWWWWWFWWWWCW
-//WFWWWWFWWWWWFWWWFWWWWWFWWWWFW
-//WFFFFFFFFFFFFFFFFFFFFFFFFFFFW
-//WFWWWWFWWFWWWWWWWWWFWWFWWWWFW
-//WFFFFFFWWFFFFWWWFFFFWWFFFFFFW
-//WWWWWWFWWWWW WWW WWWWWFWWWWWW
-//     WFWWWWW WWW WWWWWFW     
-//     WFWWW         WWWFW     
-//     WFWWW WWWWWWW WWWFW     
-//WWWWWWFWWW WW   WW WWWFWWWWWW
-//      FF   WWWWWWW   FF      
-//WWWWWWFWW           WWFWWWWWW
-//     WFWW WWWWWWWWW WWFW     
-//     WFWW WWWWWWWWW WWFW     
-//WWWWWWFWW WWWWWWWWW WWFWWWWWW
-//WFFFFFFFFFFFFWWWFFFFFFFFFFFFW
-//WFWWWWFWWWWWFWWWFWWWWWFWWWWFW
-//WFWWWWFWWWWWFWWWFWWWWWFWWWWFW
-//WCFFWWFFFFFFFFFFFFFFFFFWWFFCW
-//WWWFWWFWWFWWWWWWWWWFWWFWWFWWW
-//WWWFWWFWWFWWWWWWWWWFWWFWWFWWW
-//WFFFFFFWWFFFFWWWFFFFWWFFFFFFW
-//WFWWWWWWWWWWFWWWFWWWWWWWWWWFW
-//WFWWWWWWWWWWFWWWFWWWWWWWWWWFW
-//W             S             W
-//WWWWWWWWWWWWWWWWWWWWWWWWWWWWW
-//";
         public static Point LeftTeleport { get => new Point(-1, 13); }
         public static Point RightTeleport { get => new Point(29, 13); }
 
@@ -52,13 +21,13 @@ namespace Game
             { RightTeleport, new Point(0, 13) }
         };
 
-        public static int PointsAtLevel;
+        public static int PointsAtLevel = 212;
         public static Point PackMansPosition { get; set; }
         public static Point BlinkysPosition { get; set; } // 14, 10
         public static int Score;
+        public static int CountEnergizer;
 
         public static MonsterBehavior CurrentBehavior;
-        // public static ICreature[,] Map = Map_creator.CreateMap(MapPacman);
         public static ICreature[,] Map;
 
         public static int PointsEated;

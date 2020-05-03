@@ -1,11 +1,22 @@
-﻿namespace Game
+﻿using System.Threading;
+using System.Threading.Tasks;
+
+namespace Game
 {
     class Fruit : ICreature
     {
         public Directions CurrentDirection { get; set; }
         private string Image = "Fruit.png";
 
-        public CreatureCommand Act(int x, int y) => new CreatureCommand();
+        public CreatureCommand Act(int x, int y)
+        {
+            if (Game.PointsEated >= 70)
+            {
+                Game.Map[14, 14] = new Bonus();
+                Game.PointsEated = 0;
+            }
+           return new CreatureCommand();
+        }
 
         public bool DeadInConflict(ICreature conflictedObject)
         {

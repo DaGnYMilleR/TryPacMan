@@ -49,7 +49,8 @@ W              W
 W              W
 WWWWWWWWWWWWWWWW");
             Game.PackMansPosition = new Point(5, 2);
-            Assert.AreEqual(Pinky.GetGoal(), new Point(1,1));
+            Game.PacMansDirection = Directions.Up;
+            Assert.AreEqual(Pinky.GetGoal(), new Point(5,1));
         }
 
         [Test]

@@ -62,8 +62,6 @@ namespace Game
 
         public Point Get2CellsBeforePacman(Point pacmanPos) => GetNCellsBeforePoint(pacmanPos, Game.PacMansDirection, 2);
 
-        public override int GetDrawingPriority() => 3;
-
 
         public override string GetImageFileName()
         {

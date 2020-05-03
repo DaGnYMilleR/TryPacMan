@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Game
@@ -9,20 +10,41 @@ namespace Game
     class Bonus : ICreature
     {
         public Directions CurrentDirection { get; set; }
+        private static bool BonusOn = true;
 
 
-        public CreatureCommand Act(int x, int y) => new CreatureCommand();
+        public CreatureCommand Act(int x, int y)
+        {
+            BonusOff();
+            return new CreatureCommand();
+        }
+        private static async void BonusOff()
+        {
+            await Task.Run(() =>
+            {
+                Thread.Sleep(8000);
+                BonusOn = false;
+            });
+        }
 
         public bool DeadInConflict(ICreature conflictedObject) //
         {
-            throw new NotImplementedException();
+            if (conflictedObject is PackMan)
+            {
+                Game.Score += 100;
+                return true;
+            }
+            if (!BonusOn)
+                return true;
+            return false;
         }
+
 
         public int GetDrawingPriority() => 4;
 
         public string GetImageFileName()
         {
-            return "Fruit.png";
+            return "Bonus.png";
         }
     }
 }

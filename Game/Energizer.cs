@@ -20,6 +20,7 @@ namespace Game
             {
                 Game.Score += 50;
                 Game.IsMonsterStyle = true;
+                Game.CountEnergizer++;
                 MonserStyleOn();
                 return true;
             }
@@ -30,7 +31,10 @@ namespace Game
             await Task.Run(() =>
             {
                 Thread.Sleep(8000);
-                Game.IsMonsterStyle = false;
+                if (Game.CountEnergizer == 1)
+                    Game.IsMonsterStyle = false;
+                else
+                    Game.CountEnergizer--;
             });
         }
 

@@ -21,10 +21,8 @@ namespace Game
         public bool DeadInConflict(ICreature conflictedObject)
                         => conflictedObject is PackMan && Game.IsMonsterStyle;
 
-        public virtual int GetDrawingPriority()
-        {
-            throw new NotImplementedException();
-        }
+        public int GetDrawingPriority() => 4;
+      
 
         public virtual string GetImageFileName()
         {
@@ -82,7 +80,7 @@ namespace Game
             for (var i = speed; i >= 0; i--)
             {
                 var tryToMove = movement * i;
-                if (Game.InBounds(new Point(x + tryToMove.DeltaX, y + tryToMove.DeltaY)))
+                if (CanMoveTo(new Point(x + tryToMove.DeltaX, y + tryToMove.DeltaY)))
                     return tryToMove;
             }
             return null;

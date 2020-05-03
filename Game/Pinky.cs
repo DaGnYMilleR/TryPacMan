@@ -48,13 +48,11 @@ namespace Game
 
         public static Point GetGoal()
         {
-            var pointUp = GetNCellsBeforePoint(Game.PackMansPosition, Directions.Up, 4);
-            var goal = GetNCellsBeforePoint(pointUp, Directions.Left, 4);
+            var goal = GetNCellsBeforePoint(Game.PackMansPosition, Game.PacMansDirection, 4);
             return goal;
         }
     
 
-        public override int GetDrawingPriority() => 8;
 
         public override string GetImageFileName()
         {

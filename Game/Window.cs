@@ -27,7 +27,7 @@ namespace Game
             foreach (var e in imagesDirectory.GetFiles("*.png"))
                 bitmaps[e.Name] = (Bitmap)Image.FromFile(e.FullName);
             var timer = new Timer();
-            timer.Interval = 20;
+            timer.Interval = 10;
             timer.Tick += TimerTick;
             timer.Start();
         }
@@ -67,7 +67,7 @@ namespace Game
         {
             if (tickCount == 0) gameState.BeginAct();
             foreach (var e in gameState.Animations)
-                e.Location = new Point(e.Location.X + 4 * e.Command.DeltaX, e.Location.Y + 4 * e.Command.DeltaY);
+                e.Location = new Point(e.Location.X + 2 * e.Command.DeltaX, e.Location.Y + 2 * e.Command.DeltaY);
             if (tickCount == 7)
                 gameState.EndAct();
             tickCount++;
