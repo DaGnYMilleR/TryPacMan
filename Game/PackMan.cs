@@ -69,7 +69,12 @@ namespace Game
 
         public bool DeadInConflict(ICreature conflictedObject)
         {
-            return conflictedObject is Ghost && !Game.IsMonsterStyle;
+            if(conflictedObject is Ghost && !Game.IsMonsterStyle)
+            {
+                Game.Lives--;
+                return true;
+            }
+            return false;
         }
 
         public int GetDrawingPriority() => 10;

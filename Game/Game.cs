@@ -34,6 +34,8 @@ namespace Game
         public static bool IsMonsterStyle;
         internal static Keys KeyPressed;
 
+        public static int Lives = 1;
+
         public static int MapWidth => Map.GetLength(0);
         public static int MapHeight => Map.GetLength(1);
         public static Directions PacMansDirection;
