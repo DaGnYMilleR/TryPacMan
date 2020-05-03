@@ -12,18 +12,22 @@ namespace Game
     class TestPinky
     {
         [Test]
-        public void TestChaseMode()
+        public void TestSteeps()
         {
             Game.Map = Map_creator.CreateMap(@"
-       
-      P");
-            Game.PackMansPosition = new Point(0, 0);
-            Game.CurrentBehavior = MonsterBehavior.chase;
+WWWWW
+WS  W
+W   W
+WP  W
+WWWWW");
+            Game.PackMansPosition = new Point(1, 1);
             Game.PointsAtLevel = 7;
             Game.PointsEated = 2;
-            var pinkyPos = new Point(0, 3);
+            Game.CurrentBehavior = MonsterBehavior.chase;
+            
+            var pinkyPos = new Point(1, 3);
             var pinky = new Blinky(Directions.Right);
-            for (var i = 0; i < 7; i++)
+            for (var i = 0; i < 2; i++)
             {
                 var a = pinky.Act(pinkyPos.X, pinkyPos.Y);
                 pinkyPos.X += a.DeltaX;
@@ -35,13 +39,53 @@ namespace Game
         }
 
         [Test]
-        public void SimpleTest()
+        public void TestFindGoal()
         {
-            var pinky = new Blinky(Directions.Left);
-            var pinkyPos = new Point(14, 10);
-            Game.PackMansPosition = new Point(14, 27);
+            Game.Map = Map_creator.CreateMap(@"
+WWWWWWWWWWWWWWWW
+W              W
+W    S         W
+W              W
+W              W
+WWWWWWWWWWWWWWWW");
+            Game.PackMansPosition = new Point(5, 2);
+            Assert.AreEqual(Pinky.GetGoal(), new Point(1,1));
+        }
+
+        [Test]
+        public void TestFindGoal1()
+        {
+            Game.Map = Map_creator.CreateMap(@"
+WWWWWWWWWWWWWWWW
+WS             W
+W              W
+W              W
+W              W
+WWWWWWWWWWWWWWWW");
+            Game.PackMansPosition = new Point(1, 1);
+            Assert.AreEqual(Pinky.GetGoal(), new Point(1, 1));
+        }
+
+        [Test]
+        public void SimpleTest() //?
+        {
+            Game.Map = Map_creator.CreateMap(@"
+WWWWWWWWWWWWWWWW
+W              W
+W    S         W
+W              W
+W           P  W
+WWWWWWWWWWWWWWWW");
+            Game.PackMansPosition = new Point(5, 2);
+            Game.PointsAtLevel = 7;
+            Game.PointsEated = 2;
+            Game.CurrentBehavior = MonsterBehavior.chase;
+
+            var pinkyPos = new Point(12, 4);
+            var pinky = new Blinky(Directions.Right);
+
             var result = new List<Point>() { pinkyPos };
-            while (pinkyPos != Game.PackMansPosition)
+            for (var i = 0; i < 10; i++)
             {
                 var move = pinky.Act(pinkyPos.X, pinkyPos.Y);
                 pinkyPos.X += move.DeltaX;
@@ -49,7 +93,8 @@ namespace Game
                 result.Add(pinkyPos);
             }
             Assert.IsNotEmpty(result);
-            Assert.AreEqual(46, result.Count);
+            Assert.AreEqual(new Point(4,2), pinkyPos);
+
         }
 
         [Test]
@@ -60,36 +105,37 @@ WWWWWW
 W    W
 W    W
 W    W
-WP   W
+W   PW
 WWWWWW");
             Game.PackMansPosition = new Point(4, 1);
             Game.CurrentBehavior = MonsterBehavior.scatter;
             Game.PointsAtLevel = 7;
             Game.PointsEated = 2;
-            var pinkyPos = new Point(1, 4);
-            var pinky = new Blinky(Directions.Right);
-            for (var i = 0; i < 6; i++)
+            var pinkyPos = new Point(4, 1);
+            var pinky = new Pinky(Directions.Left);
+            for (var i = 0; i < 7; i++)
             {
                 var a = pinky.Act(pinkyPos.X, pinkyPos.Y);
                 pinkyPos.X += a.DeltaX;
                 pinkyPos.Y += a.DeltaY;
 
             }
-            Assert.AreEqual(Game.PackMansPosition, pinkyPos);
+            Assert.AreEqual(new Point(1,1), pinkyPos);
         }
 
         [Test]
         public void TestFrightenedMode()
         {
             Game.Map = Map_creator.CreateMap(@"
-    
-    
-    
-B   ");
+WWWWWW
+W    W
+W    W
+WP   W
+WWWWWW");
             Game.PackMansPosition = new Point(3, 0);
             Game.CurrentBehavior = MonsterBehavior.frightened;
             var pinkyPos = new Point(0, 3);
-            var pinky = new Blinky(Directions.Right);
+            var pinky = new Pinky(Directions.Right);
             var res = new List<CreatureCommand>();
             for (var i = 0; i < 6; i++)
             {

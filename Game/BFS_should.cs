@@ -14,11 +14,11 @@ namespace Game
         [Test, Order(10)]
         public void ReturnNoPaths_WhenNoPathsToChests()
         {
-            var game = new Game();
-            
+            Game.Map = Map_creator.CreateMap(TestGhost.Map);
 
 
-            var paths = BFS.FindPaths(game, new Point(1, 1), new Point(3, 5), new Point(1, 2)).ToList();
+
+            var paths = BFS.FindPaths(new Point(1, 1), new Point(3, 5), new Point(1, 2)).ToList();
             Assert.IsNotEmpty(paths);
             Assert.AreEqual(paths.Last(), new Point(1, 1));
             Assert.AreEqual(paths[paths.Count - 2], new Point(2, 1));
@@ -33,9 +33,8 @@ WB  W
 WWWWW
 W   W
 WWWWW";
-            var game = new Game();
             Game.Map = Map_creator.CreateMap(map);
-            var path = BFS.FindPaths(game, new Point(1, 1), new Point(3, 5), new Point(1, 2));
+            var path = BFS.FindPaths(new Point(1, 1), new Point(3, 5), new Point(1, 2));
             Assert.AreEqual(path, null);
         }
 
@@ -53,7 +52,7 @@ WWWWWW";
             Game.Map = Map_creator.CreateMap(map);
             var points = new Point[] { new Point(1, 1), new Point(2, 1), new Point(2, 3), new Point(1, 4) };
 
-            var path = BFS.FindPaths(game, new Point(1, 1), new Point(1, 4), new Point(1, 2)).ToList();
+            var path = BFS.FindPaths(new Point(1, 1), new Point(1, 4), new Point(1, 2)).ToList();
             for (var i = 0; i < 4; i++)
             {
                 Assert.That(path.Contains(points[i]));
@@ -69,11 +68,10 @@ WWW
 W     
 W  WW 
      ";
-            var game = new Game();
             Game.Map = Map_creator.CreateMap(map);
             var points = new Point[] { new Point(1, 1), new Point(2, 1), new Point(2, 3), new Point(1, 4) };
 
-            var path = BFS.FindPaths(game, new Point(1, 1), new Point(1, 4), new Point(1, 2)).ToList();
+            var path = BFS.FindPaths(new Point(1, 1), new Point(1, 4), new Point(1, 2)).ToList();
             for (var i = 0; i < 4; i++)
             {
                 Assert.That(path.Contains(points[i]));
@@ -84,6 +82,7 @@ W  WW
         [Test]
         public void TestGetNeighbors()
         {
+
             var point = BFS.GetNeighbors(new Point(5, 5)).ToList();
             Assert.AreEqual(new Point(4, 5), point[0]);
             Assert.That(point.Contains(new Point(5, 4)));
@@ -94,7 +93,7 @@ W  WW
         [Test]
         public void TestIscorrectPoint()
         {
-            var game = new Game();
+            Game.Map = Map_creator.CreateMap(TestGhost.Map);
 
             var a = BFS.IsPointCorrect(new Point(3, 3));
             Assert.IsFalse(a);
@@ -106,8 +105,8 @@ W  WW
         [Test]
         public void FindPatheTest()
         {
-            var game = new Game();
-            var path = BFS.FindPaths(game, new Point(14, 10), new Point(14, 27), new Point(13, 10));
+            Game.Map = Map_creator.CreateMap(TestGhost.Map);
+            var path = BFS.FindPaths(new Point(14, 10), new Point(14, 27), new Point(13, 10));
             foreach (var p in path)
             {
                 Assert.That(!(Game.Map[p.X, p.Y] is Wall));

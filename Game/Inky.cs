@@ -4,7 +4,6 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace Game
 {
@@ -14,16 +13,15 @@ namespace Game
         {
             CurrentDirection = dir;
         }
-        private string Image= "InkyUp.png";
-        private ImageList PacmanImages = new ImageList(); // Доделать добаваить все картинки м.ь. при инициализации разобраться с путем до картинки
+        private string Image = "InkyUp.png";
         public override CreatureCommand Act(int x, int y)
         {
-            var goal = Game.PackMansPosition;
             var speed = ChangeSpeed();
 
             switch (Game.CurrentBehavior)
             {
                 case MonsterBehavior.chase:
+                    var goal = FindGoal(Game.PackMansPosition, Game.BlinkysPosition);
                     var movement = FindPath(x, y, goal);
                     var movementWithSpeed = GetMovementBySpeed(movement, speed, x, y);
                     if (movementWithSpeed != null)
@@ -31,7 +29,7 @@ namespace Game
                     break;
 
                 case MonsterBehavior.scatter:
-                    var movement1 = FindPath(x, y, new Point(Game.MapWidth - 1, 0));
+                    var movement1 = FindPath(x, y, new Point(Game.MapWidth - 2, Game.MapHeight - 2));
                     var movementWithSpeed1 = GetMovementBySpeed(movement1, speed, x, y);
                     if (movementWithSpeed1 != null)
                         return movementWithSpeed1;
@@ -50,7 +48,21 @@ namespace Game
             return new CreatureCommand();
         }
 
-        public override int GetDrawingPriority() => 6;
+        public Point FindGoal(Point pacmansPos, Point blinkysPos) //придумать красивое решение
+        {
+            var twoCellsBeforePacman = Get2CellsBeforePacman(pacmansPos);
+            var width = twoCellsBeforePacman.X - blinkysPos.X;
+            var height = twoCellsBeforePacman.Y - blinkysPos.Y;
+
+            var result = new Point(twoCellsBeforePacman.X + width, twoCellsBeforePacman.Y + height);
+            if (Game.InBounds(result) && !(Game.Map[result.X, result.Y] is Wall))
+                return result;
+            return twoCellsBeforePacman;
+        }
+
+        public Point Get2CellsBeforePacman(Point pacmanPos) => GetNCellsBeforePoint(pacmanPos, Game.PacMansDirection, 2);
+
+        public override int GetDrawingPriority() => 3;
 
 
         public override string GetImageFileName()

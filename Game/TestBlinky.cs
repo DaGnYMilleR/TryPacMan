@@ -14,7 +14,6 @@ namespace Game
         [Test]
         public void TestChaseMode()
         {
-            var game = new Game();
             Game.Map = Map_creator.CreateMap(@"
     
     
@@ -40,7 +39,7 @@ B   ");
         [Test]
         public void SimpleTest()
         {
-            var game = new Game();
+            Game.Map = Map_creator.CreateMap(TestGhost.Map);
             var blinky = new Blinky(Directions.Left);
             var blinkyPos = new Point(14, 10);
             Game.PackMansPosition = new Point(14, 27);
@@ -86,7 +85,6 @@ WWWWWW");
         [Test]
         public void TestFrightenedMode()
         {
-            var game = new Game();
             Game.Map = Map_creator.CreateMap(@"
     
     

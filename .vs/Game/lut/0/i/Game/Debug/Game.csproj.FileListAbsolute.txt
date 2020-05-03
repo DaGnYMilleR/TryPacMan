@@ -9,3 +9,4 @@ C:\Users\dns\Desktop\TryPacMan-master\.vs\Game\lut\0\i\Game\Debug\Game.csproj.Ge
 C:\Users\dns\Desktop\TryPacMan-master\.vs\Game\lut\0\i\Game\Debug\Game.csproj.CoreCompileInputs.cache
 C:\Users\dns\Desktop\TryPacMan-master\.vs\Game\lut\0\i\Game\Debug\Game.csproj.CopyComplete
 C:\Users\dns\Desktop\TryPacMan-master\.vs\Game\lut\0\i\Game\Debug\Game.exe
+C:\Users\dns\Desktop\TryPacMan-master\.vs\Game\lut\0\i\Game\Debug\Game.csprojAssemblyReference.cache

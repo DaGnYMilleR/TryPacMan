@@ -10,9 +10,13 @@ namespace Game
 {
     class PackMan : ICreature
     {
-        public Directions CurrentDirection { get; set; }
+        public Directions CurrentDirection { get; set;}
         private bool Tick;
         private Point prevPoint;
+        public PackMan(Directions dir)
+        {
+            CurrentDirection = dir;
+        }
 
         public CreatureCommand Act(int x, int y)
         {
@@ -20,12 +24,12 @@ namespace Game
             if (Game.LeftTeleport == new Point(x - 1, y) && CurrentDirection == Directions.Left)
             {
                 Game.PackMansPosition = PointExtenshions.Add(Game.RightTeleport, new Point(-1, 0));
-                return new CreatureCommand { DeltaX = 28, DeltaY = 0 };
+                return new CreatureCommand { DeltaX = Game.MapWidth - 1, DeltaY = 0 };
             }
             if (Game.RightTeleport == new Point(x + 1, y) && CurrentDirection == Directions.Right)
             {
                 Game.PackMansPosition = PointExtenshions.Add(Game.LeftTeleport, new Point(1, 0));
-                return new CreatureCommand { DeltaX = -28, DeltaY = 0 };
+                return new CreatureCommand { DeltaX = -Game.MapWidth + 1, DeltaY = 0 };
             }
             switch (CurrentDirection)
             {

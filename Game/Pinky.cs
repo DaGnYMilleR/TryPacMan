@@ -13,12 +13,13 @@ namespace Game
 
         public override CreatureCommand Act(int x, int y)
         {
-            var goal = GetGoal();
+            
             var speed = ChangeSpeed();
 
             switch (Game.CurrentBehavior)
             {
                 case MonsterBehavior.chase:
+                    var goal = GetGoal();
                     var movement = FindPath(x, y, goal);
                     var movementWithSpeed = GetMovementBySpeed(movement, speed, x, y);
                     if (movementWithSpeed != null)
@@ -45,7 +46,7 @@ namespace Game
             return new CreatureCommand();
         }
 
-        private static Point GetGoal()
+        public static Point GetGoal()
         {
             var pointUp = GetNCellsBeforePoint(Game.PackMansPosition, Directions.Up, 4);
             var goal = GetNCellsBeforePoint(pointUp, Directions.Left, 4);

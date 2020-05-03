@@ -43,7 +43,7 @@ namespace Game
                 case 'F':
                     return new Fruit();
                 case 'S':
-                    return new PackMan();
+                    return new PackMan(Directions.Right);
                 case 'D':
                     return new Door();
                 default:

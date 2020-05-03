@@ -25,7 +25,7 @@ namespace Game
                     break;
 
                 case MonsterBehavior.scatter:
-                    var movement1 = FindPath( x, y, new Point(-1, Game.MapWidth));
+                    var movement1 = FindPath( x, y, new Point(-1, Game.MapHeight));
                     var movementWithSpeed1 = GetMovementBySpeed(movement1, speed, x, y);
                     if (movementWithSpeed1 != null)
                         return movementWithSpeed1;
@@ -43,12 +43,12 @@ namespace Game
             }
             return new CreatureCommand();
         }
-        private static Point GetGoal(int x, int y)
+        public static Point GetGoal(int x, int y)
         {
             if (Math.Sqrt(GetDistanceSquare(new Point(x, y), Game.PackMansPosition)) > 8)
                 return Game.PackMansPosition;
             else
-                return new Point(0, Game.MapWidth - 1);
+                return new Point(0, Game.MapHeight - 1);
         }
 
         public override int GetDrawingPriority() => 7;

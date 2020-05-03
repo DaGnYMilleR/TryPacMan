@@ -24,7 +24,7 @@ namespace Game
                                 && !(Game.Map[point.X, point.Y] is Wall);
 
 
-        public static SinglyLinkedList<Point> FindPaths(Game game, Point start, Point goal, Point addToVisited)
+        public static SinglyLinkedList<Point> FindPaths(Point start, Point goal, Point addToVisited)
         {
             var visited = new HashSet<Point>() { addToVisited };
             var queue = new Queue<SinglyLinkedList<Point>>();
