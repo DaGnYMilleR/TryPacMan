@@ -27,7 +27,7 @@ namespace Game
             foreach (var e in imagesDirectory.GetFiles("*.png"))
                 bitmaps[e.Name] = (Bitmap)Image.FromFile(e.FullName);
             var timer = new Timer();
-            timer.Interval = 15;
+            timer.Interval = 20;
             timer.Tick += TimerTick;
             timer.Start();
         }

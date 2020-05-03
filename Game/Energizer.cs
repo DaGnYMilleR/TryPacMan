@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Game
@@ -19,9 +20,18 @@ namespace Game
             {
                 Game.Score += 50;
                 Game.IsMonsterStyle = true;
+                MonserStyleOn();
                 return true;
             }
             return false;
+        }
+        private static async void MonserStyleOn()
+        {
+            await Task.Run(() =>
+            {
+                Thread.Sleep(8000);
+                Game.IsMonsterStyle = false;
+            });
         }
 
         public int GetDrawingPriority() => 3;

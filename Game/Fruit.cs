@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Game
+﻿namespace Game
 {
     class Fruit : ICreature
     {
@@ -18,6 +12,7 @@ namespace Game
             if (conflictedObject is PackMan)
             {
                 Game.Score += 10;
+                Game.PointsEated++;
                 return true;
             }
             return false;

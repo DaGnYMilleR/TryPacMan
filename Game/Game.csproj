@@ -70,7 +70,6 @@
     </Compile>
     <Compile Include="CreatureCommand.cs" />
     <Compile Include="GameState.cs" />
-    <Compile Include="GarbidgeFix%29.cs" />
     <Compile Include="Ghost.cs" />
     <Compile Include="ICreature.cs" />
     <Compile Include="Inky.cs" />
@@ -96,9 +95,6 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="NewFile1.txt" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Window.resx">
