@@ -11,7 +11,37 @@ namespace Game
 {
     class Game
     {
-
+        public static string MapPacman = @"
+WWWWWWWWWWWWWWWWWWWWWWWWWWWWW
+WFFFFFFFFFFFFWWWFFFFFFFFFFFFW
+WFWWWWFWWWWWFWWWFWWWWWFWWWWFW
+WEWWWWFWWWWWFWWWFWWWWWFWWWWEW
+WFWWWWFWWWWWFWWWFWWWWWFWWWWFW
+WFFFFFFFFFFFFFFFFFFFFFFFFFFFW
+WFWWWWFWWFWWWWWWWWWFWWFWWWWFW
+WFFFFFFWWFFFFWWWFFFFWWFFFFFFW
+WWWWWWFWWWWW WWW WWWWWFWWWWWW
+     WFWWWWW WWW WWWWWFW     
+     WFWWW      B  WWWFW     
+     WFWWW WWWDWWW WWWFW     
+WWWWWWFWWW WWPIKWW WWWFWWWWWW
+      FF   WWWWWWW   FF      
+WWWWWWFWW           WWFWWWWWW
+     WFWW WWWWWWWWW WWFW     
+     WFWW WWWWWWWWW WWFW     
+WWWWWWFWW WWWWWWWWW WWFWWWWWW
+WFFFFFFFFFFFFWWWFFFFFFFFFFFFW
+WFWWWWFWWWWWFWWWFWWWWWFWWWWFW
+WFWWWWFWWWWWFWWWFWWWWWFWWWWFW
+WEFFWWFFFFFFFFFFFFFFFFFWWFFEW
+WWWFWWFWWFWWWWWWWWWFWWFWWFWWW
+WWWFWWFWWFWWWWWWWWWFWWFWWFWWW
+WFFFFFFWWFFFFWWWFFFFWWFFFFFFW
+WFWWWWWWWWWWFWWWFWWWWWWWWWWFW
+WFWWWWWWWWWWFWWWFWWWWWWWWWWFW
+W             S             W
+WWWWWWWWWWWWWWWWWWWWWWWWWWWWW
+";
         public static Point LeftTeleport { get => new Point(-1, 13); }
         public static Point RightTeleport { get => new Point(29, 13); }
 
@@ -37,6 +67,7 @@ namespace Game
         public static int MapWidth => Map.GetLength(0);
         public static int MapHeight => Map.GetLength(1);
         public static Directions PacMansDirection;
+        public static int GameLives;
 
         public static bool CanMoveToLeft(int x, int y) => x - 1 >= 0 && !(Map[x - 1, y] is Wall);
 
@@ -54,6 +85,7 @@ namespace Game
         public static void CreateMap(string MapPacman)
         {
             Map = Map_creator.CreateMap(MapPacman);
+            GameLives = 3;
         }
 
     }

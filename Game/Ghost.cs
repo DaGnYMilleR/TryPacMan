@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
@@ -22,7 +23,7 @@ namespace Game
                         => conflictedObject is PackMan && Game.IsMonsterStyle;
 
         public int GetDrawingPriority() => 4;
-      
+
 
         public virtual string GetImageFileName()
         {
@@ -70,7 +71,7 @@ namespace Game
                 var neighbor = point.Add(newPoint);
                 if (neighbor == Game.LeftTeleport || neighbor == Game.RightTeleport)
                     yield return Game.Teleports[neighbor];
-                if (CanMoveTo(neighbor))
+                if (CanMoveTo(neighbor) && !(Game.Map[neighbor.X, neighbor.Y] is Ghost))
                     yield return neighbor;
             }
         }
@@ -99,7 +100,7 @@ namespace Game
                     if (Game.Teleports.ContainsKey(newPoint))
                     {
                         var movement = Game.Teleports[newPoint];
-                        return new CreatureCommand { DeltaX = movement.X, DeltaY = movement.Y };
+                        return new CreatureCommand { DeltaX = movement.X - x, DeltaY = movement.Y - y };
                     }
                     if (CanMoveTo(newPoint)
                         && Direction.reversedDirections[new Point(newX, newY)] != Direction.GetOppositeDirection(CurrentDirection))

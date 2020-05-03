@@ -141,7 +141,7 @@ WWWWWW");
         [Test]
         public void TestTelepotMainMap()
         {
-            Game.Map = Map_creator.CreateMap(TestGhost.Map);
+            Game.Map = Map_creator.CreateMap(Game.MapPacman);
             var pacman = new PackMan(Directions.Right);
             Game.PackMansPosition = new Point( Game.RightTeleport.X - 1, Game.RightTeleport.Y);
             var coord = pacman.Act(Game.PackMansPosition.X, Game.PackMansPosition.Y);

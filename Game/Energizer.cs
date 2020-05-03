@@ -33,7 +33,6 @@ namespace Game
                 Thread.Sleep(8000);
                 if (Game.CountEnergizer == 1)
                     Game.IsMonsterStyle = false;
-                else
                     Game.CountEnergizer--;
             });
         }

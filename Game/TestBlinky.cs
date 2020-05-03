@@ -39,7 +39,7 @@ B   ");
         [Test]
         public void SimpleTest()
         {
-            Game.Map = Map_creator.CreateMap(TestGhost.Map);
+            Game.Map = Map_creator.CreateMap(Game.MapPacman);
             var blinky = new Blinky(Directions.Left);
             var blinkyPos = new Point(14, 10);
             Game.PackMansPosition = new Point(14, 27);

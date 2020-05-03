@@ -21,7 +21,7 @@ namespace Game
             ClientSize = new Size(
                 GameState.ElementSize * Game.MapWidth,
                 GameState.ElementSize * Game.MapHeight + GameState.ElementSize);
-            FormBorderStyle = FormBorderStyle.FixedDialog;
+            FormBorderStyle = FormBorderStyle.Fixed3D;
             if (imagesDirectory == null)
                 imagesDirectory = new DirectoryInfo("Images");
             foreach (var e in imagesDirectory.GetFiles("*.png"))

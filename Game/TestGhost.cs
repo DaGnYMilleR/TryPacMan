@@ -1,51 +1,16 @@
 ﻿using NUnit.Framework;
-using System;
-using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Game
 {
     [TestFixture]
     class TestGhost
     {
-        public static string Map = @"
-WWWWWWWWWWWWWWWWWWWWWWWWWWWWW
-WFFFFFFFFFFFFWWWFFFFFFFFFFFFW
-WFWWWWFWWWWWFWWWFWWWWWFWWWWFW
-WEWWWWFWWWWWFWWWFWWWWWFWWWWEW
-WFWWWWFWWWWWFWWWFWWWWWFWWWWFW
-WFFFFFFFFFFFFFFFFFFFFFFFFFFFW
-WFWWWWFWWFWWWWWWWWWFWWFWWWWFW
-WFFFFFFWWFFFFWWWFFFFWWFFFFFFW
-WWWWWWFWWWWW WWW WWWWWFWWWWWW
-     WFWWWWW WWW WWWWWFW     
-     WFWWW      B  WWWFW     
-     WFWWW WWWDWWW WWWFW     
-WWWWWWFWWW WWPIKWW WWWFWWWWWW
-      FF   WWWWWWW   FF      
-WWWWWWFWW      S    WWFWWWWWW
-     WFWW WWWWWWWWW WWFW     
-     WFWW WWWWWWWWW WWFW     
-WWWWWWFWW WWWWWWWWW WWFWWWWWW
-WFFFFFFFFFFFFWWWFFFFFFFFFFFFW
-WFWWWWFWWWWWFWWWFWWWWWFWWWWFW
-WFWWWWFWWWWWFWWWFWWWWWFWWWWFW
-WEFFWWFFFFFFFFFFFFFFFFFWWFFEW
-WWWFWWFWWFWWWWWWWWWFWWFWWFWWW
-WWWFWWFWWFWWWWWWWWWFWWFWWFWWW
-WFFFFFFWWFFFFWWWFFFFWWFFFFFFW
-WFWWWWWWWWWWFWWWFWWWWWWWWWWFW
-WFWWWWWWWWWWFWWWFWWWWWWWWWWFW
-W             S             W
-WWWWWWWWWWWWWWWWWWWWWWWWWWWWW
-";
+
         [Test]
         public void FindPathTest()
         {
-            Game.CreateMap(Map);
+            Game.CreateMap(Game.MapPacman);
             var blinky = new Blinky(Directions.Left);
             var bPos = new Point(14, 10);
             var pacPos = new Point(14, 27);
@@ -65,7 +30,7 @@ WWWWWWWWWWWWWWWWWWWWWWWWWWWWW
         [Test]
         public void TestTeleports1()
         {
-            Game.CreateMap(Map);
+            Game.CreateMap(Game.MapPacman);
             var blinky = new Blinky(Directions.Left);
             var start = new Point(1, 13);
             var goal = new Point(27, 13);
@@ -85,7 +50,7 @@ WWWWWWWWWWWWWWWWWWWWWWWWWWWWW
         [Test]
         public void TestTeleports2()
         {
-            Game.CreateMap(Map);
+            Game.CreateMap(Game.MapPacman);
             var blinky = new Blinky(Directions.Right);
             var start = new Point(27, 13);
             var goal = new Point(1, 13);
@@ -105,15 +70,15 @@ WWWWWWWWWWWWWWWWWWWWWWWWWWWWW
         [Test]
         public void TestGetMovementBySpeed()
         {
-            Game.CreateMap(Map);
+            Game.CreateMap(Game.MapPacman);
             var x = 27;
             var y = 27;
             var move = new CreatureCommand() { DeltaX = 1, DeltaY = 0 };
             var a = Ghost.GetMovementBySpeed(move, 4, x, y);
-            Assert.AreEqual(1, a.DeltaX);
+            Assert.AreEqual(0, a.DeltaX);
             x = 26;
             a = Ghost.GetMovementBySpeed(move, 3, x, y);
-            Assert.AreEqual(2, a.DeltaX);
+            Assert.AreEqual(1, a.DeltaX);
             x = 29;
             move = new CreatureCommand() { DeltaX = 1, DeltaY = 0 };
             a = Ghost.GetMovementBySpeed(move, 3, x, y);
