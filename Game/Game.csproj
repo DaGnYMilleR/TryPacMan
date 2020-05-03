@@ -55,8 +55,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BFS.cs" />
-    <Compile Include="BFS_should.cs" />
     <Compile Include="Blinky.cs" />
     <Compile Include="Bonus.cs" />
     <Compile Include="CreatureAnimation.cs" />
