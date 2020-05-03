@@ -73,6 +73,7 @@ namespace Game
             {
                 Game.GameLives--;
                 return true;
+
             }
             return false;
         }

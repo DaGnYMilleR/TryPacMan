@@ -61,6 +61,11 @@ namespace Game
                 e.Graphics.DrawImage(bitmaps[a.Creature.GetImageFileName()], a.Location);
             e.Graphics.ResetTransform();
             e.Graphics.DrawString(Game.Score.ToString(), new Font("Arial", 16), Brushes.Green, 0, 0);
+            var imagesDirectory = new DirectoryInfo("Images");
+            imagesDirectory.GetFiles("live.png");
+            var c = (Bitmap)Image.FromFile(imagesDirectory.GetFiles("live.png").FirstOrDefault().FullName);
+            for (var i = 0; i < Game.GameLives; i++)
+                e.Graphics.DrawImage(c, new Point(100 + i * 20, 10));
         }
 
         private void TimerTick(object sender, EventArgs args)

@@ -22,7 +22,7 @@ WFWWWWFWWFWWWWWWWWWFWWFWWWWFW
 WFFFFFFWWFFFFWWWFFFFWWFFFFFFW
 WWWWWWFWWWWW WWW WWWWWFWWWWWW
      WFWWWWW WWW WWWWWFW     
-     WFWWW      B  WWWFW     
+     WFWWW    B    WWWFW     
      WFWWW WWWDWWW WWWFW     
 WWWWWWFWWW WWPIKWW WWWFWWWWWW
       FF   WWWWWWW   FF      
@@ -53,9 +53,19 @@ WWWWWWWWWWWWWWWWWWWWWWWWWWWWW
 
         public static int PointsAtLevel = 212;
         public static Point PackMansPosition { get; set; }
+        public static Point PackManStartPosition = new Point(14, 27);
         public static Point BlinkysPosition { get; set; } // 14, 10
+        public static Point PinkyPosition { get; set; } // 13, 12
+        public static Point KlaidPosition { get; set; } // 15, 12
+        public static Point InkyPosition { get; set; } //14, 12
+        public static Dictionary<int, Point> StartPositionGhosts = new Dictionary<int, Point>
+        {{1, new Point(13, 12) },
+        { 2, new Point(14, 10) },
+        { 3, new Point(15, 12)} ,
+        { 4, new Point(14, 12)}};
         public static int Score;
         public static int CountEnergizer;
+        public static int CountBonus;
 
         public static MonsterBehavior CurrentBehavior;
         public static ICreature[,] Map;

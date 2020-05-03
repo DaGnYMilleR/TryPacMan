@@ -10,8 +10,6 @@ namespace Game
     class Bonus : ICreature
     {
         public Directions CurrentDirection { get; set; }
-        private static bool BonusOn = true;
-
 
         public CreatureCommand Act(int x, int y)
         {
@@ -22,8 +20,11 @@ namespace Game
         {
             await Task.Run(() =>
             {
+                
                 Thread.Sleep(8000);
-                BonusOn = false;
+                if (Game.CountBonus == 1)
+                Game.Map[14, 14] = null;
+                Game.CountBonus--;
             });
         }
 
@@ -34,8 +35,6 @@ namespace Game
                 Game.Score += 100;
                 return true;
             }
-            if (!BonusOn)
-                return true;
             return false;
         }
 

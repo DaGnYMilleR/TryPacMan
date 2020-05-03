@@ -14,6 +14,7 @@ namespace Game
             {
                 Game.Map[14, 14] = new Bonus();
                 Game.PointsEated = 0;
+                Game.CountBonus++;
             }
            return new CreatureCommand();
         }

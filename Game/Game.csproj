@@ -82,7 +82,6 @@
     <Compile Include="Pinky.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SinglyLinkedList.cs" />
     <Compile Include="TestBlinky.cs" />
     <Compile Include="TestGhost.cs" />
     <Compile Include="TestInky.cs" />
