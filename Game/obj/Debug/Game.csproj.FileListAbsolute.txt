@@ -5,7 +5,6 @@ C:\Users\Danil\Desktop\PackMan\Game\Game\obj\Debug\Game.csprojAssemblyReference.
 C:\Users\Danil\Desktop\PackMan\Game\Game\obj\Debug\Game.csproj.CoreCompileInputs.cache
 C:\Users\Danil\Desktop\PackMan\Game\Game\obj\Debug\Game.exe
 C:\Users\Danil\Desktop\PackMan\Game\Game\obj\Debug\Game.pdb
-C:\Users\Danil\Desktop\PackMan\Game\Game\obj\Debug\Game.Program.resources
 C:\Users\Danil\Desktop\PackMan\Game\Game\obj\Debug\Game.csproj.GenerateResource.cache
 C:\Users\Danil\Desktop\PackMan\Game\Game\bin\Debug\NUnit3.TestAdapter.dll
 C:\Users\Danil\Desktop\PackMan\Game\Game\bin\Debug\NUnit3.TestAdapter.pdb
@@ -49,3 +48,4 @@ C:\Users\dns\Desktop\TryPacMan-master\Game\obj\Debug\Game.pdb
 C:\Users\dns\Desktop\TryPacMan-master\Game\obj\Debug\Game.PacManWindow.resources
 C:\Users\dns\Desktop\TryPacMan-master\Game\obj\Debug\Game.csproj.GenerateResource.cache
 C:\Users\dns\Desktop\TryPacMan-master\Game\obj\Debug\Game.csprojAssemblyReference.cache
+C:\Users\Danil\Desktop\PackMan\Game\Game\obj\Debug\Game.PacManWindow.resources

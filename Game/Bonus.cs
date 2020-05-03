@@ -24,7 +24,7 @@ namespace Game
             {
                 Thread.Sleep(8000);
                 BonusOn = false;
-            });
+            }); 
         }
 
         public bool DeadInConflict(ICreature conflictedObject) //

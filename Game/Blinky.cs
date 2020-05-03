@@ -25,6 +25,7 @@ namespace Game
                 case MonsterBehavior.chase:
                     var movement = FindPath(x, y, goal);
                     var movementWithSpeed = GetMovementBySpeed(movement, speed, x, y);
+                    Game.BlinkysPosition.Add(new Point(movementWithSpeed.DeltaX, movementWithSpeed.DeltaY));
                     if (movementWithSpeed != null)
                         return movementWithSpeed;
                     break;
@@ -32,6 +33,7 @@ namespace Game
                 case MonsterBehavior.scatter:
                     var movement1 = FindPath(x, y, new Point(Game.MapWidth, -1));
                     var movementWithSpeed1 = GetMovementBySpeed(movement1, speed, x, y);
+                    Game.BlinkysPosition.Add(new Point(movementWithSpeed1.DeltaX, movementWithSpeed1.DeltaY));
                     if (movementWithSpeed1 != null)
                         return movementWithSpeed1;
                     break;
@@ -39,6 +41,7 @@ namespace Game
                 case MonsterBehavior.frightened:
                     var movement2 = FrightenedAlgorithm(x, y);
                     var movementWithSpeed2 = GetMovementBySpeed(movement2, speed, x, y);
+                    Game.BlinkysPosition.Add(new Point(movementWithSpeed2.DeltaX, movementWithSpeed2.DeltaY));
                     if (movementWithSpeed2 != null)
                         return movementWithSpeed2;
                     break;

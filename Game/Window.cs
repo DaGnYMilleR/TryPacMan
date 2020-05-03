@@ -27,7 +27,7 @@ namespace Game
             foreach (var e in imagesDirectory.GetFiles("*.png"))
                 bitmaps[e.Name] = (Bitmap)Image.FromFile(e.FullName);
             var timer = new Timer();
-            timer.Interval = 10;
+            timer.Interval = 15;
             timer.Tick += TimerTick;
             timer.Start();
         }
@@ -68,29 +68,12 @@ namespace Game
             if (tickCount == 0) gameState.BeginAct();
             foreach (var e in gameState.Animations)
                 e.Location = new Point(e.Location.X + 2 * e.Command.DeltaX, e.Location.Y + 2 * e.Command.DeltaY);
+            if (tickCount == 3) Game.Map[11, 14] = null;
             if (tickCount == 7)
                 gameState.EndAct();
             tickCount++;
             if (tickCount == 8) tickCount = 0;
             Invalidate();
-        }
-
-        private void InitializeComponent()
-        {
-            this.SuspendLayout();
-            // 
-            // PacManWindow
-            // 
-            this.ClientSize = new System.Drawing.Size(282, 153);
-            this.Name = "PacManWindow";
-            this.Load += new System.EventHandler(this.PacManWindow_Load);
-            this.ResumeLayout(false);
-
-        }
-
-        private void PacManWindow_Load(object sender, EventArgs e)
-        {
-
         }
     }
 }

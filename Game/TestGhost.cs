@@ -1,10 +1,5 @@
 ﻿using NUnit.Framework;
-using System;
-using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Game
 {
@@ -110,10 +105,10 @@ WWWWWWWWWWWWWWWWWWWWWWWWWWWWW
             var y = 27;
             var move = new CreatureCommand() { DeltaX = 1, DeltaY = 0 };
             var a = Ghost.GetMovementBySpeed(move, 4, x, y);
-            Assert.AreEqual(1, a.DeltaX);
+            Assert.AreEqual(0, a.DeltaX);
             x = 26;
             a = Ghost.GetMovementBySpeed(move, 3, x, y);
-            Assert.AreEqual(2, a.DeltaX);
+            Assert.AreEqual(1, a.DeltaX);
             x = 29;
             move = new CreatureCommand() { DeltaX = 1, DeltaY = 0 };
             a = Ghost.GetMovementBySpeed(move, 3, x, y);
