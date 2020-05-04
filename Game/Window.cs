@@ -4,6 +4,7 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
+using System.Media;
 
 namespace Game
 {
@@ -13,6 +14,7 @@ namespace Game
         private readonly GameState gameState;
         private readonly HashSet<Keys> pressedKeys = new HashSet<Keys>();
         private int tickCount;
+        private Audio audio = new Audio();
 
 
         public PacManWindow(DirectoryInfo imagesDirectory = null)
@@ -77,6 +79,7 @@ namespace Game
                 gameState.EndAct();
             tickCount++;
             if (tickCount == 8) tickCount = 0;
+            audio.Play();
             Invalidate();
         }
 
@@ -94,6 +97,11 @@ namespace Game
         }
 
         private void PacManWindow_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void SoundOn()
         {
 
         }

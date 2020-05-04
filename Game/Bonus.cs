@@ -21,7 +21,7 @@ namespace Game
             await Task.Run(() =>
             {
                 
-                Thread.Sleep(8000);
+                Thread.Sleep(6000);
                 if (Game.CountBonus == 1)
                 Game.Map[14, 14] = null;
                 Game.CountBonus--;

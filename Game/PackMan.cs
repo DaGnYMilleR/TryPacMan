@@ -20,6 +20,7 @@ namespace Game
 
         public CreatureCommand Act(int x, int y)
         {
+            var a = new Audio();
             GetDirection(x,y);
             if (Game.LeftTeleport == new Point(x - 1, y) && CurrentDirection == Directions.Left)
             {

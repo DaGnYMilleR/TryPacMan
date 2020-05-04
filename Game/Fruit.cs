@@ -10,10 +10,9 @@ namespace Game
 
         public CreatureCommand Act(int x, int y)
         {
-            if (Game.PointsEated >= 70)
+            if (Game.PointsEated % 70 == 0 && Game.PointsEated >= 70)
             {
                 Game.Map[14, 14] = new Bonus();
-                Game.PointsEated = 0;
                 Game.CountBonus++;
             }
            return new CreatureCommand();
