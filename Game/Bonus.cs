@@ -36,9 +36,5 @@ namespace Game
             }
             return false;
         }
-
-
-        public int GetDrawingPriority() => 4;
-
     }
 }

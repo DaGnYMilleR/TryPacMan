@@ -19,6 +19,7 @@ namespace Game
             {
                 Game.Score += 50;
                 Game.IsMonsterStyle = true;
+               // Game.CurrentBehavior = MonsterBehavior.frightened;
                 Game.CountEnergizer++;
                 MonsterStyleOn();
                 return true;
@@ -31,11 +32,12 @@ namespace Game
             {
                 Thread.Sleep(8000);
                 if (Game.CountEnergizer == 1)
+                {
                     Game.IsMonsterStyle = false;
+                   // Game.CurrentBehavior = MonsterBehavior.chase;
+                }
                 Game.CountEnergizer--;
             });
         }
-
-        public int GetDrawingPriority() => 3;
     }
 }

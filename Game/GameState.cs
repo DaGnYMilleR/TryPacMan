@@ -59,7 +59,7 @@ namespace Game
                 }
             }
 
-            Animations = Animations.OrderByDescending(z => z.Creature.GetDrawingPriority()).ToList();
+            Animations = Animations.OrderByDescending(z => Priorities.GetDrawingPriority(z.CreaturesName)).ToList();
         }
 
         public void EndAct()

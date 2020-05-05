@@ -20,7 +20,6 @@ namespace Game
         public bool DeadInConflict(ICreature conflictedObject)
                         => conflictedObject is PackMan && Game.IsMonsterStyle;
 
-        public int GetDrawingPriority() => 4;
 
         public CreatureCommand FindPath(int x, int y, Point goal) // принимает начальную позицию и цель. Возвращает следующую точку и обновляет CurrDir
         {

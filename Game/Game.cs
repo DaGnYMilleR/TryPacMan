@@ -51,6 +51,8 @@ WWWWWWWWWWWWWWWWWWWWWWWWWWWWW
             { RightTeleport, new Point(0, 13) }
         };
 
+        //public static Teleports tels;
+
         public static int PointsAtLevel = 212;
         public static Point PackMansPosition { get; set; }
         public static Point PackManStartPosition = new Point(14, 27);

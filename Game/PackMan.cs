@@ -76,8 +76,6 @@ namespace Game
             return false;
         }
 
-        public int GetDrawingPriority() => 10;
-
         public void GetDirection(int x, int y)
         {
             switch (Game.KeyPressed)

@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace Game
 {
@@ -10,8 +9,10 @@ namespace Game
     {
         static bool tick;
         static readonly string[] monsters = new string[] { "Blinky", "Inky", "Klaid", "Pinky" };
+        static ImageList pictures = new ImageList();
+        
 
-        public static Dictionary<string, Dictionary<Directions, string>> images = new Dictionary<string, Dictionary<Directions, string>>
+        static Dictionary<string, Dictionary<Directions, string>> images = new Dictionary<string, Dictionary<Directions, string>>
         {
             { "Blinky", new Dictionary<Directions, string>() { { Directions.Up, "BlinkyUp.png" },
                                                                { Directions.Down, "BlinkyDown.png" },
@@ -66,23 +67,22 @@ namespace Game
                 case Directions.Up:
                     if (tick == true)
                         return "Pacman 1 1.png";
-                    else
-                        return "Pacman 1 2.png";
+                    return "Pacman 1 2.png";
+
                 case Directions.Right:
                     if (tick == true)
                         return "Pacman 2 1.png";
-                    else
-                        return "Pacman 2 2.png";
+                    return "Pacman 2 2.png";
+
                 case Directions.Down:
                     if (tick == true)
                         return "Pacman 3 1.png";
-                    else
-                        return "Pacman 3 2.png";
+                    return "Pacman 3 2.png";
+
                 case Directions.Left:
                     if (tick == true)
                         return "Pacman 4 1.png";
-                    else
-                        return "Pacman 4 2.png";
+                    return "Pacman 4 2.png";
             }
             throw new Exception("Wrong direction");
         }
