@@ -22,7 +22,8 @@ namespace Game
             {
                 Thread.Sleep(8000);
                 if (Game.CountBonus == 1)
-                    Game.Map[14, 14] = null;
+                    if (Game.Map[14, 14].FirstOrDefault() != null)
+                    Game.Map[14, 14].RemoveAt(0);
                 Game.CountBonus--;
             });
         }

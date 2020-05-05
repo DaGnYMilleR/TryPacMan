@@ -28,7 +28,7 @@ namespace Game
             var height = twoCellsBeforePacman.Y - blinkysPos.Y;
 
             var result = new Point(twoCellsBeforePacman.X + width, twoCellsBeforePacman.Y + height);
-            if (Game.InBounds(result) && !(Game.Map[result.X, result.Y] is Wall))
+            if (Game.InBounds(result) && !(Game.Map[result.X, result.Y].FirstOrDefault() is Wall))
                 return result;
             return twoCellsBeforePacman;
         }

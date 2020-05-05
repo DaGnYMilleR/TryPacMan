@@ -9,7 +9,6 @@ namespace Game
     interface ICreature
     {
         Directions CurrentDirection { get; set; }
-        int GetDrawingPriority();
         CreatureCommand Act(int x, int y);
         bool DeadInConflict(ICreature conflictedObject);
     }

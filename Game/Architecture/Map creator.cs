@@ -8,44 +8,46 @@ namespace Game
 {
     class Map_creator
     {
-        public static ICreature[,] CreateMap(string map)
+        public static List<ICreature> [,] CreateMap(string map)
         {
+            
             var rows = map.Split(new[] { "\n" }, StringSplitOptions.RemoveEmptyEntries);
-            var result = new ICreature[rows[0].Length, rows.Length];
+            var result = new List<ICreature>[rows[0].Length, rows.Length];
             for (var i = 0; i < rows[0].Length; i++)
                 for (var j = 0; j < rows.Length; j++)
                 {
+                    
                     result[i, j] = CreateCreatureBySymbol(rows[j][i]);
                 }
             return result;
         }
         
-        public static ICreature CreateCreatureBySymbol(char symb)
+        public static List<ICreature> CreateCreatureBySymbol(char symb)
         {
             switch (symb)
             {
                 case 'W': 
-                    return new Wall();
-                case ' ': 
-                    return null;
+                    return new List<ICreature> { new Wall() };
+                case ' ':
+                    return new List<ICreature>();
                 case 'E':
-                    return new Energizer();
+                    return new List<ICreature> { new Energizer() };
                 case 'C':
-                    return new Bonus();
+                    return new List<ICreature> { new Bonus() };
                 case 'P':
-                    return new Pinky(Directions.Right);
+                    return new List<ICreature> { new Pinky(Directions.Right) };
                 case 'K':
-                    return new Klaid(Directions.Right);
+                    return new List<ICreature> { new Klaid(Directions.Right) };
                 case 'I':
-                    return new Inky(Directions.Right);
+                    return new List<ICreature> { new Inky(Directions.Right) };
                 case 'B':
-                    return new Blinky(Directions.Right);
+                    return new List<ICreature> { new Blinky(Directions.Right) };
                 case 'F':
-                    return new Fruit();
+                    return new List<ICreature> { new Fruit() };
                 case 'S':
-                    return new PackMan(Directions.Right);
+                    return new List<ICreature> { new PackMan(Directions.Right) };
                 case 'D':
-                    return new Door();
+                    return new List<ICreature> { new Door() };
                 default:
                     throw new Exception("Wrong symbol!");
             }

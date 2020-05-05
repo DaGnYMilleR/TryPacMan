@@ -83,28 +83,28 @@ namespace Game
             switch (Game.KeyPressed)
             {
                 case Keys.Up:
-                    if (!(Game.Map[x, y - 1] is Wall))
+                    if (!(Game.Map[x, y - 1].FirstOrDefault() is Wall))
                     {
                         CurrentDirection = Directions.Up;
                         Game.PacMansDirection = CurrentDirection;
                     }
                     break;
                 case Keys.Down:
-                    if (!(Game.Map[x, y + 1] is Wall))
+                    if (!(Game.Map[x, y + 1].FirstOrDefault() is Wall))
                     {
                         CurrentDirection = Directions.Down;
                         Game.PacMansDirection = CurrentDirection;
                     }
                     break;
                 case Keys.Left:
-                    if (x != 0 && !(Game.Map[x - 1, y] is Wall))
+                    if (x != 0 && !(Game.Map[x - 1, y].FirstOrDefault() is Wall))
                     {
                         CurrentDirection = Directions.Left;
                         Game.PacMansDirection = CurrentDirection;
                     }
                     break;
                 case Keys.Right:
-                    if (x != Game.MapHeight - 1 && !(Game.Map[x + 1, y] is Wall))
+                    if (x != Game.MapHeight - 1 && !(Game.Map[x + 1, y].FirstOrDefault() is Wall))
                     {
                         CurrentDirection = Directions.Right;
                         Game.PacMansDirection = CurrentDirection;

@@ -20,7 +20,7 @@ namespace Game
                 {
                     if (Game.GameLives <= 0)
                     {
-                        var creature = Game.Map[x, y];
+                        var creature = Game.Map[x, y].FirstOrDefault();
                         if (creature == null) continue;
 
                         Animations.Add(
@@ -37,29 +37,32 @@ namespace Game
                     }
                     else
                     {
-                        var creature = Game.Map[x, y];
-                        if (creature == null) continue;
-                        var command = creature.Act(x, y);
+                        foreach (var creature in Game.Map[x, y])
+                        {
+                            //var creature = Game.Map[x, y].FirstOrDefault();
+                            if (creature == null) continue;
+                            var command = creature.Act(x, y);
 
-                        if (x + command.DeltaX < 0 || x + command.DeltaX >= Game.MapWidth || y + command.DeltaY < 0 ||
-                            y + command.DeltaY >= Game.MapHeight)
-                            throw new Exception($"The object {creature.GetType()} falls out of the game field");
+                            if (x + command.DeltaX < 0 || x + command.DeltaX >= Game.MapWidth || y + command.DeltaY < 0 ||
+                                y + command.DeltaY >= Game.MapHeight)
+                                throw new Exception($"The object {creature.GetType()} falls out of the game field");
 
-                        Animations.Add(
-                            new CreatureAnimation
-                            {
-                                Command = command,
-                                Creature = creature,
-                                Location = new Point(x * ElementSize, y * ElementSize),
-                                TargetLogicalLocation = new Point(x + command.DeltaX, y + command.DeltaY),
-                                CreaturesName = creature.GetType().Name,
-                                CreaturesDirection = creature.CurrentDirection
-                            }) ;
+                            Animations.Add(
+                                new CreatureAnimation
+                                {
+                                    Command = command,
+                                    Creature = creature,
+                                    Location = new Point(x * ElementSize, y * ElementSize),
+                                    TargetLogicalLocation = new Point(x + command.DeltaX, y + command.DeltaY),
+                                    CreaturesName = creature.GetType().Name,
+                                    CreaturesDirection = creature.CurrentDirection
+                                });
+                        }
                     }
                 }
             }
 
-            Animations = Animations.OrderByDescending(z => z.Creature.GetDrawingPriority()).ToList();
+            Animations = Animations.OrderBy(z => Priorities.GetDrawingPriority(z.CreaturesName)).ToList();
         }
 
         public void EndAct()
@@ -70,7 +73,7 @@ namespace Game
                     Game.Map[x, y] = SelectWinnerCandidatePerLocation(creaturesPerLocation, x, y);
         }
 
-        private static ICreature SelectWinnerCandidatePerLocation(List<ICreature>[,] creatures, int x, int y)
+        private static List<ICreature> SelectWinnerCandidatePerLocation(List<ICreature>[,] creatures, int x, int y)
         {
             var candidates = creatures[x, y];
             var aliveCandidates = candidates.ToList();
@@ -82,7 +85,7 @@ namespace Game
             //    throw new Exception(
             //        $"Creatures {aliveCandidates[0].GetType().Name} and {aliveCandidates[1].GetType().Name} claimed the same map cell");
 
-            return aliveCandidates.FirstOrDefault();
+            return aliveCandidates.OrderBy(s => Priorities.GetDrawingPriority(s.GetType().Name)).ToList();
         }
 
         private List<ICreature>[,] GetCandidatesPerLocation()

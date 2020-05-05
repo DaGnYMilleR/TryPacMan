@@ -94,7 +94,7 @@ namespace Game
                 var neighbor = point.Add(newPoint);
                 if (neighbor == Game.LeftTeleport || neighbor == Game.RightTeleport)
                     yield return Game.Teleports[neighbor];
-                else if (CanMoveTo(neighbor) && !(Game.Map[neighbor.X, neighbor.Y] is Ghost))
+                else if (CanMoveTo(neighbor) && !(Game.Map[neighbor.X, neighbor.Y].FirstOrDefault() is Ghost))
                     yield return neighbor;
             }
         }
@@ -143,7 +143,7 @@ namespace Game
             {
                 var move = vector.Multiply(i);
                 var newPoint = point.Add(move);
-                if (Game.InBounds(newPoint) && !(Game.Map[newPoint.X, newPoint.Y] is Wall))
+                if (Game.InBounds(newPoint) && !(Game.Map[newPoint.X, newPoint.Y].FirstOrDefault() is Wall))
                     return newPoint;
             }
             return point;
@@ -151,7 +151,7 @@ namespace Game
 
         public static bool CanMoveTo(Point point)
         {
-            return Game.InBounds(point) && !(Game.Map[point.X, point.Y] is Wall);
+            return Game.InBounds(point) && !(Game.Map[point.X, point.Y].FirstOrDefault() is Wall);
         }
 
         public static int ChangeSpeed() // FIX values // изменяет скорость

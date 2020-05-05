@@ -62,6 +62,7 @@
     <Compile Include="Architecture\Direction.cs" />
     <Compile Include="Classes\Energizer.cs" />
     <Compile Include="Classes\Fruit.cs" />
+    <Compile Include="Classes\Prioryties.cs" />
     <Compile Include="Game.cs" />
     <Compile Include="Architecture\Component1.cs">
       <SubType>Component</SubType>

@@ -68,7 +68,7 @@ WWWWWWWWWWWWWWWWWWWWWWWWWWWWW
         public static int CountBonus;
 
         public static MonsterBehavior CurrentBehavior;
-        public static ICreature[,] Map;
+        public static List<ICreature> [,] Map;
 
         public static int PointsEated;
         public static bool IsMonsterStyle;
@@ -79,13 +79,13 @@ WWWWWWWWWWWWWWWWWWWWWWWWWWWWW
         public static Directions PacMansDirection;
         public static int GameLives;
 
-        public static bool CanMoveToLeft(int x, int y) => x - 1 >= 0 && !(Map[x - 1, y] is Wall);
+        public static bool CanMoveToLeft(int x, int y) => x - 1 >= 0 && !(Map[x - 1, y].FirstOrDefault() is Wall);
 
-        public static bool CanMoveToRight(int x, int y) => x + 1 < MapWidth && !(Map[x + 1, y] is Wall);
+        public static bool CanMoveToRight(int x, int y) => x + 1 < MapWidth && !(Map[x + 1, y].FirstOrDefault() is Wall);
 
-        public static bool CanMoveToDown(int x, int y) => y + 1 < MapHeight && !(Map[x, y + 1] is Wall);
+        public static bool CanMoveToDown(int x, int y) => y + 1 < MapHeight && !(Map[x, y + 1].FirstOrDefault() is Wall);
 
-        public static bool CanMoveToUp(int x, int y) => y - 1 >= 0 && !(Map[x, y - 1] is Wall);
+        public static bool CanMoveToUp(int x, int y) => y - 1 >= 0 && !(Map[x, y - 1].FirstOrDefault() is Wall);
 
         public static bool InBounds(Point point)
         {

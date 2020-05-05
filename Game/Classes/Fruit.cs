@@ -1,4 +1,5 @@
-﻿using System.Threading;
+﻿using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Game
@@ -11,7 +12,7 @@ namespace Game
         {
             if (Game.PointsEated >= 70)
             {
-                Game.Map[14, 14] = new Bonus();
+                Game.Map[14, 14].Add(new Bonus());
                 Game.PointsEated = 0;
                 Game.CountBonus++;
             }

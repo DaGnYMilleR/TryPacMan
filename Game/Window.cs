@@ -63,7 +63,7 @@ namespace Game
             e.Graphics.ResetTransform();
             e.Graphics.DrawString(Game.Score.ToString(), new Font("Arial", 16), Brushes.Green, 0, 0);
             var imagesDirectory = new DirectoryInfo("Images");
-            imagesDirectory.GetFiles("live.png");
+            imagesDirectory.GetFiles("live.png"); //remont
             var c = (Bitmap)Image.FromFile(imagesDirectory.GetFiles("live.png").FirstOrDefault().FullName);
             for (var i = 0; i < Game.GameLives; i++)
                 e.Graphics.DrawImage(c, new Point(100 + i * 20, 10));
@@ -74,12 +74,11 @@ namespace Game
             if (tickCount == 0) gameState.BeginAct();
             foreach (var e in gameState.Animations)
                 e.Location = new Point(e.Location.X + 1 * e.Command.DeltaX, e.Location.Y + 1 * e.Command.DeltaY);
-            Game.Map[14, 11] = null;
             if (tickCount == 7)
                 gameState.EndAct();
             tickCount++;
             if (tickCount == 8) tickCount = 0;
-            Audio.Play();
+                Audio.Play();
             Invalidate();
         }
     }
