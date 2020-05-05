@@ -29,8 +29,10 @@ namespace Game
                                 Command = new CreatureCommand(),
                                 Creature = creature,
                                 Location = new Point(x * ElementSize, y * ElementSize),
-                                TargetLogicalLocation = new Point(x, y)
-                            });
+                                TargetLogicalLocation = new Point(x, y),
+                                CreaturesName = creature.GetType().Name,
+                                CreaturesDirection = creature.CurrentDirection
+                            }) ;
 
                     }
                     else
@@ -49,8 +51,10 @@ namespace Game
                                 Command = command,
                                 Creature = creature,
                                 Location = new Point(x * ElementSize, y * ElementSize),
-                                TargetLogicalLocation = new Point(x + command.DeltaX, y + command.DeltaY)
-                            });
+                                TargetLogicalLocation = new Point(x + command.DeltaX, y + command.DeltaY),
+                                CreaturesName = creature.GetType().Name,
+                                CreaturesDirection = creature.CurrentDirection
+                            }) ;
                     }
                 }
             }

@@ -3,9 +3,7 @@
 namespace Game
 {
     class Pinky : Ghost
-    {
-        private string Image = "PinkyUp.png";
-        
+    {       
         public Pinky(Directions dir)
         {
             CurrentDirection = dir;
@@ -23,31 +21,6 @@ namespace Game
         {
             var goal = GetNCellsBeforePoint(Game.PackMansPosition, Game.PacMansDirection, 4);
             return goal;
-        }
-    
-
-
-        public override string GetImageFileName()
-        {
-            if (Game.IsMonsterStyle)
-                return BlueMonsters;
-            switch (CurrentDirection)
-            {
-                case Directions.Up:
-                     Image = "PinkyUp.png";
-                    break;
-                case Directions.Right:
-                    Image = "PinkyRight.png";
-                    break;
-                case Directions.Down:
-                    Image = "PinkyDown.png";
-                    break;
-                case Directions.Left:
-                    Image = "PinkyLeft.png";
-                    break;
-            }
-            return Image;
-
         }
     }
 }

@@ -9,7 +9,7 @@ namespace Game
 {
     class Bonus : ICreature
     {
-        public Directions CurrentDirection { get; set; }
+        public Directions CurrentDirection { get; set; } = Directions.Nothing;
 
         public CreatureCommand Act(int x, int y)
         {
@@ -20,7 +20,6 @@ namespace Game
         {
             await Task.Run(() =>
             {
-
                 Thread.Sleep(8000);
                 if (Game.CountBonus == 1)
                     Game.Map[14, 14] = null;
@@ -41,9 +40,5 @@ namespace Game
 
         public int GetDrawingPriority() => 4;
 
-        public string GetImageFileName()
-        {
-            return "Bonus.png";
-        }
     }
 }

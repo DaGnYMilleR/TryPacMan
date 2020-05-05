@@ -9,7 +9,6 @@ namespace Game
         {
             CurrentDirection = dir;
         }
-        private string Image = "KlaidUp.png";
         public override CreatureCommand Act(int x, int y)
         {
             var goal = GetGoal(x, y);
@@ -24,29 +23,6 @@ namespace Game
                 return Game.PackMansPosition;
             else
                 return new Point(0, Game.MapHeight - 1);
-        }
-
-
-        public override string GetImageFileName()
-        {
-            if (Game.IsMonsterStyle)
-                return BlueMonsters;
-            switch (CurrentDirection)
-            {
-                case Directions.Up:
-                    Image = "KlaidUp.png";
-                    break;
-                case Directions.Right:
-                    Image = "KlaidRight.png";
-                    break;
-                case Directions.Down:
-                    Image = "KlaidDown.png";
-                    break;
-                case Directions.Left:
-                    Image = "KlaidLeft.png";
-                    break;
-            }
-            return Image;
         }
     }
 }

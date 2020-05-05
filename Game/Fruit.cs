@@ -5,8 +5,7 @@ namespace Game
 {
     class Fruit : ICreature
     {
-        public Directions CurrentDirection { get; set; }
-        private string Image = "Fruit.png";
+        public Directions CurrentDirection { get; set; } = Directions.Nothing;
 
         public CreatureCommand Act(int x, int y)
         {
@@ -31,8 +30,5 @@ namespace Game
         }
 
         public int GetDrawingPriority() => 2;
-
-
-        public string GetImageFileName() => Image;
     }
 }

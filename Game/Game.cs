@@ -92,6 +92,7 @@ WWWWWWWWWWWWWWWWWWWWWWWWWWWWW
             var rect = new Rectangle(0, 0, MapWidth, MapHeight);
             return rect.Contains(point);
         }
+
         public static void CreateMap(string MapPacman)
         {
             Map = Map_creator.CreateMap(MapPacman);

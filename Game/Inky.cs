@@ -13,7 +13,6 @@ namespace Game
         {
             CurrentDirection = dir;
         }
-        private string Image = "InkyUp.png";
         public override CreatureCommand Act(int x, int y)
         {
             var goal = FindGoal(Game.PackMansPosition, Game.BlinkysPosition);
@@ -35,28 +34,5 @@ namespace Game
         }
 
         public Point Get2CellsBeforePacman(Point pacmanPos) => GetNCellsBeforePoint(pacmanPos, Game.PacMansDirection, 2);
-
-
-        public override string GetImageFileName()
-        {
-            if (Game.IsMonsterStyle)
-                return BlueMonsters;
-            switch (CurrentDirection)
-            {
-                case Directions.Up:
-                    Image = "InkyUp.png";
-                    break;
-                case Directions.Right:
-                    Image = "InkyRight.png";
-                    break;
-                case Directions.Down:
-                    Image = "InkyDown.png";
-                    break;
-                case Directions.Left:
-                    Image = "InkyLeft.png";
-                    break;
-            }
-            return Image;
-        }
     }
 }

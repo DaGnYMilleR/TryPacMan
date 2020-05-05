@@ -9,8 +9,7 @@ namespace Game
 {
     class Energizer : ICreature
     {
-        public Directions CurrentDirection { get; set; }
-        private string Image = "Energizer.png";
+        public Directions CurrentDirection { get; set; } = Directions.Nothing;
 
         public CreatureCommand Act(int x, int y) => new CreatureCommand();
 
@@ -21,25 +20,22 @@ namespace Game
                 Game.Score += 50;
                 Game.IsMonsterStyle = true;
                 Game.CountEnergizer++;
-                MonserStyleOn();
+                MonsterStyleOn();
                 return true;
             }
             return false;
         }
-        private static async void MonserStyleOn()
+        private static async void MonsterStyleOn()//  TODO class interlocked
         {
             await Task.Run(() =>
             {
                 Thread.Sleep(8000);
                 if (Game.CountEnergizer == 1)
                     Game.IsMonsterStyle = false;
-                else
-                    Game.CountEnergizer--;
+                Game.CountEnergizer--;
             });
         }
 
         public int GetDrawingPriority() => 3;
-
-        public string GetImageFileName() => Image;
     }
 }

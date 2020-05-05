@@ -11,8 +11,6 @@ namespace Game
     class PackMan : ICreature
     {
         public Directions CurrentDirection { get; set; }
-        private bool Tick;
-        private Point prevPoint;
         public PackMan(Directions dir)
         {
             CurrentDirection = dir;
@@ -79,41 +77,6 @@ namespace Game
         }
 
         public int GetDrawingPriority() => 10;
-
-        public string GetImageFileName()
-        {
-            if (prevPoint != Game.PackMansPosition)
-            {
-                Tick = !Tick;
-                prevPoint = Game.PackMansPosition;
-            }
-
-            switch (CurrentDirection)
-            {
-                case Directions.Up:
-                    if (Tick == true)
-                        return "Pacman 1 1.png";
-                    else
-                        return "Pacman 1 2.png";
-                case Directions.Right:
-                    if (Tick == true)
-                        return "Pacman 2 1.png";
-                    else
-                        return "Pacman 2 2.png";
-                case Directions.Down:
-                    if (Tick == true)
-                        return "Pacman 3 1.png";
-                    else
-                        return "Pacman 3 2.png";
-                case Directions.Left:
-                    if (Tick == true)
-                        return "Pacman 4 1.png";
-                    else
-                        return "Pacman 4 2.png";
-            }
-            return "Pacman 0.png";
-
-        }
 
         public void GetDirection(int x, int y)
         {

@@ -9,7 +9,6 @@ namespace Game
     class Ghost : ICreature
     {
         public const int mapDiagonalSize = 900;
-        public string BlueMonsters = "GhostIsMonsterStyle.png";
         public static Point[] possibleMoves = new Point[] { new Point(1, 0), new Point(0, -1), new Point(-1, 0), new Point(0, 1) };
         public Directions CurrentDirection { get; set; }
 
@@ -22,12 +21,6 @@ namespace Game
                         => conflictedObject is PackMan && Game.IsMonsterStyle;
 
         public int GetDrawingPriority() => 4;
-      
-
-        public virtual string GetImageFileName()
-        {
-            throw new NotImplementedException();
-        }
 
         public CreatureCommand FindPath(int x, int y, Point goal) // принимает начальную позицию и цель. Возвращает следующую точку и обновляет CurrDir
         {
@@ -101,7 +94,7 @@ namespace Game
                 var neighbor = point.Add(newPoint);
                 if (neighbor == Game.LeftTeleport || neighbor == Game.RightTeleport)
                     yield return Game.Teleports[neighbor];
-                if (CanMoveTo(neighbor) && !(Game.Map[neighbor.X, neighbor.Y] is Ghost))
+                else if (CanMoveTo(neighbor) && !(Game.Map[neighbor.X, neighbor.Y] is Ghost))
                     yield return neighbor;
             }
         }
@@ -174,5 +167,13 @@ namespace Game
                 return 2;
             return 3;
         }
+
+        //сделать удобную структуру папок         -- easy
+        //FIX Bugs                                                                                 -- easy
+        //Add music                                                                                 -- easy
+        //карту в файл и читать её каждый раз (сделать отдельный класс static Map)                  --hard
+        //убрать константы из game                                                                   --hard 
+        //добавить ImageList для каждого призрака                                                  --easy
+        // FiX Icreature, убрать отрисовку в отдельную сущность                                     --hard
     }
 }

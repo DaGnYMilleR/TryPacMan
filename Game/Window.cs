@@ -58,7 +58,8 @@ namespace Game
                 Brushes.Black, 0, 0, GameState.ElementSize * Game.MapWidth,
                 GameState.ElementSize * Game.MapHeight);
             foreach (var a in gameState.Animations)
-                e.Graphics.DrawImage(bitmaps[a.Creature.GetImageFileName()], a.Location);
+                e.Graphics.DrawImage(bitmaps[ImageHandler.GetImage(a.CreaturesName, a.CreaturesDirection)], a.Location);
+                //e.Graphics.DrawImage(bitmaps[a.Creature.GetImageFileName()], a.Location);
             e.Graphics.ResetTransform();
             e.Graphics.DrawString(Game.Score.ToString(), new Font("Arial", 16), Brushes.Green, 0, 0);
             var imagesDirectory = new DirectoryInfo("Images");
@@ -72,7 +73,8 @@ namespace Game
         {
             if (tickCount == 0) gameState.BeginAct();
             foreach (var e in gameState.Animations)
-                e.Location = new Point(e.Location.X + 2 * e.Command.DeltaX, e.Location.Y + 2 * e.Command.DeltaY);
+                e.Location = new Point(e.Location.X + 1 * e.Command.DeltaX, e.Location.Y + 1 * e.Command.DeltaY);
+            Game.Map[14, 11] = null;
             if (tickCount == 7)
                 gameState.EndAct();
             tickCount++;

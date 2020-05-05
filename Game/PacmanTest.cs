@@ -127,18 +127,7 @@ WWWWWW");
 
 
         }
-        [Test]
-        public void TestGetImage()
-        {
-            var pacman = new PackMan(Directions.Right);
-            Game.PackMansPosition = new Point(1, 1);
-            Assert.AreEqual(pacman.GetImageFileName(), "Pacman 2 1.png");
-            Game.PackMansPosition = new Point(1, 3);
-            Assert.AreEqual(pacman.GetImageFileName(), "Pacman 2 2.png");
-            pacman.CurrentDirection = Directions.Up;
-            Game.PackMansPosition = new Point(1, 4);
-            Assert.AreEqual(pacman.GetImageFileName(), "Pacman 1 1.png");
-        }
+
         [Test]
         public void TestTelepotMainMap()
         {
