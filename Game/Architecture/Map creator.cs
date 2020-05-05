@@ -11,7 +11,7 @@ namespace Game
         public static List<ICreature> [,] CreateMap(string map)
         {
             
-            var rows = map.Split(new[] { "\n" }, StringSplitOptions.RemoveEmptyEntries);
+            var rows = map.Split(new[] { "\r\n" }, StringSplitOptions.RemoveEmptyEntries);
             var result = new List<ICreature>[rows[0].Length, rows.Length];
             for (var i = 0; i < rows[0].Length; i++)
                 for (var j = 0; j < rows.Length; j++)

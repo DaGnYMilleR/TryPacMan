@@ -13,8 +13,7 @@ namespace Game
         private readonly GameState gameState;
         private readonly HashSet<Keys> pressedKeys = new HashSet<Keys>();
         private int tickCount;
-        private Audio Audio = new Audio();
-
+        
 
         public PacManWindow(DirectoryInfo imagesDirectory = null)
         {
@@ -78,7 +77,6 @@ namespace Game
                 gameState.EndAct();
             tickCount++;
             if (tickCount == 8) tickCount = 0;
-                Audio.Play();
             Invalidate();
         }
     }

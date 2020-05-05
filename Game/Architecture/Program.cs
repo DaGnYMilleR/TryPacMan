@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
+using System.IO;
 
 namespace Game
 {
@@ -8,7 +9,8 @@ namespace Game
         [STAThread]
         private static void Main()
         {
-        Game.CreateMap(Game.MapPacman);
+            var map = new StreamReader(@"Maps\Map1.txt");
+            Game.CreateMap(map.ReadToEnd());
             Application.Run(new PacManWindow());
         }
     }

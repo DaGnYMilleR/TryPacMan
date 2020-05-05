@@ -39,7 +39,6 @@ namespace Game
                     {
                         foreach (var creature in Game.Map[x, y])
                         {
-                            //var creature = Game.Map[x, y].FirstOrDefault();
                             if (creature == null) continue;
                             var command = creature.Act(x, y);
 
@@ -81,9 +80,6 @@ namespace Game
                 foreach (var rival in candidates)
                     if (rival != candidate && candidate.DeadInConflict(rival))
                         aliveCandidates.Remove(candidate);
-            //if (aliveCandidates.Count > 1)
-            //    throw new Exception(
-            //        $"Creatures {aliveCandidates[0].GetType().Name} and {aliveCandidates[1].GetType().Name} claimed the same map cell");
 
             return aliveCandidates.OrderBy(s => Priorities.GetDrawingPriority(s.GetType().Name)).ToList();
         }

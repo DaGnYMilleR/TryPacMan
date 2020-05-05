@@ -25,6 +25,7 @@ namespace Game
             {
                 Game.Score += 10;
                 Game.PointsEated++;
+                Game.Audio.Play();
                 return true;
             }
             return false;
