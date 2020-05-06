@@ -36,7 +36,7 @@ namespace Game
                     return new List<ICreature> { new Bonus() };
                 case 'P':
                     Game.startPositions["Pinky"] = new Point(x, y);
-                    return new List<ICreature> { new Pinky(Directions.Right) };
+                    return new List<ICreature> { new Pinky(Directions.Nothing) };
                 case 'K':
                     Game.startPositions["Klaid"] = new Point(x, y);
                     return new List<ICreature> { new Klaid(Directions.Right) };
@@ -45,7 +45,7 @@ namespace Game
                     return new List<ICreature> { new Inky(Directions.Right) };
                 case 'B':
                     Game.startPositions["Blinky"] = new Point(x, y);
-                    return new List<ICreature> { new Blinky(Directions.Right) };
+                    return new List<ICreature> { new Blinky(Directions.Nothing) };
                 case 'F':
                     Game.PointsAtLevel++;
                     return new List<ICreature> { new Fruit() };

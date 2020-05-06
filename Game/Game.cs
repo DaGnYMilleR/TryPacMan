@@ -65,6 +65,7 @@ namespace Game
 
         public static void CreateMap(string MapPacman)
         {
+            teleports = new Teleport();
             Map = Map_creator.CreateMap(MapPacman);
             GameLives = 3;
         }

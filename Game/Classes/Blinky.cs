@@ -17,7 +17,7 @@ namespace Game
         public override CreatureCommand Act(int x, int y)
         {
             var goal = Game.PackMansPosition;
-            var movement = FindAct(x, y, goal, new Point(Game.MapWidth, 0));
+            var movement = FindAct(x, y, goal, new Point(Game.MapWidth, -1));
             Game.BlinkysPosition.Add(new Point(movement.DeltaX, movement.DeltaY));
             return movement;
         }

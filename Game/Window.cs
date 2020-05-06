@@ -13,7 +13,8 @@ namespace Game
         private readonly GameState gameState;
         private readonly HashSet<Keys> pressedKeys = new HashSet<Keys>();
         private int tickCount;
-        
+        private int tickCount2;
+
 
         public PacManWindow(DirectoryInfo imagesDirectory = null)
         {
@@ -28,6 +29,7 @@ namespace Game
                 bitmaps[e.Name] = (Bitmap)Image.FromFile(e.FullName);
             var timer = new Timer();
             timer.Interval = 10;
+            timer.Tick += ScatterModeController;
             timer.Tick += TimerTick;
             timer.Start();
         }
@@ -61,9 +63,7 @@ namespace Game
                 e.Graphics.DrawImage(bitmaps[ImageHandler.GetImage(a.CreaturesName, a.CreaturesDirection)], a.Location);
             e.Graphics.ResetTransform();
             e.Graphics.DrawString(Game.Score.ToString(), new Font("Arial", 16), Brushes.Green, 0, 0);
-            var imagesDirectory = new DirectoryInfo("Images");
-            imagesDirectory.GetFiles("live.png"); //remont
-            var c = (Bitmap)Image.FromFile(imagesDirectory.GetFiles("live.png").FirstOrDefault().FullName);
+            var c = bitmaps[ImageHandler.GetImage("live", Directions.Nothing)];
             for (var i = 0; i < Game.GameLives; i++)
                 e.Graphics.DrawImage(c, new Point(100 + i * 20, 10));
         }
@@ -78,6 +78,36 @@ namespace Game
             tickCount++;
             if (tickCount == 8) tickCount = 0;
             Invalidate();
+        }
+
+        private void ScatterModeController(object sender, EventArgs args)
+        {
+            if (!(Game.CurrentBehavior == MonsterBehavior.frightened))
+            {
+                if (tickCount2 == 100)
+                {
+                    Game.CurrentBehavior = MonsterBehavior.scatter;
+                    Console.WriteLine(MonsterBehavior.scatter.ToString() + " on");
+                }
+                if (tickCount2 == 500)
+                {
+                    Game.CurrentBehavior = MonsterBehavior.chase;
+                    Console.WriteLine(MonsterBehavior.scatter.ToString() + " off");
+                }
+
+                if (tickCount2 == 800)
+                {
+                    Game.CurrentBehavior = MonsterBehavior.scatter;
+                    Console.WriteLine(MonsterBehavior.scatter.ToString() + " on");
+                }
+                if (tickCount2 == 1100)
+                {
+                    Game.CurrentBehavior = MonsterBehavior.chase;
+                    Console.WriteLine(MonsterBehavior.scatter.ToString() + " off");
+                }
+                tickCount2++;
+                Invalidate();
+            }
         }
     }
 }

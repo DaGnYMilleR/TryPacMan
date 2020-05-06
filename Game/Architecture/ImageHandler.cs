@@ -38,7 +38,8 @@ namespace Game
             { "Energizer", new Dictionary<Directions, string>() { { Directions.Nothing, "Energizer.png" } } },
             { "Fruit", new Dictionary<Directions, string>() { { Directions.Nothing, "Fruit.png" } } },
             { "Wall", new Dictionary<Directions, string>() { { Directions.Nothing, "Wall.png" } } },
-            { "Door", new Dictionary<Directions, string>() { { Directions.Nothing, "Door.png" } } }
+            { "Door", new Dictionary<Directions, string>() { { Directions.Nothing, "Door.png" } } },
+            { "live", new Dictionary<Directions, string>() { { Directions.Nothing, "live.png" } } }
         };
 
         public static string GetImage(string name, Directions direction)

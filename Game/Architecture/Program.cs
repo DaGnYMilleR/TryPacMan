@@ -10,6 +10,7 @@ namespace Game
         private static void Main()
         {
             var map = new StreamReader(@"Maps\Map1.txt");
+            Console.WriteLine("Map readen");
             Game.CreateMap(map.ReadToEnd());
             Application.Run(new PacManWindow());
         }

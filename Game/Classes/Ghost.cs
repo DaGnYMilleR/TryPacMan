@@ -59,7 +59,6 @@ namespace Game
         public CreatureCommand FindAct(int x, int y, Point goal, Point goalInScatter)
         {
             var speed = ChangeSpeed();
-
             switch (Game.CurrentBehavior)
             {
                 case MonsterBehavior.chase:
@@ -113,8 +112,11 @@ namespace Game
         public CreatureCommand FrightenedAlgorithm(int x, int y) // алгоритм режима испуга. Принимает x, y. Возвращает след точку, обновляет CurrDir
         {
             var rnd = new Random();
+            var attemptsCount = 0;
             while (true)
             {
+                if (attemptsCount >= 10)
+                    return new CreatureCommand();
                 var newX = rnd.Next(-1, 2);
                 var newY = rnd.Next(-1, 2);
                 if ((newX != newY) && (newX == 0 || newY == 0))
@@ -131,6 +133,7 @@ namespace Game
                         CurrentDirection = Direction.reversedDirections[new Point(newX, newY)];
                         return new CreatureCommand { DeltaX = newX, DeltaY = newY };
                     }
+                    attemptsCount++;
                 }
             }
         }
