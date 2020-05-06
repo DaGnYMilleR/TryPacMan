@@ -38,9 +38,9 @@ namespace Game
                     result = movement;
                 }
             }
-            if (result.X == 28)
+            if (result.X == 27)
                 CurrentDirection = Directions.Left;
-            else if (result.X == -28)
+            else if (result.X == -27)
                 CurrentDirection = Directions.Right;
             else
                 CurrentDirection = Direction.reversedDirections[result];
@@ -92,8 +92,8 @@ namespace Game
             foreach (var newPoint in possibleMoves)
             {
                 var neighbor = point.Add(newPoint);
-                if (neighbor == Game.LeftTeleport || neighbor == Game.RightTeleport)
-                    yield return Game.Teleports[neighbor];
+                if (Game.teleports.teleports.Contains(neighbor))
+                    yield return Game.teleports.EntranceExitPairs[neighbor];
                 else if (CanMoveTo(neighbor) && !(Game.Map[neighbor.X, neighbor.Y].FirstOrDefault() is Ghost))
                     yield return neighbor;
             }
@@ -120,9 +120,9 @@ namespace Game
                 if ((newX != newY) && (newX == 0 || newY == 0))
                 {
                     var newPoint = new Point(x + newX, y + newY);
-                    if (Game.Teleports.ContainsKey(newPoint))
+                    if (Game.teleports.teleports.Contains(newPoint))
                     {
-                        var movement = Game.Teleports[newPoint];
+                        var movement = Game.teleports.EntranceExitPairs[newPoint];
                         return new CreatureCommand { DeltaX = movement.X - x, DeltaY = movement.Y - y };
                     }
                     if (CanMoveTo(newPoint)
@@ -143,7 +143,7 @@ namespace Game
             {
                 var move = vector.Multiply(i);
                 var newPoint = point.Add(move);
-                if (Game.InBounds(newPoint) && !(Game.Map[newPoint.X, newPoint.Y].FirstOrDefault() is Wall))
+                if (CanMoveTo(newPoint))
                     return newPoint;
             }
             return point;

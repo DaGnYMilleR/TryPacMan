@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Game
@@ -13,16 +14,31 @@ namespace Game
         public virtual CreatureCommand Act(int x, int y) => new CreatureCommand();
 
         public virtual bool DeadInConflict(ICreature conflictedObject) => false;
-
-        public virtual int GetDrawingPriority() => 1;
     }
 
     class Door : Wall
     {
-        public override CreatureCommand Act(int x, int y) => new CreatureCommand();
+        private static bool deleted = true;
+        public override CreatureCommand Act(int x, int y)
+        {
+            if (deleted)
+            {
+                deleted = !deleted;
+                Await();
+            }
+            return new CreatureCommand();
+        }
 
         public override bool DeadInConflict(ICreature conflictedObject) => false;
 
-        public override int GetDrawingPriority() => 9;
+        private static void Await()
+        {
+            Task.Run(() =>
+            {
+                Thread.Sleep(8000);
+                if (Game.Map[14, 11].FirstOrDefault() != null)
+                    Game.Map[14, 11].RemoveAt(0);
+            });
+        }
     }
 }

@@ -128,14 +128,14 @@ WWWWWW");
 
         }
 
-        [Test]
-        public void TestTelepotMainMap()
-        {
-            Game.Map = Map_creator.CreateMap(TestGhost.Map);
-            var pacman = new PackMan(Directions.Right);
-            Game.PackMansPosition = new Point( Game.RightTeleport.X - 1, Game.RightTeleport.Y);
-            var coord = pacman.Act(Game.PackMansPosition.X, Game.PackMansPosition.Y);
-            Assert.AreEqual(new Point(coord.DeltaX, coord.DeltaY), new Point(-Game.MapWidth + 1, 0));
-        }
+        //[Test]
+        //public void TestTelepotMainMap()
+        //{
+        //    Game.Map = Map_creator.CreateMap(TestGhost.Map);
+        //    var pacman = new PackMan(Directions.Right);
+        //    Game.PackMansPosition = new Point( Game.RightTeleport.X - 1, Game.RightTeleport.Y);
+        //    var coord = pacman.Act(Game.PackMansPosition.X, Game.PackMansPosition.Y);
+        //    Assert.AreEqual(new Point(coord.DeltaX, coord.DeltaY), new Point(-Game.MapWidth + 1, 0));
+        //}
     }
 }

@@ -35,7 +35,5 @@ namespace Game
                 Game.CountEnergizer--;
             });
         }
-
-        public int GetDrawingPriority() => 3;
     }
 }

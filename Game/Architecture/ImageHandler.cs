@@ -10,6 +10,7 @@ namespace Game
     {
         static bool tick;
         static readonly string[] monsters = new string[] { "Blinky", "Inky", "Klaid", "Pinky" };
+        private static string Image;
 
         public static Dictionary<string, Dictionary<Directions, string>> images = new Dictionary<string, Dictionary<Directions, string>>
         {
@@ -61,31 +62,38 @@ namespace Game
         static string GetPackMansImage(Directions dir)
         {
             tick = !tick;
-            switch (dir)
+            if (Game.PrevPositionPacman != Game.PackMansPosition)
             {
-                case Directions.Up:
-                    if (tick == true)
-                        return "Pacman 1 1.png";
-                    else
-                        return "Pacman 1 2.png";
-                case Directions.Right:
-                    if (tick == true)
-                        return "Pacman 2 1.png";
-                    else
-                        return "Pacman 2 2.png";
-                case Directions.Down:
-                    if (tick == true)
-                        return "Pacman 3 1.png";
-                    else
-                        return "Pacman 3 2.png";
-                case Directions.Left:
-                    if (tick == true)
-                        return "Pacman 4 1.png";
-                    else
-                        return "Pacman 4 2.png";
+                switch (dir)
+                {
+                    case Directions.Up:
+                        if (tick == true)
+                            Image = "Pacman 1 1.png";
+                        else
+                            Image = "Pacman 1 2.png";
+                        break;
+                    case Directions.Right:
+                        if (tick == true)
+                            Image = "Pacman 2 1.png";
+                        else
+                            Image = "Pacman 2 2.png";
+                        break;
+                    case Directions.Down:
+                        if (tick == true)
+                            Image = "Pacman 3 1.png";
+                        else
+                            Image = "Pacman 3 2.png";
+                        break;
+                    case Directions.Left:
+                        if (tick == true)
+                            Image = "Pacman 4 1.png";
+                        else
+                            Image = "Pacman 4 2.png";
+                        break;
+                }
             }
-            throw new Exception("Wrong direction");
+            return Image;
         }
-
+        
     }
 }

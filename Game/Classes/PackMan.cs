@@ -19,51 +19,46 @@ namespace Game
         public CreatureCommand Act(int x, int y)
         {
             GetDirection(x, y);
-            if (Game.LeftTeleport == new Point(x - 1, y) && CurrentDirection == Directions.Left)
+            var currentPosition = new Point(x, y);
+            Game.PrevPositionPacman = Game.PackMansPosition;
+            if (Game.teleports.teleports.Contains(currentPosition))
             {
-                Game.PackMansPosition = PointExtenshions.Add(Game.RightTeleport, new Point(-1, 0));
-                return new CreatureCommand { DeltaX = Game.MapWidth - 1, DeltaY = 0 };
-            }
-            if (Game.RightTeleport == new Point(x + 1, y) && CurrentDirection == Directions.Right)
-            {
-                Game.PackMansPosition = PointExtenshions.Add(Game.LeftTeleport, new Point(1, 0));
-                return new CreatureCommand { DeltaX = -Game.MapWidth + 1, DeltaY = 0 };
+                var goal = Game.teleports.EntranceExitPairs[currentPosition];
+                if ((goal == Game.teleports.Entrance && CurrentDirection == Directions.Right)
+                    || (goal == Game.teleports.Exit && CurrentDirection == Directions.Left))
+                {
+                    var movement = new Point(goal.X - x, goal.Y - y);
+                    Game.PackMansPosition = currentPosition.Add(goal);
+                    return new CreatureCommand { DeltaX = movement.X, DeltaY = movement.Y };
+                }
             }
             switch (CurrentDirection)
             {
                 case Directions.Up:
                     if (Game.CanMoveToUp(x, y))
-                    {
-                        Game.PackMansPosition = PointExtenshions.Add(new Point(x, y), new Point(0, -1));
-                        return new CreatureCommand { DeltaX = 0, DeltaY = -1 };
-                    }
+                        return Move(0, -1, currentPosition);
                     break;
                 case Directions.Down:
                     if (Game.CanMoveToDown(x, y))
-                    {
-                        Game.PackMansPosition = PointExtenshions.Add(new Point(x, y), new Point(0, 1));
-                        return new CreatureCommand { DeltaX = 0, DeltaY = 1 };
-                    }
+                        return Move(0, 1, currentPosition);
                     break;
                 case Directions.Left:
                     if (Game.CanMoveToLeft(x, y))
-                    {
-                        Game.PackMansPosition = PointExtenshions.Add(new Point(x, y), new Point(-1, 0));
-                        return new CreatureCommand { DeltaX = -1, DeltaY = 0 };
-                    }
+                        return Move(-1, 0, currentPosition);
                     break;
                 case Directions.Right:
                     if (Game.CanMoveToRight(x, y))
-                    {
-                        Game.PackMansPosition = PointExtenshions.Add(new Point(x, y), new Point(1, 0));
-                        return new CreatureCommand { DeltaX = 1, DeltaY = 0 };
-                    }
+                        return Move(1, 0, currentPosition);
                     break;
             }
             return new CreatureCommand();
         }
 
-
+        private static CreatureCommand Move(int x, int y, Point currentPosition)
+        {
+            Game.PackMansPosition = PointExtenshions.Add(currentPosition, new Point(x, y));
+            return new CreatureCommand { DeltaX = x, DeltaY = y };
+        }
 
         public bool DeadInConflict(ICreature conflictedObject)
         {

@@ -11,29 +11,28 @@ namespace Game
 {
     class Game
     {
-        public static Point LeftTeleport { get => new Point(-1, 13); }
-        public static Point RightTeleport { get => new Point(29, 13); }
-
-        public static Dictionary<Point, Point> Teleports = new Dictionary<Point, Point>()
-        {
-            { LeftTeleport, new Point(28, 13) },
-            { RightTeleport, new Point(0, 13) }
-        };
-        public static Audio Audio = new Audio();
-
+        public static Teleport teleports = new Teleport();
 
         public static int PointsAtLevel = 212;
         public static Point PackMansPosition { get; set; }
         public static Point PackManStartPosition = new Point(14, 27);
-        public static Point BlinkysPosition { get; set; } // 14, 10
-        public static Point PinkyPosition { get; set; } // 13, 12
-        public static Point KlaidPosition { get; set; } // 15, 12
-        public static Point InkyPosition { get; set; } //14, 12
-        public static Dictionary<int, Point> StartPositionGhosts = new Dictionary<int, Point>
-        {{1, new Point(13, 12) },
-        { 2, new Point(14, 10) },
-        { 3, new Point(15, 12)} ,
-        { 4, new Point(14, 12)}};
+        public static Point BlinkysPosition { get; set; }
+        public static Point PinkyPosition { get; set; }
+        public static Point KlaidPosition { get; set; }
+        public static Point InkyPosition { get; set; }
+
+        public static Dictionary<string, Point> startPositions = new Dictionary<string, Point>()
+        {
+            { "Blinky", new Point() },
+            { "Inky", new Point() },
+            { "Pinky", new Point() },
+            { "Klaid", new Point() },
+            {"PackMan", new Point() }
+        };
+        public static Audio Audio = new Audio();
+
+
+        public static Point PrevPositionPacman;
         public static int Score;
         public static int CountEnergizer;
         public static int CountBonus;
