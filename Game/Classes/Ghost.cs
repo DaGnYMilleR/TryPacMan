@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace Game
 {
@@ -17,8 +19,11 @@ namespace Game
             throw new NotImplementedException();
         }
 
-        public bool DeadInConflict(ICreature conflictedObject)
-                        => conflictedObject is PackMan && Game.IsMonsterStyle;
+        public virtual bool DeadInConflict(ICreature conflictedObject)
+        {
+
+            return conflictedObject is PackMan && Game.IsMonsterStyle;
+        }
 
         public int GetDrawingPriority() => 4;
 
@@ -166,6 +171,15 @@ namespace Game
             if (relation > 1.3)
                 return 2;
             return 3;
+        }
+        
+        public static async void RespawnGhost(Ghost ghost)
+        {
+             await Task.Run(() =>
+            {
+                Thread.Sleep(6000);
+                Game.Map[Game.startPositions[ghost.GetType().Name].X, Game.startPositions[ghost.GetType().Name].Y].Add(ghost);
+            });
         }
 
         //сделать удобную структуру папок         -- easy

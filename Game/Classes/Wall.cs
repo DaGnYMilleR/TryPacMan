@@ -31,7 +31,7 @@ namespace Game
 
         public override bool DeadInConflict(ICreature conflictedObject) => false;
 
-        private static void Await()
+        private void Await()
         {
             Task.Run(() =>
             {

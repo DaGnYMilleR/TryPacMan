@@ -17,7 +17,7 @@ namespace Game
         {
             var goal = FindGoal(Game.PackMansPosition, Game.BlinkysPosition);
             var movement = FindAct(x, y, goal, new Point(Game.MapWidth, Game.MapHeight));
-            Game.KlaidPosition.Add(new Point(movement.DeltaX, movement.DeltaY));
+            Game.InkyPosition.Add(new Point(movement.DeltaX, movement.DeltaY));
             return movement;
         }
 
@@ -33,6 +33,15 @@ namespace Game
             return twoCellsBeforePacman;
         }
 
+        public override bool DeadInConflict(ICreature conflictedObject)
+        {
+            if (conflictedObject is PackMan && Game.IsMonsterStyle)
+            {
+                RespawnGhost(new Inky(Directions.Right));
+                return true;
+            }
+            return false;
+        }
         public Point Get2CellsBeforePacman(Point pacmanPos) => GetNCellsBeforePoint(pacmanPos, Game.PacMansDirection, 2);
     }
 }

@@ -34,7 +34,7 @@ WWWWW");
                 klaidPos.Y += a.DeltaY;
 
             }
-            Assert.AreEqual(new Point(1,3), klaidPos);
+            Assert.AreEqual(new Point(1, 3), klaidPos);
 
         }
 
@@ -50,7 +50,7 @@ W             KW
 WWWWWWWWWWWWWWWW");
             Game.PackMansPosition = new Point(5, 2);
             Assert.AreEqual(Klaid.GetGoal(14, 4), Game.PackMansPosition);
-            Assert.AreEqual(Klaid.GetGoal(5, 3), new Point (0, Game.MapHeight - 1));
+            Assert.AreEqual(Klaid.GetGoal(5, 3), new Point(0, Game.MapHeight - 1));
         }
 
 
@@ -81,7 +81,7 @@ WWWWWWWWWWWWWWWW");
                 result.Add(klaidPos);
             }
             Assert.IsNotEmpty(result);
-            Assert.AreEqual(new Point(3 , 3), klaidPos);
+            Assert.AreEqual(new Point(3, 3), klaidPos);
             for (var i = 0; i < 2; i++)
             {
                 var move = klaid.Act(klaidPos.X, klaidPos.Y);

@@ -22,5 +22,15 @@ namespace Game
             var goal = GetNCellsBeforePoint(Game.PackMansPosition, Game.PacMansDirection, 4);
             return goal;
         }
+
+        public override bool DeadInConflict(ICreature conflictedObject)
+        {
+            if (conflictedObject is PackMan && Game.IsMonsterStyle)
+            {
+                RespawnGhost(new Pinky(Directions.Right));
+                return true;
+            }
+            return false;
+        }
     }
 }
