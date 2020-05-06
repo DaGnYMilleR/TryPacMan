@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace Game
 {
@@ -170,6 +172,7 @@ namespace Game
                 return 2;
             return 3;
         }
+        
 
         //сделать удобную структуру папок         -- easy
         //FIX Bugs                                                                                 -- easy

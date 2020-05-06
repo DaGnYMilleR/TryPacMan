@@ -84,30 +84,52 @@ namespace Game
         {
             if (!(Game.CurrentBehavior == MonsterBehavior.frightened))
             {
-                if (tickCount2 == 100)
+                if (tickCount2 == 0)
                 {
                     Game.CurrentBehavior = MonsterBehavior.scatter;
                     Console.WriteLine(MonsterBehavior.scatter.ToString() + " on");
                 }
-                if (tickCount2 == 500)
+                if (tickCount2 == 700)
                 {
                     Game.CurrentBehavior = MonsterBehavior.chase;
                     Console.WriteLine(MonsterBehavior.scatter.ToString() + " off");
                 }
 
-                if (tickCount2 == 800)
+                if (tickCount2 == 2700)
                 {
                     Game.CurrentBehavior = MonsterBehavior.scatter;
                     Console.WriteLine(MonsterBehavior.scatter.ToString() + " on");
                 }
-                if (tickCount2 == 1100)
+                if (tickCount2 == 3400)
                 {
                     Game.CurrentBehavior = MonsterBehavior.chase;
                     Console.WriteLine(MonsterBehavior.scatter.ToString() + " off");
                 }
-                tickCount2++;
-                Invalidate();
+
+                if (tickCount2 == 5400)
+                {
+                    Game.CurrentBehavior = MonsterBehavior.scatter;
+                    Console.WriteLine(MonsterBehavior.scatter.ToString() + " on");
+                }
+                if (tickCount2 == 5900)
+                {
+                    Game.CurrentBehavior = MonsterBehavior.chase;
+                    Console.WriteLine(MonsterBehavior.scatter.ToString() + " off");
+                }
+
+                if (tickCount2 == 7900)
+                {
+                    Game.CurrentBehavior = MonsterBehavior.scatter;
+                    Console.WriteLine(MonsterBehavior.scatter.ToString() + " on");
+                }
+                if (tickCount2 == 8400)
+                {
+                    Game.CurrentBehavior = MonsterBehavior.chase;
+                    Console.WriteLine(MonsterBehavior.scatter.ToString() + " off");
+                }
+                tickCount2++; 
             }
+            Invalidate();
         }
     }
 }

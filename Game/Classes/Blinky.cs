@@ -21,5 +21,6 @@ namespace Game
             Game.BlinkysPosition.Add(new Point(movement.DeltaX, movement.DeltaY));
             return movement;
         }
+
     }
 }

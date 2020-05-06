@@ -69,6 +69,27 @@ namespace Game
             Map = Map_creator.CreateMap(MapPacman);
             GameLives = 3;
         }
+        
+        public static void Reloge()
+        {
+            Map[KlaidPosition.X, KlaidPosition.Y] = new List<ICreature>();
+            Map[BlinkysPosition.X, BlinkysPosition.Y] = new List<ICreature>();
+            Map[InkyPosition.X, InkyPosition.Y] = new List<ICreature>();
+            Map[PinkyPosition.X, PinkyPosition.Y] = new List<ICreature>();
+            Map[PackMansPosition.X, PackMansPosition.Y] = new List<ICreature>();
+            Map[startPositions["Blinky"].X, startPositions["Blinky"].Y].Add(new Blinky(Directions.Right));
+            Map[startPositions["Inky"].X, startPositions["Inky"].Y].Add(new Inky(Directions.Right));
+            Map[startPositions["Pinky"].X, startPositions["Pinky"].Y].Add(new Pinky(Directions.Right));
+            Map[startPositions["Klaid"].X, startPositions["Klaid"].Y].Add(new Klaid(Directions.Right));
+            Map[startPositions["PackMan"].X, startPositions["PackMan"].Y].Add(new PackMan(Directions.Right));
+        }
+        private static ICreature GetItem(List<ICreature> list)
+        {
+            foreach (var item in list)
+                if (item is Ghost)
+                    return item;
+            return list[list.Count - 1];
+        }
 
     }
 }

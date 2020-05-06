@@ -23,5 +23,6 @@ namespace Game
             var goal = GetNCellsBeforePoint(Game.PackMansPosition, Game.PacMansDirection, 4);
             return goal;
         }
+
     }
 }

@@ -79,7 +79,16 @@ namespace Game
             foreach (var candidate in candidates)
                 foreach (var rival in candidates)
                     if (rival != candidate && candidate.DeadInConflict(rival))
+                    {
+
                         aliveCandidates.Remove(candidate);
+                        if (candidate is Ghost)
+                        {
+                            var coord = Game.startPositions[candidate.GetType().Name];
+                            Game.Map[coord.X, coord.Y].Add(candidate);
+                        }
+                            
+                    }
 
             return aliveCandidates.OrderBy(s => Priorities.GetDrawingPriority(s.GetType().Name)).ToList();
         }

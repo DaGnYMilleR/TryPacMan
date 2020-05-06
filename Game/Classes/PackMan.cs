@@ -62,16 +62,24 @@ namespace Game
 
         public bool DeadInConflict(ICreature conflictedObject)
         {
-            if (conflictedObject is Ghost && !Game.IsMonsterStyle)
+            var pointBefore = Direction.directions[CurrentDirection];
+            if ((conflictedObject is Ghost || IsGhost(Game.Map[pointBefore.X + Game.PackMansPosition.X, pointBefore.Y + Game.PackMansPosition.Y])) && !Game.IsMonsterStyle)
             {
                 Game.GameLives--;
+                //Game.Reloge();
                 return true;
 
             }
             return false;
         }
 
-        public int GetDrawingPriority() => 10;
+        private static bool IsGhost(List<ICreature> list)
+        {
+            foreach (var item in list)
+                if (item is Ghost)
+                    return true;
+            return false;
+        }
 
         public void GetDirection(int x, int y)
         {
