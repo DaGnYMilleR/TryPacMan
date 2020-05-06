@@ -21,14 +21,6 @@ namespace Game
             Game.BlinkysPosition.Add(new Point(movement.DeltaX, movement.DeltaY));
             return movement;
         }
-        public override bool DeadInConflict(ICreature conflictedObject)
-        {
-            if (conflictedObject is PackMan && Game.IsMonsterStyle)
-            {
-                RespawnGhost(new Blinky(Directions.Right));
-                return true;
-            }
-            return false;
-        }
+
     }
 }

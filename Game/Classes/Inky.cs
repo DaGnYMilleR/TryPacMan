@@ -33,15 +33,6 @@ namespace Game
             return twoCellsBeforePacman;
         }
 
-        public override bool DeadInConflict(ICreature conflictedObject)
-        {
-            if (conflictedObject is PackMan && Game.IsMonsterStyle)
-            {
-                RespawnGhost(new Inky(Directions.Right));
-                return true;
-            }
-            return false;
-        }
         public Point Get2CellsBeforePacman(Point pacmanPos) => GetNCellsBeforePoint(pacmanPos, Game.PacMansDirection, 2);
     }
 }

@@ -24,14 +24,5 @@ namespace Game
             else
                 return new Point(0, Game.MapHeight - 1);
         }
-        public override bool DeadInConflict(ICreature conflictedObject)
-        {
-            if (conflictedObject is PackMan && Game.IsMonsterStyle)
-            {
-                RespawnGhost(new Klaid(Directions.Right));
-                return true;
-            }
-            return false;
-        }
     }
 }

@@ -19,11 +19,8 @@ namespace Game
             throw new NotImplementedException();
         }
 
-        public virtual bool DeadInConflict(ICreature conflictedObject)
-        {
-
-            return conflictedObject is PackMan && Game.IsMonsterStyle;
-        }
+        public bool DeadInConflict(ICreature conflictedObject)
+                        => conflictedObject is PackMan && Game.IsMonsterStyle;
 
         public int GetDrawingPriority() => 4;
 
@@ -173,14 +170,6 @@ namespace Game
             return 3;
         }
         
-        public static async void RespawnGhost(Ghost ghost)
-        {
-             await Task.Run(() =>
-            {
-                Thread.Sleep(6000);
-                Game.Map[Game.startPositions[ghost.GetType().Name].X, Game.startPositions[ghost.GetType().Name].Y].Add(ghost);
-            });
-        }
 
         //сделать удобную структуру папок         -- easy
         //FIX Bugs                                                                                 -- easy
