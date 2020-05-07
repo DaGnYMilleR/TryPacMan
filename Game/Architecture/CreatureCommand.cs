@@ -10,11 +10,10 @@ namespace Game
     {
         public int DeltaX;
         public int DeltaY;
-        public ICreature TransformTo;
         
         public static CreatureCommand operator * (CreatureCommand command, int a)
         {
-            return new CreatureCommand { DeltaX = command.DeltaX * a, DeltaY = command.DeltaY * a, TransformTo = command.TransformTo };
+            return new CreatureCommand { DeltaX = command.DeltaX * a, DeltaY = command.DeltaY * a };
         }
 
     }

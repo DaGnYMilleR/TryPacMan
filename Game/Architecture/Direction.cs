@@ -34,15 +34,8 @@ namespace Game
 
     public static class PointExtenshions
     {
-        public static Point Multiply(this Point point, int a)
-        {
-            return new Point(point.X * a, point.Y * a);
-        }
+        public static Point Multiply(this Point point, int a) => new Point(point.X * a, point.Y * a);
 
-        public static Point Add(this Point point, Point otherPoint)
-        {
-            return new Point(point.X + otherPoint.X, point.Y + otherPoint.Y);
-        }
+        public static Point Add(this Point point, Point otherPoint) => new Point(point.X + otherPoint.X, point.Y + otherPoint.Y);
     }
-
 }

@@ -8,8 +8,8 @@ namespace Game
 {
     static class Priorities
     {
-        static List<string> LowLevelObjects = new List<string>() { "Wall", "Bonus", "Energizer", "Fruit", "Door" };
-        static List<string> HighLevelObjects = new List<string>() { "PackMan", "Blinky", "Inky", "Pinky", "Klaid" };
+        static readonly List<string> LowLevelObjects = new List<string>() { "Wall", "Bonus", "Energizer", "Fruit", "Door" };
+        static readonly List<string> HighLevelObjects = new List<string>() { "PackMan", "Blinky", "Inky", "Pinky", "Klaid" };
 
         public static int GetDrawingPriority(string name)
         {

@@ -20,7 +20,7 @@ namespace Game
                 Game.Score += 50;
                 Game.IsMonsterStyle = true;
                 Game.CurrentBehavior = MonsterBehavior.frightened;
-                Game.CountEnergizer++;
+                Interlocked.Increment(ref Game.CountEnergizer);///Game.CountEnergizer++;
                 MonsterStyleOn();
                 return true;
             }
@@ -36,7 +36,8 @@ namespace Game
                     Game.IsMonsterStyle = false;
                     Game.CurrentBehavior = MonsterBehavior.chase;
                 }
-                Game.CountEnergizer--;
+                //Game.CountEnergizer--;
+                Interlocked.Decrement(ref Game.CountEnergizer);
             });
         }
     }

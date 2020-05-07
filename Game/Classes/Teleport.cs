@@ -27,8 +27,7 @@ namespace Game
 
         public Directions CurrentDirection { get; set; }
 
-        public CreatureCommand Act(int x, int y)
-                => new CreatureCommand();
+        public CreatureCommand Act(int x, int y) => new CreatureCommand();
 
         public void AddTeleport(Point point)
         {
@@ -47,7 +46,6 @@ namespace Game
             EntranceExitPairs.Add(Exit, Entrance);
         }
 
-        public bool DeadInConflict(ICreature conflictedObject)
-                   => false;
+        public bool DeadInConflict(ICreature conflictedObject) => false;
     }
 }

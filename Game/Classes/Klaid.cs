@@ -21,8 +21,7 @@ namespace Game
         {
             if (Math.Sqrt(GetDistanceSquare(new Point(x, y), Game.PackMansPosition)) > 8)
                 return Game.PackMansPosition;
-            else
-                return new Point(0, Game.MapHeight - 1);
+            return new Point(0, Game.MapHeight - 1);
         }
     }
 }

@@ -13,7 +13,6 @@ namespace Game
             if (Game.PointsEated >= 70)
             {
                 Game.Map[14, 14].Add(new Bonus());
-                Game.PointsEated = 0;
                 Game.CountBonus++;
             }
             return new CreatureCommand();

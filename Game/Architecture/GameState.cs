@@ -103,8 +103,7 @@ namespace Game
             {
                 var x = e.TargetLogicalLocation.X;
                 var y = e.TargetLogicalLocation.Y;
-                var nextCreature = e.Command.TransformTo ?? e.Creature;
-                creatures[x, y].Add(nextCreature);
+                creatures[x, y].Add(e.Creature);
             }
 
             return creatures;

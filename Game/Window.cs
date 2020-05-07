@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Threading;
 using System.Windows.Forms;
 
 namespace Game
@@ -27,7 +28,7 @@ namespace Game
                 imagesDirectory = new DirectoryInfo("Images");
             foreach (var e in imagesDirectory.GetFiles("*.png"))
                 bitmaps[e.Name] = (Bitmap)Image.FromFile(e.FullName);
-            var timer = new Timer();
+            var timer = new System.Windows.Forms.Timer();
             timer.Interval = 10;
             timer.Tick += ScatterModeController;
             timer.Tick += TimerTick;
@@ -87,6 +88,9 @@ namespace Game
                 if (tickCount2 == 0)
                 {
                     Game.CurrentBehavior = MonsterBehavior.scatter;
+                    //Game.Map[14, 11] = Interlocked.Exchange(ref Game.Map[14, 11], new List<ICreature>());
+                   // Game.Map[14, 11] = new List<ICreature>();
+                   // Console.WriteLine(Game.Map[14, 11].ToString());
                     Console.WriteLine(MonsterBehavior.scatter.ToString() + " on");
                 }
                 if (tickCount2 == 700)

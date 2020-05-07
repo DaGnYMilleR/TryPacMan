@@ -23,12 +23,12 @@ namespace Game
                 Thread.Sleep(8000);
                 if (Game.CountBonus == 1)
                     if (Game.Map[14, 14].FirstOrDefault() != null)
-                    Game.Map[14, 14].RemoveAt(0);
+                        Game.Map[14, 14].RemoveAt(0);
                 Game.CountBonus--;
             });
         }
 
-        public bool DeadInConflict(ICreature conflictedObject) //
+        public bool DeadInConflict(ICreature conflictedObject)
         {
             if (conflictedObject is PackMan)
             {

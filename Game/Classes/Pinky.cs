@@ -18,11 +18,6 @@ namespace Game
             return movement;
         }
 
-        public static Point GetGoal()
-        {
-            var goal = GetNCellsBeforePoint(Game.PackMansPosition, Game.PacMansDirection, 4);
-            return goal;
-        }
-
+        public static Point GetGoal() => GetNCellsBeforePoint(Game.PackMansPosition, Game.PacMansDirection, 4);
     }
 }

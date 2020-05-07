@@ -13,7 +13,7 @@ namespace Game
     {
         public static Teleport teleports = new Teleport();
 
-        public static int PointsAtLevel = 212;
+        public static int PointsAtLevel;
         public static Point PackMansPosition { get; set; }
         public static Point PackManStartPosition = new Point(14, 27);
         public static Point BlinkysPosition { get; set; }
@@ -27,8 +27,9 @@ namespace Game
             { "Inky", new Point() },
             { "Pinky", new Point() },
             { "Klaid", new Point() },
-            {"PackMan", new Point() }
+            { "PackMan", new Point() }
         };
+
         public static Audio Audio = new Audio();
 
 
