@@ -21,9 +21,12 @@ namespace Game
             await Task.Run(() =>
             {
                 Thread.Sleep(8000);
-                if (Game.CountBonus == 1)
-                    if (Game.Map[14, 14].FirstOrDefault() != null)
-                        Game.Map[14, 14].RemoveAt(0);
+                if (Game.CountBonus >= 1)
+                    lock (Game.Map[14, 14])
+                    {
+                        if (Game.Map[14, 14].FirstOrDefault() != null)
+                            Game.Map[14, 14].RemoveAt(0);
+                    }
                 Game.CountBonus--;
             });
         }

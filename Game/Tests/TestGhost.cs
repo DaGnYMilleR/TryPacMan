@@ -72,7 +72,7 @@ WWWWWWWWWWWWWWWWWWWWWWWWWWWWW
                 start.Y += move.DeltaY;
                 count++;
             }
-            Assert.AreEqual(3, count);
+            Assert.AreEqual(2, count);
             Assert.AreEqual(Directions.Left, blinky.CurrentDirection);
             Assert.AreEqual(start, goal);
         }
@@ -92,7 +92,7 @@ WWWWWWWWWWWWWWWWWWWWWWWWWWWWW
                 start.Y += move.DeltaY;
                 count++;
             }
-            Assert.AreEqual(3, count);
+            Assert.AreEqual(2, count);
             Assert.AreEqual(Directions.Right, blinky.CurrentDirection);
             Assert.AreEqual(start, goal);
         }

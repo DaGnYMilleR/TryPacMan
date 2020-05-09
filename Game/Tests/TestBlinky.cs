@@ -14,11 +14,7 @@ namespace Game
         [Test]
         public void TestChaseMode()
         {
-            Game.Map = Map_creator.CreateMap(@"
-    
-    
-    
-B   ");
+            Game.Map = Map_creator.CreateMap("    \r\n    \r\n    \r\n    \r\nB   ", "\r\n");
             Game.PackMansPosition = new Point(3, 0);
             Game.CurrentBehavior = MonsterBehavior.chase;
             Game.PointsAtLevel = 7;
@@ -39,7 +35,7 @@ B   ");
         [Test]
         public void SimpleTest()
         {
-            Game.Map = Map_creator.CreateMap(TestGhost.Map);
+            Game.Map = Map_creator.CreateMap(TestGhost.Map, "\r\n");
             var blinky = new Blinky(Directions.Left);
             var blinkyPos = new Point(14, 10);
             Game.PackMansPosition = new Point(14, 27);
@@ -59,13 +55,7 @@ B   ");
         public void TestScatterMode()
         {
             var game = new Game();
-            Game.Map = Map_creator.CreateMap(@"
-WWWWWW
-W    W
-W    W
-W    W
-WB   W
-WWWWWW");
+            Game.Map = Map_creator.CreateMap("WWWWWW\r\nW    W\r\nW    W\r\nW    W\r\nWB   W\r\nWWWWWW", "\r\n");
             Game.PackMansPosition = new Point(4, 1);
             Game.CurrentBehavior = MonsterBehavior.scatter;
             Game.PointsAtLevel = 7;
@@ -85,11 +75,7 @@ WWWWWW");
         [Test]
         public void TestFrightenedMode()
         {
-            Game.Map = Map_creator.CreateMap(@"
-    
-    
-    
-B   ");
+            Game.Map = Map_creator.CreateMap("    \r\n    \r\n    \r\nB   ", "\r\n");
             Game.PackMansPosition = new Point(3, 0);
             Game.CurrentBehavior = MonsterBehavior.frightened;
             var blinkyPos = new Point(0, 3);

@@ -39,7 +39,7 @@ namespace Game
         public static int CountBonus;
 
         public static MonsterBehavior CurrentBehavior;
-        public static List<ICreature> [,] Map;
+        public static volatile List<ICreature> [,] Map;
 
         public static int PointsEated;
         public static bool IsMonsterStyle;
@@ -64,10 +64,12 @@ namespace Game
             return rect.Contains(point);
         }
 
+        public static bool IsDoorClosed = true;
+
         public static void CreateMap(string MapPacman)
         {
             teleports = new Teleport();
-            Map = Map_creator.CreateMap(MapPacman);
+            Map = Map_creator.CreateMap(MapPacman, "\r\n");
             GameLives = 3;
         }
         
@@ -90,6 +92,39 @@ namespace Game
                 if (item is Ghost)
                     return item;
             return list[list.Count - 1];
+        }
+
+        public static List<ICreature>[,] UpdateMapCell(int x, int y)
+        {
+            Console.WriteLine("Up");
+            //Map[x, y] = new List<ICreature>();
+            var res = new List<ICreature>[MapWidth, MapHeight];
+            for (var i = 0; i < MapWidth; i++)
+                for(var j = 0; j < MapHeight; j ++)
+                {
+                    if (i == x && j == y)
+                        res[i, j] = new List<ICreature>();
+                    else
+                    {
+                        res[i, j] = Map[i, j];
+                    }
+                }
+            for (var i = 0; i < MapWidth; i++)
+            {
+                for (var j = 0; j < MapHeight; j++)
+                {
+                    if (i == 14 && j == 11)
+                        Console.Write("!!!!!!!!!");
+                    if (res[i, j].FirstOrDefault() == null)
+                        Console.Write($"empty ");
+                    else
+                        Console.Write(res[i, j].FirstOrDefault().ToString() + "  ");
+                }
+                Console.WriteLine();
+            }
+
+            return res;
+            
         }
 
     }

@@ -62,14 +62,14 @@ namespace Game
 
         public bool DeadInConflict(ICreature conflictedObject)
         {
-            var pointBefore = Direction.directions[CurrentDirection];
-            if ((conflictedObject is Ghost || IsGhost(Game.Map[pointBefore.X + Game.PackMansPosition.X, pointBefore.Y + Game.PackMansPosition.Y])) && !Game.IsMonsterStyle)
-            {
-                Game.GameLives--;
-                //Game.Reloge();
-                return true;
+                var pointBefore = Direction.directions[CurrentDirection];
+                if ((conflictedObject is Ghost || IsGhost(Game.Map[pointBefore.X + Game.PackMansPosition.X, pointBefore.Y + Game.PackMansPosition.Y])) && !Game.IsMonsterStyle)
+                {
+                    Game.GameLives--;
+                    Game.Reloge();
+                    return true;
 
-            }
+                }
             return false;
         }
 
@@ -83,36 +83,39 @@ namespace Game
 
         public void GetDirection(int x, int y)
         {
-            switch (Game.KeyPressed)
+            lock (Game.Map)
             {
-                case Keys.Up:
-                    if (!(Game.Map[x, y - 1].FirstOrDefault() is Wall))
-                    {
-                        CurrentDirection = Directions.Up;
-                        Game.PacMansDirection = CurrentDirection;
-                    }
-                    break;
-                case Keys.Down:
-                    if (!(Game.Map[x, y + 1].FirstOrDefault() is Wall))
-                    {
-                        CurrentDirection = Directions.Down;
-                        Game.PacMansDirection = CurrentDirection;
-                    }
-                    break;
-                case Keys.Left:
-                    if (x != 0 && !(Game.Map[x - 1, y].FirstOrDefault() is Wall))
-                    {
-                        CurrentDirection = Directions.Left;
-                        Game.PacMansDirection = CurrentDirection;
-                    }
-                    break;
-                case Keys.Right:
-                    if (x != Game.MapHeight - 1 && !(Game.Map[x + 1, y].FirstOrDefault() is Wall))
-                    {
-                        CurrentDirection = Directions.Right;
-                        Game.PacMansDirection = CurrentDirection;
-                    }
-                    break;
+                switch (Game.KeyPressed)
+                {
+                    case Keys.Up:
+                        if (!(Game.Map[x, y - 1].FirstOrDefault() is Wall))
+                        {
+                            CurrentDirection = Directions.Up;
+                            Game.PacMansDirection = CurrentDirection;
+                        }
+                        break;
+                    case Keys.Down:
+                        if (!(Game.Map[x, y + 1].FirstOrDefault() is Wall))
+                        {
+                            CurrentDirection = Directions.Down;
+                            Game.PacMansDirection = CurrentDirection;
+                        }
+                        break;
+                    case Keys.Left:
+                        if (x != 0 && !(Game.Map[x - 1, y].FirstOrDefault() is Wall))
+                        {
+                            CurrentDirection = Directions.Left;
+                            Game.PacMansDirection = CurrentDirection;
+                        }
+                        break;
+                    case Keys.Right:
+                        if (x != Game.MapHeight - 1 && !(Game.Map[x + 1, y].FirstOrDefault() is Wall))
+                        {
+                            CurrentDirection = Directions.Right;
+                            Game.PacMansDirection = CurrentDirection;
+                        }
+                        break;
+                }
             }
         }
 

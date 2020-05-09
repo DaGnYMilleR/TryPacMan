@@ -19,7 +19,7 @@ WWWWW
 WS  W
 W   W
 WP  W
-WWWWW");
+WWWWW", "\n");
             Game.PackMansPosition = new Point(1, 1);
             Game.PointsAtLevel = 7;
             Game.PointsEated = 2;
@@ -47,7 +47,7 @@ W              W
 W    S         W
 W              W
 W              W
-WWWWWWWWWWWWWWWW");
+WWWWWWWWWWWWWWWW", "\n");
             Game.PackMansPosition = new Point(5, 2);
             Game.PacMansDirection = Directions.Up;
             Assert.AreEqual(Pinky.GetGoal(), new Point(5,1));
@@ -62,7 +62,7 @@ WS             W
 W              W
 W              W
 W              W
-WWWWWWWWWWWWWWWW");
+WWWWWWWWWWWWWWWW", "\n");
             Game.PackMansPosition = new Point(1, 1);
             Assert.AreEqual(Pinky.GetGoal(), new Point(1, 1));
         }
@@ -76,7 +76,7 @@ W              W
 W    S         W
 W              W
 W           P  W
-WWWWWWWWWWWWWWWW");
+WWWWWWWWWWWWWWWW", "\n");
             Game.PackMansPosition = new Point(5, 2);
             Game.PointsAtLevel = 7;
             Game.PointsEated = 2;
@@ -107,7 +107,7 @@ W    W
 W    W
 W    W
 W   PW
-WWWWWW");
+WWWWWW", "\n");
             Game.PackMansPosition = new Point(4, 1);
             Game.CurrentBehavior = MonsterBehavior.scatter;
             Game.PointsAtLevel = 7;
@@ -132,7 +132,7 @@ WWWWWW
 W    W
 W    W
 WP   W
-WWWWWW");
+WWWWWW", "\n");
             Game.PackMansPosition = new Point(3, 0);
             Game.CurrentBehavior = MonsterBehavior.frightened;
             var pinkyPos = new Point(0, 3);

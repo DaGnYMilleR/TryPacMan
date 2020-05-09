@@ -19,7 +19,7 @@ WWWWW
 WS KW
 W   W
 W   W
-WWWWW");
+WWWWW", "\r\n");
             Game.PackMansPosition = new Point(1, 1);
             Game.PointsAtLevel = 7;
             Game.PointsEated = 2;
@@ -47,7 +47,7 @@ W              W
 W    S         W
 W              W
 W             KW
-WWWWWWWWWWWWWWWW");
+WWWWWWWWWWWWWWWW", "\r\n");
             Game.PackMansPosition = new Point(5, 2);
             Assert.AreEqual(Klaid.GetGoal(14, 4), Game.PackMansPosition);
             Assert.AreEqual(Klaid.GetGoal(5, 3), new Point(0, Game.MapHeight - 1));
@@ -63,7 +63,7 @@ W              W
 W    S         W
 W              W
 W           K  W
-WWWWWWWWWWWWWWWW");
+WWWWWWWWWWWWWWWW", "\r\n");
             Game.PackMansPosition = new Point(5, 2);
             Game.PointsAtLevel = 7;
             Game.PointsEated = 2;
@@ -109,7 +109,7 @@ W   KW
 W    W
 W    W
 W    W
-WWWWWW");
+WWWWWW", "\r\n");
             Game.CurrentBehavior = MonsterBehavior.scatter;
             Game.PointsAtLevel = 7;
             Game.PointsEated = 2;
@@ -133,7 +133,7 @@ WWWWWW
 W    W
 W    W
 WP   W
-WWWWWW");
+WWWWWW", "\r\n");
             Game.PackMansPosition = new Point(3, 0);
             Game.CurrentBehavior = MonsterBehavior.frightened;
             var klaidPos = new Point(0, 3);

@@ -10,7 +10,6 @@ namespace Game
     class Wall : ICreature
     {
         public Directions CurrentDirection { get; set; } = Directions.Nothing;
-
         public virtual CreatureCommand Act(int x, int y) => new CreatureCommand();
 
         public virtual bool DeadInConflict(ICreature conflictedObject) => false;
@@ -24,7 +23,6 @@ namespace Game
             if (deleted)
             {
                 deleted = !deleted;
-                //Console.WriteLine("Door, " + deleted.ToString());
                 Await();
             }
             return new CreatureCommand();
@@ -32,21 +30,26 @@ namespace Game
 
         public override bool DeadInConflict(ICreature conflictedObject) => false;
 
-        private void Await()
+        private static async void Await()
         {
-            //Console.WriteLine("here");
-            Task.Run(() =>
+            await Task.Run(() =>
             {
-                //Console.WriteLine("me to");
                 Thread.Sleep(1000);
-                //Console.WriteLine("number 2");
-                if (Game.Map[14, 11].FirstOrDefault() != null || Game.Map[14, 11].FirstOrDefault() is Door)
-                // Game.Map[14, 11].RemoveAt(0);
+                lock (Game.Map)
                 {
-                  //  Console.WriteLine(Game.Map[14, 11].FirstOrDefault().ToString() + " 1");
-                    //Interlocked.Exchange(ref Game.Map[14, 11], new List<ICreature>());
-                    Game.Map[14, 11].RemoveAt(0);
-                    //Console.WriteLine(Game.Map[14, 11].FirstOrDefault().ToString() + " 2");
+                    if (Game.Map[14, 11].FirstOrDefault() != null || Game.Map[14, 11].FirstOrDefault() is Door)
+                    {
+                        // Сюда он заходит спокойно
+                        // Interlocked.Exchange(ref Game.Map[14, 11], new List<ICreature>());//
+                        //Game.Map[14, 11].Clear();
+                        Game.IsDoorClosed = false;
+                        //Game.Map = Game.UpdateMapCell(14, 11);//
+                        //if (Game.Map[14, 11].Count == 0)
+                        //    Console.WriteLine("here");
+                        //if (Game.Map[14, 11].FirstOrDefault() != null)
+                          //  Game.Map[14, 11].RemoveAt(0);
+                    }
+                    Game.Map[14, 11] = new List<ICreature>() { new Door() };
                 }
             });
         }

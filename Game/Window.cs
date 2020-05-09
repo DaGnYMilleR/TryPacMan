@@ -15,6 +15,7 @@ namespace Game
         private readonly HashSet<Keys> pressedKeys = new HashSet<Keys>();
         private int tickCount;
         private int tickCount2;
+        private int tickCount3;
 
 
         public PacManWindow(DirectoryInfo imagesDirectory = null)
@@ -32,7 +33,28 @@ namespace Game
             timer.Interval = 10;
             timer.Tick += ScatterModeController;
             timer.Tick += TimerTick;
+            timer.Tick += OpenDoor;
             timer.Start();
+        }
+
+        private void OpenDoor(object sender, EventArgs args)
+        {
+            if(tickCount3 == 100)
+            {
+                Game.Map[11, 14] = new List<ICreature>();
+                Game.Map = Game.UpdateMapCell(0, 0);
+                Game.Map[14, 11] = new List<ICreature>();
+                Game.Map[0, 0] = new List<ICreature>();
+                // Game.IsDoorClosed = false;
+            }
+            if (tickCount3 == 150)
+            {
+                Game.IsDoorClosed = true;
+                Game.Map[14, 11] = new List<ICreature>() { new Door() };
+            }
+            tickCount3++;
+            Invalidate();
+
         }
 
         protected override void OnLoad(EventArgs e)
@@ -102,6 +124,7 @@ namespace Game
                 if (tickCount2 == 2700)
                 {
                     Game.CurrentBehavior = MonsterBehavior.scatter;
+                    
                     Console.WriteLine(MonsterBehavior.scatter.ToString() + " on");
                 }
                 if (tickCount2 == 3400)

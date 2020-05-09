@@ -92,11 +92,14 @@ namespace Game
         {
             foreach (var newPoint in possibleMoves)
             {
-                var neighbor = point.Add(newPoint);
-                if (Game.teleports.teleports.Contains(neighbor))
-                    yield return Game.teleports.EntranceExitPairs[neighbor];
-                else if (CanMoveTo(neighbor) && !(Game.Map[neighbor.X, neighbor.Y].FirstOrDefault() is Ghost))
-                    yield return neighbor;
+                lock (Game.Map)
+                {
+                    var neighbor = point.Add(newPoint);
+                    if (Game.teleports.teleports.Contains(neighbor))
+                        yield return Game.teleports.EntranceExitPairs[neighbor];
+                    else if (CanMoveTo(neighbor) && !(Game.Map[neighbor.X, neighbor.Y].FirstOrDefault() is Ghost))
+                        yield return neighbor;
+                }
             }
         }
 
@@ -156,7 +159,10 @@ namespace Game
 
         public static bool CanMoveTo(Point point)
         {
-            return Game.InBounds(point) && !(Game.Map[point.X, point.Y].FirstOrDefault() is Wall);
+            lock (Game.Map)
+            {
+                return Game.InBounds(point) && !(Game.Map[point.X, point.Y].FirstOrDefault() is Wall);
+            }
         }
 
         public static int ChangeSpeed() // FIX values // изменяет скорость

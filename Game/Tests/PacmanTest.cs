@@ -14,7 +14,7 @@ namespace Game
 WWWWWW
 WS   W
 W    W
-WWWWWW");
+WWWWWW", "\n");
             Game.PackMansPosition = new Point(1, 1);
             Game.PacMansDirection = Directions.Right;
             Game.PointsAtLevel = 7;
@@ -39,7 +39,7 @@ WWWWWW");
             Game.Map = Map_creator.CreateMap(@"
 WWWWWWW
 WS W  W
-WWWWWWW");
+WWWWWWW", "\n");
             Game.PackMansPosition = new Point(1, 1);
             Game.PacMansDirection = Directions.Right;
             Game.PointsAtLevel = 7;
@@ -65,7 +65,7 @@ WS   W
 W    W
 W    W
 W    W
-WWWWWW");
+WWWWWW", "\n");
             Game.PackMansPosition = new Point(1, 1);
             Game.PacMansDirection = Directions.Right;
             Game.PointsAtLevel = 7;
@@ -89,7 +89,7 @@ WS   W
 W    W
 W    W
 W    W
-WWWWWW");
+WWWWWW", "\n");
             Game.PackMansPosition = new Point(1, 1);
             Game.PacMansDirection = Directions.Right;
             Game.PointsAtLevel = 7;
