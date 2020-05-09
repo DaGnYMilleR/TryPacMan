@@ -18,8 +18,6 @@ namespace Game
             {
                 for (var y = 0; y < Game.MapHeight; y++)
                 {
-                    lock (Game.Map)
-                    {
                         if (Game.GameLives <= 0)
                         {
 
@@ -70,7 +68,6 @@ namespace Game
                             }
                         }
                     }
-                }
             }
 
             Animations = Animations.OrderBy(z => Priorities.GetDrawingPriority(z.CreaturesName)).ToList();
@@ -88,55 +85,55 @@ namespace Game
 
         private static List<ICreature> SelectWinnerCandidatePerLocation(List<ICreature>[,] creatures, int x, int y)
         {
-            lock (Game.Map)
-            {
                 var candidates = creatures[x, y];
                 var aliveCandidates = candidates.ToList();
-                foreach (var candidate in candidates)
-                    foreach (var rival in candidates)
-                        if (rival != candidate && candidate.DeadInConflict(rival))
+            foreach (var candidate in candidates)
+                foreach (var rival in candidates)
+                    if (rival != candidate && candidate.DeadInConflict(rival))
+                    {
+
+                        aliveCandidates.Remove(candidate);
+                        if (candidate is Ghost)
                         {
-
-                            aliveCandidates.Remove(candidate);
-                            if (candidate is Ghost)
-                            {
-                                var coord = Game.startPositions[candidate.GetType().Name];
-                                Game.Map[coord.X, coord.Y].Add(candidate);
-                            }
-                            if (candidate is PackMan)
-                            {
-                                aliveCandidates.Remove(rival);
-                                Reloge();
-                            }
-
+                            var coord = Game.startPositions[candidate.GetType().Name];
+                            Game.Map[coord.X, coord.Y].Add(candidate);
                         }
+                        if (candidate is PackMan)
+                        {
+                            aliveCandidates.Remove(rival);
+                            Reloge();
+                        }
+                    }
 
                 return aliveCandidates.OrderBy(s => Priorities.GetDrawingPriority(s.GetType().Name)).ToList();
-            }
+            
         }
         public static void Reloge()
         {
-            for (var x = 0; x < Game.MapWidth; x++)
+            lock (Game.Map)
             {
-                for (var y = 0; y < Game.MapHeight; y++)
+                for (var x = 0; x < Game.MapWidth; x++)
                 {
-                    var creatures = Game.Map[x, y];
-                    Game.Map[x, y] = new List<ICreature>();
-                    if (new Point(x, y) == new Point(Game.startPositions["Klaid"].X, Game.startPositions["Klaid"].Y))
-                        Game.Map[x, y].Add(new Klaid(Directions.Right));
-                    if (new Point(x, y) == new Point(Game.startPositions["Blinky"].X, Game.startPositions["Blinky"].Y))
-                        Game.Map[x, y].Add(new Blinky(Directions.Right));
-                    if (new Point(x, y) == new Point(Game.startPositions["Inky"].X, Game.startPositions["Inky"].Y))
-                        Game.Map[x, y].Add(new Inky(Directions.Right));
-                    if (new Point(x, y) == new Point(Game.startPositions["Pinky"].X, Game.startPositions["Pinky"].Y))
-                        Game.Map[x, y].Add(new Pinky(Directions.Right));
-                    if (new Point(x, y) == new Point(Game.startPositions["PackMan"].X, Game.startPositions["PackMan"].Y))
-                        Game.Map[x, y].Add(new PackMan(Directions.Right));
-                    foreach (var creature in creatures)
+                    for (var y = 0; y < Game.MapHeight; y++)
                     {
-                        if (creature is Ghost || creature is PackMan)
-                            continue;
-                        Game.Map[x, y].Add(creature);
+                        var creatures = Game.Map[x, y];
+                        Game.Map[x, y] = new List<ICreature>();
+                        if (new Point(x, y) == new Point(Game.startPositions["Klaid"].X, Game.startPositions["Klaid"].Y))
+                            Game.Map[x, y].Add(new Klaid(Directions.Right));
+                        if (new Point(x, y) == new Point(Game.startPositions["Blinky"].X, Game.startPositions["Blinky"].Y))
+                            Game.Map[x, y].Add(new Blinky(Directions.Right));
+                        if (new Point(x, y) == new Point(Game.startPositions["Inky"].X, Game.startPositions["Inky"].Y))
+                            Game.Map[x, y].Add(new Inky(Directions.Right));
+                        if (new Point(x, y) == new Point(Game.startPositions["Pinky"].X, Game.startPositions["Pinky"].Y))
+                            Game.Map[x, y].Add(new Pinky(Directions.Right));
+                        if (new Point(x, y) == new Point(Game.startPositions["PackMan"].X, Game.startPositions["PackMan"].Y))
+                            Game.Map[x, y].Add(new PackMan(Directions.Right));
+                        foreach (var creature in creatures)
+                        {
+                            if (creature is Ghost || creature is PackMan)
+                                continue;
+                            Game.Map[x, y].Add(creature);
+                        }
                     }
                 }
             }
