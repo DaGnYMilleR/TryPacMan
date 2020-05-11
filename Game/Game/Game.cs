@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -22,6 +23,22 @@ namespace Game
         public static Point InkyPosition { get; set; }
 
         public static bool Reloge;
+
+
+        public static Dictionary<string, Ghost> namesGhosts = new Dictionary<string, Ghost>()
+        {
+            { "Blinky", new Blinky(Directions.Right) },
+            { "Inky", new Inky(Directions.Right) },
+            { "Pinky", new Pinky(Directions.Right) },
+            { "Klaid", new Klaid(Directions.Right) },
+        };
+
+        public static Dictionary<string, bool> liveGhosts = new Dictionary<string, bool>() {
+             { "Blinky", true },
+            { "Inky", true },
+            { "Pinky", true },
+            { "Klaid", true },
+        };
 
         public static Dictionary<string, Point> startPositions = new Dictionary<string, Point>()
         {
@@ -46,6 +63,7 @@ namespace Game
         public static int PointsEated;
         public static bool IsMonsterStyle;
         internal static Keys KeyPressed;
+        public static int DeadGhostCount;
 
         public static int MapWidth => Map.GetLength(0);
         public static int MapHeight => Map.GetLength(1);
@@ -64,6 +82,35 @@ namespace Game
         {
             var rect = new Rectangle(0, 0, MapWidth, MapHeight);
             return rect.Contains(point);
+        }
+
+        public static async void AddDeadGhost(string ghost)
+        {
+             await Task.Run(() =>
+            {
+                Thread.Sleep(3000);
+                    liveGhosts[ghost] = false;
+                    DeadGhostCount++;
+                Console.WriteLine(ghost);
+            });
+        }
+
+        public static void RespawnGhost()
+        {
+            if (DeadGhostCount > 0)
+                lock (liveGhosts)
+                {
+                    foreach (var ghost in liveGhosts.Keys)
+                    {
+                        if (liveGhosts[ghost] == false)
+                        {
+                            var coord = startPositions[ghost];
+                            Map[coord.X, coord.Y].Add(namesGhosts[ghost]);
+                            liveGhosts[ghost] = true;
+                            DeadGhostCount--;
+                        }
+                    }
+                }
         }
 
         public static bool IsDoorClosed = true;
@@ -89,19 +136,19 @@ namespace Game
                         res[i, j] = Map[i, j];
                     }
                 }
-            for (var i = 0; i < MapWidth; i++)
-            {
-                for (var j = 0; j < MapHeight; j++)
-                {
-                    if (i == 14 && j == 11)
-                        Console.Write("!!!!!!!!!");
-                    if (res[i, j].FirstOrDefault() == null)
-                        Console.Write($"empty ");
-                    else
-                        Console.Write(res[i, j].FirstOrDefault().ToString() + "  ");
-                }
-                Console.WriteLine();
-            }
+            //for (var i = 0; i < MapWidth; i++)
+            //{
+            //    for (var j = 0; j < MapHeight; j++)
+            //    {
+            //        if (i == 14 && j == 11)
+            //            Console.Write("!!!!!!!!!");
+            //        if (res[i, j].FirstOrDefault() == null)
+            //            Console.Write($"empty ");
+            //        else
+            //            Console.Write(res[i, j].FirstOrDefault().ToString() + "  ");
+            //    }
+            //    Console.WriteLine();
+            //}
 
             return res;
             

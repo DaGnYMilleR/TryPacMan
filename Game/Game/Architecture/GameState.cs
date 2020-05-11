@@ -95,8 +95,11 @@ namespace Game
                         aliveCandidates.Remove(candidate);
                         if (candidate is Ghost)
                         {
-                            var coord = Game.startPositions[candidate.GetType().Name];
-                            Game.Map[coord.X, coord.Y].Add(candidate);
+                            //var coord = Game.startPositions[candidate.GetType().Name];
+                            //Game.Map[coord.X, coord.Y].Add(candidate);
+                            //Console.WriteLine(Game.namesGhosts[candidate.GetType().Name]);
+                            Game.AddDeadGhost(candidate.GetType().Name);
+                            
                         }
                     }
 

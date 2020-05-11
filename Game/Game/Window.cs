@@ -35,8 +35,10 @@ namespace Game
             timer.Tick += TimerTick;
             timer.Tick += OpenDoor;
             timer.Tick += Reloge;
+            timer.Tick += RespawnGhost;
             timer.Start();
         }
+        private static void RespawnGhost(object sender, EventArgs args) => Game.RespawnGhost();
 
         //private void Wined(object sender, EventArgs args)
         //{
