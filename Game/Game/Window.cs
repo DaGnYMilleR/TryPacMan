@@ -34,8 +34,17 @@ namespace Game
             timer.Tick += ScatterModeController;
             timer.Tick += TimerTick;
             timer.Tick += OpenDoor;
+            timer.Tick += Reloge;
             timer.Start();
         }
+
+        //private void Wined(object sender, EventArgs args)
+        //{
+        //    if (Game.PointsAtLevel == Game.PointsEated)
+
+
+        //}
+        private void Reloge(object sender, EventArgs args) => Game.Respawn();
 
         private void OpenDoor(object sender, EventArgs args)
         {
@@ -45,7 +54,6 @@ namespace Game
                 Game.Map = Game.UpdateMapCell(0, 0);
                 Game.Map[14, 11] = new List<ICreature>();
                 Game.Map[0, 0] = new List<ICreature>();
-                // Game.IsDoorClosed = false;
             }
             if (tickCount3 == 150)
             {
@@ -110,9 +118,6 @@ namespace Game
                 if (tickCount2 == 0)
                 {
                     Game.CurrentBehavior = MonsterBehavior.scatter;
-                    //Game.Map[14, 11] = Interlocked.Exchange(ref Game.Map[14, 11], new List<ICreature>());
-                   // Game.Map[14, 11] = new List<ICreature>();
-                   // Console.WriteLine(Game.Map[14, 11].ToString());
                     Console.WriteLine(MonsterBehavior.scatter.ToString() + " on");
                 }
                 if (tickCount2 == 700)
@@ -153,6 +158,7 @@ namespace Game
                 {
                     Game.CurrentBehavior = MonsterBehavior.chase;
                     Console.WriteLine(MonsterBehavior.scatter.ToString() + " off");
+                    tickCount2 = 0;
                 }
                 tickCount2++; 
             }

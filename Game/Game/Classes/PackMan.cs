@@ -66,6 +66,7 @@ namespace Game
                 if ((conflictedObject is Ghost || IsGhost(Game.Map[pointBefore.X + Game.PackMansPosition.X, pointBefore.Y + Game.PackMansPosition.Y])) && !Game.IsMonsterStyle)
                 {
                     Game.GameLives--;
+                    Game.Reloge = true;
                     return true;
 
                 }

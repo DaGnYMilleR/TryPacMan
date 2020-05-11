@@ -21,6 +21,8 @@ namespace Game
         public static Point KlaidPosition { get; set; }
         public static Point InkyPosition { get; set; }
 
+        public static bool Reloge;
+
         public static Dictionary<string, Point> startPositions = new Dictionary<string, Point>()
         {
             { "Blinky", new Point() },
@@ -76,7 +78,6 @@ namespace Game
         public static List<ICreature>[,] UpdateMapCell(int x, int y)
         {
             Console.WriteLine("Up");
-            //Map[x, y] = new List<ICreature>();
             var res = new List<ICreature>[MapWidth, MapHeight];
             for (var i = 0; i < MapWidth; i++)
                 for(var j = 0; j < MapHeight; j ++)
@@ -104,6 +105,42 @@ namespace Game
 
             return res;
             
+        }
+
+        public static void Respawn()
+        {
+            if (Reloge)
+            {
+                lock (Map)
+                {
+                    for (var x = 0; x < MapWidth; x++)
+                    {
+                        for (var y = 0; y < MapHeight; y++)
+                        {
+                            var creatures = Map[x, y];
+                            Map[x, y] = new List<ICreature>();
+                            if (new Point(x, y) == new Point(startPositions["Klaid"].X, startPositions["Klaid"].Y))
+                                Map[x, y].Add(new Klaid(Directions.Right));
+                            if (new Point(x, y) == new Point(startPositions["Blinky"].X, startPositions["Blinky"].Y))
+                                Map[x, y].Add(new Blinky(Directions.Right));
+                            if (new Point(x, y) == new Point(startPositions["Inky"].X, startPositions["Inky"].Y))
+                                Map[x, y].Add(new Inky(Directions.Right));
+                            if (new Point(x, y) == new Point(startPositions["Pinky"].X, startPositions["Pinky"].Y))
+                                Map[x, y].Add(new Pinky(Directions.Right));
+                            if (new Point(x, y) == new Point(startPositions["PackMan"].X, startPositions["PackMan"].Y))
+                                Map[x, y].Add(new PackMan(Directions.Right));
+                            foreach (var creature in creatures)
+                            {
+                                if (creature is Ghost || creature is PackMan)
+                                    continue;
+                                Map[x, y].Add(creature);
+                            }
+
+                        }
+                    }
+                    Reloge = false;
+                }
+            }
         }
 
     }
