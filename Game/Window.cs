@@ -42,7 +42,7 @@ namespace Game
 
         private void Wined(object sender, EventArgs args)
         {
-            if (Game.PointsAtLevel == Game.PointsEated)
+            if (Game.PointsAtLevel <= Game.PointsEated)
                 Game.Win = true;
         }
         private void Reloge(object sender, EventArgs args) => Game.Respawn();
@@ -88,6 +88,8 @@ namespace Game
             e.Graphics.ResetTransform();
             e.Graphics.DrawString(Game.Score.ToString(), new Font("Arial", 16), Brushes.Green, 0, 0);
             var c = bitmaps[ImageHandler.GetImage("live", Directions.Nothing)];
+            if (Game.GameLives == 0)
+                e.Graphics.DrawString("Game over !", new Font("Arial", 20), Brushes.Red, 275, 350);
             for (var i = 0; i < Game.GameLives; i++)
                 e.Graphics.DrawImage(c, new Point(100 + i * 20, 10));
         }

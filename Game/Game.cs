@@ -175,7 +175,6 @@ namespace Game
                                     continue;
                                 Map[x, y].Add(creature);
                             }
-
                         }
                     }
                     Reloge = false;
